@@ -9,22 +9,82 @@
 引入CSS文件的link可以不用带type="text/css"，如下代码：
 
 /******************************************************************************************/
-
-
-/******************************************************************************************/
-
-
+16. 注意float/absolute/fixed定位会强制设置成block-----------------------------
 
 /******************************************************************************************/
-
-
+17. 清除浮动---------------------------------
+.clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+/******************************************************************************************/
+偏向于使用CSS动画替代JS动画------------------
+例如把一个框，从下到上弹出，可以用jQuery的slideUp函数，或者自己写setInterval函数处理，但是这些没有比用CSS来得好。使用CSS，
+初始状态可以把框translate移动屏幕外，然后点击的时候加上一个类，这个类的transform值为0，然后再用transition做动画就好了
 
 /******************************************************************************************/
-
-
+（2）使用transform替代position做动画-----------------------
+如果能用transform做动画的，就不会使用left/top/margin等，因为transform不会造成重绘，性能要比position那些高很多，
+特别是在移动端的时候效果比较明显。基本上位移的动画都能用transform完成，不需要使用CSS2的属性，如一个框从右到左弹出。
 
 /******************************************************************************************/
+---------------------------22. 设置常见样式reset------------------
+--------------由于每个浏览器都有自己的UA样式，并且这些样式还不太统一，所以需要做样式reset，常见的reset有以下：
+/* IE浏览器对输入控件有自己的font-family，需要统一 */
+input,
+textarea,
+button{
+    font-family: inherit;
+}
 
+/* Chrome浏览器会在输入控制聚集的时候添加一个蓝色的outline*/
+input:focus,
+textarea:focus,
+select:focus{
+    outline: none;
+}
+
+/* 去掉textarea的可拉大小功能*/
+textarea{
+    resize: none;
+}
+
+/* IOS Safari在横屏的时候会放大字体，第二个属性让滑动更流畅 */
+html{
+    -webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling : touch;
+}
+
+/* 统一标签的margin值和p标签的line-height*/
+body, p, h1, h2, ul, ol, figure, li{
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, p{
+    line-height: 150%;
+}
+
+/* 去掉select的默认样式 */
+select{
+    -webkit-appearance: none;
+}
+/* 如果有输入内容IE会给输入框右边加一个大大的X */
+input::-ms-clear{
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* 去掉number输入框右边点击上下的小三角 */
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+input::-webki-outer-spin-button{
+    -webki-appearance: none;
+}
 
 
 /******************************************************************************************/
