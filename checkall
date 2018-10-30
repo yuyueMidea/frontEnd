@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我是歌手</title>
+		<style type="text/css">
+			input{float: left;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				var aput=document.getElementsByTagName("input");
+				var opp=document.getElementById("opp");
+				var all=document.getElementById("all");
+				opp.onclick=function(e){
+					e.preventDefault();
+					for(var i=0;i<aput.length-2;i++){
+					if(!aput[i].checked){
+						aput[i].checked=true;
+					}
+					else{aput[i].checked=false;}
+					}
+				}
+				//
+				all.onclick=function(){
+					for(var i=0;i<aput.length-2;i++){
+						if(all.checked){
+							aput[i].checked=true;
+						}
+						else{aput[i].checked=false;}
+					}
+					
+				}
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body style="padding-top: 50px;">
+		<form>
+		<fieldset id="fid">
+			<legend>选出你喜欢的歌手</legend>
+			<input type="checkbox" />谭晶<br />
+			<input type="checkbox" />迪玛希<br />
+			<input type="checkbox" />杜丽莎<br />
+			<input type="checkbox" />狮子合唱团<br />
+			<input type="checkbox" />袁娅维<br />
+			<input type="checkbox" />光良<br />
+			<input type="checkbox" />林忆莲<br /><br />
+			<input type="submit" value="反选" id="opp"/>
+			<input type="checkbox" id="all"/>全选<br />
+		</fieldset>	
+		</form>
+	</body>
+</html>
