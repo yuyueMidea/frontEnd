@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			//html事件
+		
+			//在页面加载完成后触发
+			window.onload = function(){
+				console.log("页面加载完成");
+				
+				
+				//onselect : 输入框内容 
+				var oInput = document.getElementsByTagName("input")[0];
+				oInput.onselect = function(){
+					console.log("文字被选中")
+				}
+				
+				//onchange: 当输入框内容修改后，且失去焦点时触发
+				oInput.onchange = function(){
+					console.log("文字被修改了");
+				}
+				
+				//onfocus : 输入框获取焦点
+				oInput.onfocus = function(){
+					console.log("获取到了焦点");
+				}
+				
+				//onblur : 输入框失去焦点
+				oInput.onblur = function(){
+					console.log("失去了焦点");
+				}
+				
+				//onsubmit : 提交表单时触发
+				var oform = document.getElementsByTagName("form")[0];
+				oform.onsubmit = function(){
+					console.log("submit");
+				}
+				
+				//onreset : 重置表单时触发
+				oform.onreset = function(){
+					console.log("reset");
+				}
+				
+				//onscroll: 页面滚动时触发				
+				
+				//onresize
+				window.onresize = function(){
+					console.log("窗口发生改变");
+					console.log( document.documentElement.clientHeight ); //页面高度
+					console.log( document.documentElement.clientWidth ); //页面宽度
+				}
+			}
+			
+			//在页面卸载时触发
+			window.onunload = function(){
+				console.log("页面卸载");
+			}
+			
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type="text" value="hello world" />
+			<input type="submit" />
+			<input type="reset" />
+		</form>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//事件对象
+				
+				var obox = document.getElementById("box");
+				obox.onclick = function(e){
+					//console.log(arguments.length); //1
+					//console.log(arguments[0]); //[object MouseEvent]
+					//alert(e); //[object MouseEvent]
+					//alert(window.event);
+					
+					//e： 兼容谷歌，火狐； 不兼容IE
+					//window.event ： 兼容IE，谷歌， 不兼容火狐
+					//e = e || window.event;
+					e = e || event;
+					//console.log(e); //事件对象
+					
+					
+					//事件对象的属性
+					//button: 判断按下了鼠标的哪个键
+					//console.log(e.button); //0：鼠标左键， 1：鼠标滚轮， 2：鼠标右键
+					
+					//which
+					//console.log(e.which); //1：鼠标左键， 2：鼠标滚轮， 3：鼠标右键
+					
+					//clientX / clientY : 可视区的位置
+					//console.log(e.clientX + "," + e.clientY);
+					
+					//pageX / pageY : 相对整个页面（包括scrollTop,scrollLeft）
+					//console.log(e.pageX + "," + e.pageY);
+					
+					var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					//console.log(e.clientX+scrollLeft + "," + (e.clientY+scrollTop));
+					
+					//screenX / screenY : 鼠标位置距离屏幕左上角的坐标
+					//console.log(e.screenX + "," + e.screenY);
+					
+					//offsetX / offsetY : 鼠标位置距离目标元素（鼠标点击的元素）的左上角的坐标
+					console.log(e.offsetX + "," + e.offsetY);
+				}
+				
+				//
+//				window.onkeydown =  function(){
+//					console.log(arguments.length); //1
+//					console.log(arguments[0]); //[object KeyboardEvent], 键盘事件对象
+//				}
+			}
+		</script>
+	</head>
+	<body style="height: 2000px; width: 1000px;">
+		<div id="box" style="width: 100px; height: 100px; background: green; position: absolute;left: 20px; top: 20px;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			//示例: 
+			//1, 鼠标点击某处, 让精灵移动到该处 (如下图)
+			//2, 鼠标移动时, 让精灵跟随鼠标移动
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body style="background: black;">
+		<img src="images/girl.gif" />
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width: 20px;height: 20px;border-radius:50%;
+			background: red;position: absolute;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				
+				var adiv=document.getElementsByTagName("div");
+				/*document.onclick=function(e){
+					e=e||event;
+					$("cir").style.top=e.pageY-20+"px";
+					$("cir").style.left=e.pageX-20+"px";
+				}*/
+				
+						
+				document.onmousemove=function(e){
+					e=e||event;
+					adiv[adiv.length-1].style.top=e.pageY-20+"px";
+					adiv[adiv.length-1].style.left=e.pageX-20+"px";
+					//
+					adiv[adiv.length-2].style.top=adiv[adiv.length-1].style.top;
+					adiv[adiv.length-2].style.left=adiv[adiv.length-1].style.left;
+					//
+					for(var i=0;i<adiv.length-2;i++){
+						adiv[i].style.top=adiv[i+1].style.top;
+						adiv[i].style.left=adiv[i+1].style.left;
+					}
+				}
+				
+				
+				
+				
+				
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			onload=function(){
+				function $(id){
+					return document.getElementById(id);
+				}
+				
+				$("name").onblur=function(){
+					var txt=$("name").value;
+					if( txt.length<6){
+						alert("用户名不得少于6位")
+					}
+					else{
+					for(var i=0;i<txt.length;i++){
+						if(("a"<=txt[i]&&txt[i] <="z")||
+						("A"<=txt[i]&&txt[i] <="Z")||
+						("0"<= txt[i]&&txt[i] <="9")){
+							//alert("用户名输入正确");
+							break;
+						}
+						else{
+							alert("用户名只能为数字和字母")
+						}
+					}
+					}
+				}
+				//end
+				$("pw").onblur=function(){
+					var pass=$("pw").value;
+					if( pass.length<8){
+						alert("密码不得少于8位")
+					}
+				}
+				$("btn").onclick=function(){
+					var txt=$("name").value;
+					var pass=$("pw").value;
+					alert("用户名:"+txt+";"+"密码"+pass)
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 200px;height: 100px;
+			background: navajowhite;">
+			<input type="text" id="name"/><br />
+			<input type="password" id="pw"/><br />
+			<input type="button" id="btn" value="登录"/><br />
+		</div>
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width: 20px;height: 20px;border-radius:50%;
+			background: red;position: absolute;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				
+				var adiv=document.getElementsByTagName("div");
+				/*document.onclick=function(e){
+					e=e||event;
+					$("cir").style.top=e.pageY-20+"px";
+					$("cir").style.left=e.pageX-20+"px";
+				}*/
+				
+						
+				document.onmousemove=function(e){
+					e=e||event;
+					adiv[adiv.length-1].style.top=e.pageY-20+"px";
+					adiv[adiv.length-1].style.left=e.pageX-20+"px";
+					//
+					adiv[adiv.length-2].style.top=adiv[adiv.length-1].style.top;
+					adiv[adiv.length-2].style.left=adiv[adiv.length-1].style.left;
+					//
+					for(var i=0;i<adiv.length-2;i++){
+						adiv[i].style.top=adiv[i+1].style.top;
+						adiv[i].style.left=adiv[i+1].style.left;
+					}
+				}
+				
+				
+				
+				
+				
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: green;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: blueviolet;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: orange;"></div>
+		<div></div>
+		<div></div>
+		<div style="background: gray;"></div>
+	</body>
+</html>
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				var box=/box/gi;
+				var str="This is a box Box boX";
+				console.log( box.test(str) );//true
+				console.log( /box/gi.test(str) );//true
+				
+				console.log( box.exec(str) );//Box
+				console.log( /box/gi.exec(str) )//box
+				var matchArr=str.match(/box/gi);
+				console.log(matchArr);//box,Box,boX
+				var replaceStr=str.replace(/box/gi,"111");
+				console.log(replaceStr);//This is a 111 111 111
+				
+				var pattren=/^google$/;
+				var str="google";
+				console.log( pattren.test(str) );//true
+				
+				var name="哈哈";
+				var obj1={name:"张三"};
+				var obj2={name:"李四",
+				show:function(){
+					console.log(this.name)
+					}
+				}
+				//setInterval(obj2.show.bind(obj1),2000);
+				var arr=[1,2,3,4,5];
+				/*arr.forEach( function(value,index,array){
+					console.log("值："+value+"，下标："+index+"，数组："+array)
+				} )
+				*/
+				var arr2 = arr.map(function(value,index,array){
+					return value*3;
+				})
+				console.log(arr);//1,2,3,4,5
+				console.log(arr2);//3,6,9,12,15
+				var arr3=arr.filter(function(n){
+					return n>=3;
+				})
+				console.log(arr3);//3,4,5(过滤n>=3)
+				//
+				
+				var arr=[1,2,3,4,5];
+				var s=arr.reduce(function(pre,cur){
+					return pre*cur;
+				});
+				console.log(s);
+				
+			var obox=document.getElementById("box")	;
+			obox.onclick=function(){
+				var count=0;
+				clearInterval(timer);
+				var timer = setInterval(function(){
+					obox.style.marginTop=parseInt(obox.style.marginTop)+10+"px";
+					obox.style.marginLeft=parseInt(obox.style.marginLeft)+10+"px";
+					obox.style.opacity=obox.style.opacity-0.05;
+					if(obox.style.opacity<=0.5){
+						obox.innerHTML="我要消失了"
+					}
+					count++;
+					if(count>=10){
+						clearInterval(timer);
+					}
+				},50);
+			}
+				
+				
+				
+				
+			
+			var arr=[1,4,9,6,3,5,2,4];
+			for(var i=0;i<arr.length-1;i++){//比较的趟数
+				for(var j=0;j<arr.length-1-i;j++){
+					if(arr[j] < arr[j+1]){
+						var tmp = arr[j];
+						arr[j] = arr[j+1];
+						arr[j+1] = tmp;
+					}
+				}
+			}
+			console.log(arr);
+			
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 100px;height: 100px;
+			background: red;line-height: 100px;
+			cursor: pointer;margin-left: 10px;
+			margin-top: 10px;opacity: 0.9;">
+			<h2>点我移动</h2>
+		</div>
+	</body>
+</html>
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{cursor: pointer;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				function $(id){
+					return document.getElementById(id)
+				}
+				var aimg=document.getElementsByTagName("img");
+				for(var i=1;i<aimg.length;i++){
+					aimg[i].index=i;
+					/*
+					aimg[i].onclick=function(){
+						aimg[0].src="images/image1/small_"+this.index+".jpg";
+					}
+					*/
+					aimg[i].onmousemove=function(){
+						aimg[0].src="images/image1/small_"+this.index+".jpg";
+					}
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 300px;height: 300px;
+			border:1px solid blueviolet">
+			<div id="box1">
+				<img src="images/image1/big_4.jpg" style="width:150px;
+				height: 150px;"/>
+			</div>
+			
+			<img src="images/image1/small_1.jpg"/>
+			<img src="images/image1/small_2.jpg"/>
+			<img src="images/image1/small_3.jpg"/>
+			<img src="images/image1/small_4.jpg"/>
+			<img src="images/image1/small_5.jpg"/>
+			<img src="images/image1/small_6.jpg"/>
+			<img src="images/image1/small_7.jpg"/>
+			<img src="images/image1/small_8.jpg"/>
+			<img src="images/image1/small_9.jpg"/>
+			<img src="images/image1/small_10.jpg"/>
+			
+		</div>
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;}
+			input{width:150px;height: 30px;font-size: 16px;}
+			ul{float: left;display: none;}
+			li{border: 1px dashed darkgrey;list-style: none;
+			background: black;color: antiquewhite;padding: 5px;
+			padding-left: 0;cursor: pointer;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				
+				function $(id){
+					return document.getElementById(id);
+				}
+				$("btn").onmouseenter=function(){
+					$("list").style.display="block"
+				}
+				$("box").onmouseleave=function(){
+					$("list").style.display="none";
+					$("btn").value="请选择你喜欢的游戏";
+				}
+				
+				/*$("btn").onmouseenter=function(){
+					$("list").style.display="block"
+				}
+				$("box").onmouseleave=function(){
+					$("list").style.display="none";
+					$("btn").value="请选择你喜欢的游戏";
+				}*/
+				
+				var ali=document.getElementsByTagName("li");
+			for(var i=0;i<ali.length;i++){
+				ali[i].index=i;
+				ali[i].onmouseenter=function(){
+					for(var j=0;j<ali.length;j++){
+						if(j==this.index){
+							ali[j].style.background="red";
+							$("btn").value=ali[j].innerHTML;
+							$("btn").style.fontFamily="微软雅黑";
+						}
+						else{
+							ali[j].style.background="black";
+						}	
+					}
+				}	
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 150px;height: 250px;
+			background: navajowhite;">
+			<input type="button" id="btn" value="请选择你喜欢的游戏" />
+			<ul id="list">
+				<li>魔兽世界</li>
+				<li>天龙八部</li>
+				<li>九阴真经</li>
+				<li>穿越火线</li>
+				<li>英雄联盟</li>
+			</ul>	
+		</div>
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				function $(id){
+					return document.getElementById(id);
+				}
+				
+				$("btn1").onclick=function(){
+					$("box").style.marginLeft =parseInt($("box").style.marginLeft)-10+"px";
+				}//向左
+				$("btn2").onclick=function(){
+					$("box").style.marginLeft =parseInt($("box").style.marginLeft)+10+"px";
+				}//向左
+				$("btn3").onclick=function(){
+					$("box").style.marginTop =parseInt($("box").style.marginTop)-10+"px";
+				}//向左
+				$("btn4").onclick=function(){
+					$("box").style.marginTop =parseInt($("box").style.marginTop)+10+"px";
+				}//向左
+				
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" id="btn1" value="<<向左" />
+		<input type="button" id="btn2" value="向右>>" />
+		<input type="button" id="btn3" value="向上" />
+		<input type="button" id="btn4" value="向下" />
+		<div id="box" style="width: 100px;height: 100px;
+			background: red;margin-left: 100px;
+			margin-top: 100px;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			td, img {
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+		<script>
+			onload = function(){
+
+				var otab = document.getElementsByTagName("table")[0];
+				var aimg = otab.getElementsByTagName("img");
+				var oShowImg = document.getElementById("showImg");
+				
+				for (var i=0; i<aimg.length; i++) {
+					aimg[i].onclick = function(){
+						oShowImg.src = this.src;
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td><img src="images/1.jpg"/></td>
+				<td><img src="images/2.jpg"/></td>
+				<td><img src="images/3.jpg"/></td>
+			</tr>
+		</table>
+		<img src="images/1.jpg" id="showImg" />
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0; border: none}
+			ul, li{list-style: none;}
+			#box {
+				width: 220px;
+				height: 350px;
+				background: #ccc;
+			}
+			ul {
+				overflow: hidden;
+			}
+			li {
+				float: left;
+				width: 58px;
+				height: 53px;
+				border: 1px solid #aaa;
+				background: #444;
+				color: white;
+				margin-left: 10px;
+				margin-top: 10px;
+				text-align: center;
+				cursor: pointer;
+			}
+			
+			#showInfo {
+				width: 200px;
+				height: 50px;
+				background: #aaa;
+				border: 1px solid white;
+				margin: 10px;
+			}
+			
+			.active{
+				color: orange;
+				background: white;
+				border: 1px solid red;
+			}
+			
+		</style>
+		<script>
+			onload = function(){
+				
+				var oShowInfo = document.getElementById("showInfo");
+				var ali = document.getElementsByTagName("li");
+				
+				for (var i=0; i<ali.length; i++) {
+					ali[i].index = i;
+					ali[i].onclick = function(){
+						
+						for (var j=0; j<ali.length; j++) {
+							ali[j].className = "";
+						}
+						this.className = "active";
+						//oShowInfo.innerHTML = this.getElementsByTagName("h2")[0].innerHTML + "月份好";
+						oShowInfo.innerHTML = this.index+1 + "月份好";
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li class="active">
+					<h2>1</h2>
+					<p>Jan</p>
+				</li>
+				<li>
+					<h2>2</h2>
+					<p>Feb</p>
+				</li>
+				<li>
+					<h2>3</h2>
+					<p>Mar</p>
+				</li>
+				<li>
+					<h2>4</h2>
+					<p>Apr</p>
+				</li>
+				<li>
+					<h2>5</h2>
+					<p>May</p>
+				</li>
+				<li>
+					<h2>6</h2>
+					<p>Jun</p>
+				</li>
+				<li>
+					<h2>7</h2>
+					<p>Jul</p>
+				</li>
+				<li>
+					<h2>8</h2>
+					<p>Aug</p>
+				</li>
+				<li>
+					<h2>9</h2>
+					<p>Sep</p>
+				</li>
+				<li>
+					<h2>10</h2>
+					<p>Oct</p>
+				</li>
+				<li>
+					<h2>11</h2>
+					<p>Nov</p>
+				</li>
+				<li>
+					<h2>12</h2>
+					<p>Dec</p>
+				</li>
+			</ul>
+			<div id="showInfo">1月份好</div>
+		</div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				var obox = document.getElementById("box");
+				
+				onscroll = function(){
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;	
+					
+					if (scrollTop >= 400) {
+						obox.style.position = "fixed"; //固定定位
+						obox.style.top = 0;
+					}
+					else {
+						obox.style.position = "absolute"; //原本的定位方式
+						obox.style.top = 400 + "px";
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body style="height: 2000px;">
+		<div id="box" style="width: 100%; height: 25px; background: green; position: absolute; top: 400px;">留言信息</div>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0; border: none;}
+			ul, li {list-style: none;}
+			#box {
+				width: 400px;
+				height: 200px;
+				margin: 100px auto;
+			}
+			#box ul {
+				width: 400px; height: 30px;
+				background: #ccc;
+			}
+			#box ul li {
+				width: 100px;
+				text-align: center;
+				line-height: 30px;
+				float: left;
+				cursor: pointer;
+			}
+			#box ul li.hover {
+				background: orange;
+				color: white;
+			}
+			#box div {
+				width: 398px;
+				height: 169px;
+				border: 1px solid red;
+				border-top: none;
+				display: none;
+			}
+			
+		</style>
+		<script>
+			onload = function(){
+				
+				//先默认显示第一个div
+				var aContent = document.getElementsByClassName("content");
+				aContent[0].style.display = "block";
+				
+				var ali = document.getElementsByTagName("li");
+				for (var i=0; i<ali.length; i++) {
+					
+					ali[i].index = i;
+					ali[i].onclick = function(){
+						
+						for (var j=0; j<ali.length; j++) {
+							//选择的li
+							if (j == this.index) {
+								this.className = "hover";
+								aContent[j].style.display = "block"; //显示
+							}
+							//没选择的li
+							else {
+								ali[j].className = "";
+								aContent[j].style.display = "none"; //隐藏
+							}
+						}
+					}
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li class="hover">科技</li>
+				<li>探索</li>
+				<li>发明</li>
+			</ul>
+			<div class="content">科技科技科技科技科技科技科技科技科技科技</div>
+			<div class="content">探索探索探索探索探索探索探索探索探索探索</div>
+			<div class="content">发明发明发明发明发明发明发明发明发明发明</div>
+		</div>
+		
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			//内联模式：  不推荐使用
+			//脚本模式： JS
+			
+			onload = function(){
+				var oInput = document.getElementsByTagName("input")[2];
+				oInput.onclick = function(){
+					console.log("我是脚本模式调用的");
+				}
+				
+				//覆盖相同的事件
+				oInput.onclick = fn;
+				function fn(){
+					console.log("我是脚本模式调用的-2");
+				}
+				
+				
+				
+			}
+			
+			function fn(){
+				console.log(2);
+			}
+			
+		</script>
+	</head>
+	<body>
+		<!-- 内联模式 -->
+		<input type="button" value="按钮" onclick="alert(1);" />
+		<input type="button" value="按钮2" onclick="fn();" />
+		
+			
+		<!-- 脚本模式 -->
+		<input type="button" value="按钮3"  />
+		
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				
+				//事件的组成
+				var obtn = document.getElementsByTagName("input")[0];
+				obtn.onclick = function(){
+					console.log(1);
+				}
+				//obtn.onclick();
+				
+				//1, 需要添加事件的元素节点对象，如： obtn
+				//2, 事件处理函数, 如：onclick
+				//3, 事件的执行函数， 如：function(){}
+				
+				
+				//小写 
+				//on + 事件类型
+				//onclick ： on + click  
+				//onload : on + load
+				//onscroll : on + scroll
+				
+				
+				//事件的分类: 鼠标事件，键盘事件， HTML事件
+				//鼠标事件
+				//onclick： 单击，按下并松开后触发
+				var aInput = document.getElementsByTagName("input");
+				aInput[1].onclick = function(){
+					console.log("单击");
+				}
+				
+				//ondblclick : 双击
+				aInput[2].ondblclick = function(){
+					console.log("双击");
+				}
+				
+				//onmousedown : 鼠标按下时触发
+				aInput[3].onmousedown = function(){
+					console.log("鼠标按下");
+				}
+				
+				//onmouseup: 鼠标松开时触发
+				aInput[3].onmouseup = function(){
+					console.log("鼠标松开");
+				}
+				
+				//onmousemove : 鼠标移动时触发
+				aInput[3].onmousemove = function(){
+					console.log("鼠标移动");
+				}
+				
+				//onmouseover
+				aInput[4].onmouseover = function(){
+					console.log("鼠标移入");
+				}
+				//onmouseout
+				aInput[4].onmouseout = function(){
+					console.log("鼠标移出");
+				}
+				
+				//onmouseenter
+				aInput[5].onmouseenter = function(){
+					console.log("鼠标移入2");
+				}
+				//onmouseleave
+				aInput[5].onmouseleave = function(){
+					console.log("鼠标移出2");
+				}
+				
+				//onmouseenter/onmouseleave ： 推荐使用
+				//onmouseover/onmouseout  和 onmouseenter/onmouseleave 的区别
+				var obox1 = document.getElementById("box1");
+				obox1.onmouseover = function(){
+					this.children[0].children[0].value = this.children[0].children[0].value-0 + 1;
+				}
+				
+				var obox2 = document.getElementById("box2");
+				obox2.onmouseenter = function(){
+					this.children[0].children[0].value = this.children[0].children[0].value-0 + 1;
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="按钮" />
+		<input type="button" value="onclick" />
+		<input type="button" value="ondblclick" />
+		<input type="button" value="onmousedown/onmouseup/onmousemove" />
+		<input type="button" value="onmouseover/onmouseout" />
+		<input type="button" value="onmouseenter/onmouseleave" />
+		
+		<div id="box1" style="width: 200px; height: 200px; background: red;">
+			<div style="width: 180px; height: 100px; background: green;">
+				<input type="text" value="0"/>
+			</div>
+		</div>
+		<br>
+		<div id="box2" style="width: 200px; height: 200px; background: red;">
+			<div style="width: 180px; height: 100px; background: green;">
+				<input type="text" value="0"/>
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				/*
+				  示例: 
+				1, 有一块空白区域,
+				     当鼠标移动到区域内,显示"亲爱的, 我爱你",
+				     当我鼠标移开的时候,显示"对不起, 开玩笑",
+				     当我鼠标不停的在区域内移动的时候, 变换颜色
+				
+				*/
+				var obox = document.getElementById("box");
+				
+				//移入
+				obox.onmouseenter = function(){
+					this.innerHTML = "亲爱的， 我爱你";
+				}
+				//移出
+				obox.onmouseleave = function(){
+					this.innerHTML = "对不起， 开玩笑";
+				}
+				//移动
+				obox.onmousemove = function(){
+					var color = "rgb(" + parseInt(Math.random()*256) + "," + parseInt(Math.random()*256) + "," 
+          + parseInt(Math.random()*256) + ")";
+					this.style.backgroundColor = color;
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 200px; height: 200px; background: white;"></div>
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//键盘事件 ： onkeydown, onkeyup, onkeypress
+				
+				//按住键不松开则会持续触发
+				
+				//onkeydown: 键按下
+				//除了调节音量,关机键等以外的其他键， 包括字母，数字，方向键，字符键， shift,ctl,tab,空格，回车
+				window.onkeydown = function(){
+					console.log("键盘上的某一个按键按下了");
+				}
+				
+				//onkeypress: 字符键按下
+				//字母， 数字，字符（逗号，句号，问好等）， 空格， 回车
+				window.onkeypress = function(){
+					console.log("keypress");
+				}
+				
+				//onkeyup: 按键松开时触发
+				window.onkeyup = function(){
+					console.log("按键松开");
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
