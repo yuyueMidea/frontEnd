@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			/*
+			   2, 有一个红色div块，有四个button, 上下左右, 
+				   当我点击对应的按钮,这个块就进行对应的行走。
+			 */
+			onload = function(){
+				var obox = document.getElementById("box");
+				var aInput = document.getElementsByTagName("input"); 
+				
+				//向左
+				aInput[0].onclick = function(){
+					obox.style.left = parseInt(obox.style.left)-10  + "px";
+				}
+				//向右
+				aInput[1].onclick = function(){
+					obox.style.left = parseInt(obox.style.left)+10  + "px";
+				}
+				
+				//向上
+				aInput[2].onclick = function(){
+					obox.style.top = parseInt(obox.style.top)-10  + "px";
+				}
+				//向下
+				aInput[3].onclick = function(){
+					obox.style.top = parseInt(obox.style.top)+10  + "px";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="向左" />
+		<input type="button" value="向右" />
+		<input type="button" value="向上" />
+		<input type="button" value="向下" />
+		
+		<div id="box" style="width: 100px; height: 100px; background: red; position: absolute; left: 100px; top: 100px;"></div>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0; border: none;}
+			ul, li {list-style: none;}
+			body {
+				background: #ddd;
+			}
+			#box {
+				width: 150px;
+				height: 20px;
+				border: 1px solid white;
+			}
+			ul {
+				width: 100px;
+				height: 150px;
+				border: 1px solid white;
+				display: none;
+			}
+			ul li {
+				width: 100px;
+				height: 29px;
+				border-bottom: 1px dashed white;
+				text-align: center;
+				line-height: 29px;
+				background: black;
+				color: white;
+				cursor: pointer;
+			}
+			
+		</style>
+		<script>
+			onload = function(){
+				
+				var obox = document.getElementById("box");
+				var oul = document.getElementById("list");
+				
+				obox.onmouseenter = oul.onmouseenter = function(){
+					oul.style.display = "block"; //显示ul
+				}
+				obox.onmouseleave = oul.onmouseleave = function(){
+					oul.style.display = "none"; //隐藏ul					
+				}
+				
+				var ali = oul.getElementsByTagName("li");
+				for (var i=0; i<ali.length; i++){
+					ali[i].onmouseenter = function(){
+						this.style.background = "gray";
+					}
+					ali[i].onmouseleave = function(){
+						this.style.background = "black";
+					}
+					
+					ali[i].onclick = function(){
+						obox.innerHTML = this.innerHTML;
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">请选择游戏名称</div>
+		<ul id="list">
+			<li>英雄联盟</li>
+			<li>魔兽世界</li>
+			<li>大话西游</li>
+			<li>天龙八部</li>
+			<li>九阴真经</li>
+		</ul>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0; border: none;}
+			ul, li {list-style: none;}
+			body {background: black;}
+			#box {
+				width: 305px;
+				height: 245px;
+				background: white;
+				margin:  20px auto;
+				border-radius: 5px;
+			}
+			ul li {
+				float: left;
+				width: 55px;
+				height: 55px;
+				margin-left: 5px;
+				margin-top: 5px;
+			}
+			ul li img {
+				width: 55px;
+				height: 55px;
+			}
+			
+			.first {
+				width: 175px;
+				height: 175px;
+			}
+			.first img {
+				width: 175px;
+				height: 175px;
+			}
+			
+		</style>
+		<script>
+			onload = function(){
+				
+				var ali = document.getElementsByTagName("li");
+				for (var i=1; i<ali.length; i++) {
+					ali[i].onmouseenter = function(){
+						ali[0].children[0].src = this.children[0].src.replace("small","big");
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li class="first"><img src="images/images1/big_4.jpg"/></li>
+				<li><img src="images/images1/small_1.jpg"/></li>
+				<li><img src="images/images1/small_2.jpg"/></li>
+				<li><img src="images/images1/small_3.jpg"/></li>
+				<li><img src="images/images1/small_4.jpg"/></li>
+				<li><img src="images/images1/small_5.jpg"/></li>
+				<li><img src="images/images1/small_6.jpg"/></li>
+				<li><img src="images/images1/small_7.jpg"/></li>
+				<li><img src="images/images1/small_8.jpg"/></li>
+				<li><img src="images/images1/small_9.jpg"/></li>
+				<li><img src="images/images1/small_10.jpg"/></li>
+				<li><img src="images/images1/small_11.jpg"/></li>
+				
+			</ul>
+		</div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//target: 所点击的目标元素， 事件对象的属性
+				
+				document.onclick = function(e){
+					console.log("document");
+					console.log(this); //[object HTMLDocument]
+					e = e || event;
+					console.log(e.target);
+				}
+				document.body.onclick = function(e){
+					console.log("body");
+					console.log(this); //[object HTMLBodyElement]
+					e = e || event;
+					console.log(e.target);
+				}
+				document.getElementsByTagName("div")[0].onclick = function(e){
+					console.log("div");
+					console.log(this); //[object HTMLDivElement]
+					e = e || event;
+					console.log(e.target);
+				}
+				document.getElementsByTagName("input")[0].onclick = function(e){
+					console.log("input");
+					console.log(this); //[object HTMLInputElement]
+					e = e || event;
+					console.log(e.target);
+				}
+				
+				//事件流
+				//事件冒泡： 子元素向父元素传递
+				//事件捕获： 父元素向子元素传递
+				//
+			}
+		</script>
+	</head>
+	<body>
+		<div style="width: 200px; height:200px; background: red;">
+			<input type="button" value="按钮" />
+		</div>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				document.onclick = function(e){
+					e = e || event;
+					
+					if (e.shiftKey){
+						console.log("按住了shift键");
+					}
+					if (e.altKey) {
+						console.log("按住了alt键");
+					}
+					if (e.ctrlKey) {
+						console.log("按住了ctrl键");
+					}
+				}
+				
+				//任意键按下
+				//keyCode : 键码
+				//不区分大小写
+				/*
+				window.onkeydown = function(e){
+					e = e || event;
+					
+					console.log(e.keyCode);
+				}
+				*/
+				
+				
+				//a~z : 97~122
+				//A~Z : 65~90
+				//0~9 : 48~57
+				//左上右下 ： 37,38,39,40
+				//
+				
+				//charCode: 字符编码， 用在onkeypress中
+				//区分大小写的
+				window.onkeypress = function(e){
+					e = e || event;
+					
+					console.log(e.charCode); 
+					console.log( String.fromCharCode(e.charCode) );
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			/*
+			 练习: 
+				有一个红色的div块
+				1, 如果我按下ctrl+c变换随机背景颜色
+				2, 如果我按下ctrl + shift + r 重置颜色,恢复初始颜色
+				3, 如果我按下向上箭头,向上移动, 同理还可以向下,左,右移动
+				4, 如果我按下ctrl + 上下左右,走的步数变大
+				
+			*/
+			
+			onload = function(){
+				var obox = document.getElementById("box");
+				
+				window.onkeydown = function(e){
+					e = e || event;
+					
+					//ctrl + C
+					if (e.ctrlKey && e.keyCode==67) {
+						obox.style.background = "rgb(" + parseInt(Math.random()*256) + ","+ parseInt(Math.random()*256) + ","
+            + parseInt(Math.random()*256) + ")";
+					}
+					
+					//ctrl+shift +r
+					if (e.ctrlKey && e.shiftKey && e.keyCode==82){
+						obox.style.background = "red";
+					}
+					
+					var change = 10;
+					//ctrl + 移动
+					if(e.ctrlKey) {
+						if (e.keyCode == 37) { //左
+							obox.style.left = parseInt(obox.style.left) - change*3 + "px";
+						}
+						else if (e.keyCode == 39) { //右
+							obox.style.left = parseInt(obox.style.left) + change*3 + "px";
+						}
+						else if (e.keyCode == 38) { //上
+							obox.style.top = parseInt(obox.style.top) - change*3 + "px";
+						}
+						else if (e.keyCode == 40) { //下
+							obox.style.top = parseInt(obox.style.top) + change*3 + "px";
+						}
+					}
+					else {
+						//移动
+						if (e.keyCode == 37) { //左
+							obox.style.left = parseInt(obox.style.left) - change + "px";
+						}
+						else if (e.keyCode == 39) { //右
+							obox.style.left = parseInt(obox.style.left) + change + "px";
+						}
+						else if (e.keyCode == 38) { //上
+							obox.style.top = parseInt(obox.style.top) - change + "px";
+						}
+						else if (e.keyCode == 40) { //下
+							obox.style.top = parseInt(obox.style.top) + change + "px";
+						}
+					}
+					
+				}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 100px; height: 100px; background: red; position: absolute; left: 100px; top: 100px;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//事件冒泡
+				document.onclick = function(){
+					console.log("document");
+				}
+				document.body.onclick = function(e){
+					console.log("body");
+					
+					
+				}
+				document.getElementById("box").onclick = function(e){
+					console.log("div");
+					
+					//阻止冒泡
+					e = e || event;
+					if (e.stopPropagation) {
+						e.stopPropagation(); //阻止传播，非IE
+					}
+					else {
+						e.cancelBubble = true; //取消冒泡， IE
+					}
+				}
+				
+				
+				
+				//阻止浏览器的默认行为
+				//表单的提交，默认会刷新页面
+				//图片拖拽， 默认会选中图片
+				var oform = document.getElementsByTagName("form")[0];
+				oform.onsubmit = function(e){
+					console.log("提交");
+					
+					//阻止浏览器默认行为
+					e = e || event;
+					if (e.preventDefault) {
+						e.preventDefault(); //非IE
+					}
+					else {
+						e.returnValue = false; //IE
+					}
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 100px; height: 100px; background: red;">box</div>
+		
+		<form>
+			<input type="text" value="1" />
+			<input type="submit" />
+		</form>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; border: none; padding: 0;}
+			ul, li {list-style: none;}
+			ul {
+				width: 60px;
+				height: 90px;
+				background: orange;
+				position: absolute;
+				left: 10px;
+				top: 10px;
+				display: none;
+			}
+			li {
+				width: 60px;
+				height: 29px;
+				text-align: center;
+				line-height: 30px;
+				border-bottom: 1px dashed #ccc;
+				cursor: pointer;
+			}
+		</style>
+		<script>
+			onload = function(){
+				
+				//阻止右键菜单
+				document.oncontextmenu = function(){
+					return false;
+				}
+				
+				var obox = document.getElementById("box");
+				var oul = document.getElementById("list");
+				
+				obox.onmousedown = function(e){
+					e = e || event;
+					
+					if (e.button == 2) {
+						console.log("右键了");
+						oul.style.display = "block";
+						oul.style.left = e.pageX + "px";
+						oul.style.top = e.pageY + "px";
+					}
+					if(e.button==0){
+						console.log("左键了");
+					}
+				}
+				
+				document.onclick = function(){
+					oul.style.display = "none";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 200px; height: 200px; background: red;"></div>
+		<ul id="list">
+			<li>复制</li>
+			<li>粘贴</li>
+			<li>剪切</li>
+		</ul>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				var a = document.getElementsByTagName("a")[0];
+				
+				a.onclick = function(){
+					
+					//阻止超链接
+					return false;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<a href="http://www.baidu.com" >百度一下</a>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script>
+			onload = function(){
+				
+				//拖拽： onmousedown , onmousemove , onmouseup
+				
+				var obox = document.getElementById("box");
+				//元素位置
+				//console.log(obox.offsetLeft); //不带单位， 只读
+				//console.log(obox.offsetTop);
+				//元素大小
+				//console.log(obox.offsetWidth);
+				//console.log(obox.offsetHeight);				
+				
+				//onmousedown： 鼠标按下
+				obox.onmousedown = function(e){
+					e = e || event;
+					
+					//var disX = e.pageX - parseInt(obox.style.left);
+					//var disX = e.pageX - obox.offsetLeft;
+					var disX = e.offsetX;
+					var disY = e.offsetY;
+					
+					//onmousemove: 鼠标移动
+					document.onmousemove = function(e){
+						//console.log("move");
+						e = e || event;
+						
+						obox.style.left = e.pageX - disX + "px";
+						obox.style.top = e.pageY - disY + "px";
+					}
+					
+					//onmouseup: 鼠标松开
+					document.onmouseup = function(){
+						document.onmousemove = null; //移除onmousemove事件
+						document.onmouseup = null; //移除onmouseup事件
+					}
+				}
+				
+				
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 102px; height: 103px; background: red; position: absolute; left: 101px; top: 100px;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//拖拽
+				//onmousedown, onmousemove, onmouseup
+				var obox = document.getElementById("box");
+				var onav = document.getElementById("nav");
+				var oclose = document.getElementById("close");
+				
+				onav.onmousedown = function(e){
+					e =  e || event;
+					e.preventDefault(); //阻止浏览器默认行为
+					
+					var disX = e.offsetX;
+					var disY = e.offsetY;
+					
+					document.onmousemove = function(e){
+						e = e || event;
+						obox.style.left = e.pageX - disX + "px";
+						obox.style.top = e.pageY - disY + "px";
+					}
+					
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+					}
+				}
+				
+				//关闭
+				oclose.onclick = function(){
+					obox.style.display = "none";
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		
+		<div id="box" style="width: 300px; height: 300px; background: red;position:absolute; left: 50px; top: 50px;border-radius: 5px;">
+			<div id="nav" style="width: 300px; height: 30px; background: purple; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+				<div id="close" style="width: 50px; height: 30px; text-align: center;line-height: 30px; color: white;cursor: pointer;">
+        关闭</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				width: 200px;
+				height: 202px;
+			}
+		</style>
+		<script>
+			onload = function(){
+				
+				//
+				var obox = document.getElementById("box");
+				
+				console.log(obox.offsetWidth); //200
+				console.log(obox.style.width); //""
+				
+				var _style
+				if (window.getComputedStyle) {
+					//支持IE9+, 非IE
+					_style = window.getComputedStyle(obox, null);
+				}
+				else {
+					//IE8-
+					_style = obox.currentStyle;
+				}
+				console.log(_style.width); //200px
+				
+				
+				//三目运算符
+				var _style = window.getComputedStyle ? getComputedStyle(obox,null) : obox.currentStyle;
+				console.log(_style.width); //200px
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="background: red;"></div>
+	</body>
+</html>
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				var aInput = document.getElementsByTagName("input");
+				
+				//按钮1
+				//相同事件会覆盖
+//				aInput[0].onclick = function(){
+//					console.log("onclick-1");
+//				}
+//				aInput[0].onclick = function(){
+//					console.log("onclick-2");
+//				}
+//				aInput[0]["onclick"] = function(){
+//					console.log("onclick-3");
+//				}
+				
+				
+				//事件监听器
+				//相同的事件不会覆盖
+				//addEventListener()  ： IE9+
+				//removeEventListener()
+				
+				//click : 事件类型
+				//fn1: 执行函数
+				//false: 表示使用事件冒泡， （是否使用捕获， false表示使用冒泡）
+				aInput[0].addEventListener("click", fn1, false);
+				aInput[0].addEventListener("click", fn2, false);
+				function fn1(){
+					console.log("click-1");
+				}
+				function fn2(){
+					console.log("click-2");
+				}
+				
+				//按钮2
+				aInput[1].onclick = function(){
+					aInput[0].removeEventListener("click", fn1, false); //移除事件
+					aInput[0].removeEventListener("click", fn2, false); //移除事件
+				}
+				
+				//IE8-
+				//attachEvent()
+				//detachEvent()
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="按钮1" />
+		<input type="button" value="按钮2-让按钮1不能点击" />
+	</body>
+</html>
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			/*
+			 当鼠标失去焦点时: 检测用户名长度至少6位, 且只能为数字和字母;检测密码长度至少8位 
+			给登录按钮添加点击事件: 点击后弹出用户名和密码
+			 * */
+			onload = function(){
+				
+				var aInput = document.getElementsByTagName("input");
+				
+				
+				var flag1 = false; //用户名是否输入正确
+				var flag2 = false; //密码是否输入正确
+
+				//用户名
+				aInput[0].onkeyup = function(){
+					var val = this.value;
+					
+					if (val.length < 6) {
+						console.log("用户名至少为6位");
+						flag1 = false; //不合法
+					}
+					else {
+						var b = false;
+						for (var i=0; i<val.length; i++){
+							var ch = val[i];
+							if (ch>='0'&&ch<='9' || ch>='a'&&ch<='z' || ch>='A'&&ch<='Z') {
+							}
+							else {
+								console.log("用户名只能为数字或字母");
+								b = true;
+								flag1 = false; //不合法
+								break;
+							}
+						}
+//						if (i == val.length) {
+//							console.log("用户名合法");
+//						}
+						if (!b) {
+							console.log("用户名合法");		
+							flag1 = true; //合法
+						}
+					}
+				}
+				
+				//密码
+				aInput[1].onblur = function(){
+					if (this.value.length < 8) {
+						console.log("密码长度至少为8位");
+						flag2 = false;
+					}
+					else {
+						console.log("密码合法");
+						flag2 = true;
+					}
+				}
+				
+				//登录
+				aInput[2].onclick = function(){
+					console.log(flag1);
+					
+					if (flag1 && flag2) {
+						alert("用户名： "+aInput[0].value + "\n密码：" + aInput[1].value);
+					}
+					else {
+						alert("用户名或密码输入不正确！请重新输入");
+					}
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" placeholder="用户名" />
+		<input type="password" placeholder="密码" />
+		<input type="button" value="登录"/>
+	</body>
+</html>
