@@ -1,0 +1,101 @@
+<!doctype html>
+<html charset="uft-8">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        *{ padding:0; margin:0; list-style:none; border:0; }
+        .all{
+            width:500px;
+            height:200px;
+            padding:7px;
+            border:1px solid #ccc;
+            margin:100px auto;
+            position:relative;
+        }
+        .screen{
+            width:500px;
+            height:200px;
+            overflow:hidden;
+            position:relative;
+        }
+        .screen li{ width:500px; height:200px; overflow:hidden; float:left; }
+        .screen ul{ position:absolute; left:0; top:0px; width:4000px; }
+        .all ol{ position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center; }
+        .all ol li{ float:left; width:20px; height:20px; background:#fff; border:1px solid #ccc; margin-left:10px; cursor:pointer; }
+        .all ol li.current{ background:yellow; }
+    </style>
+</head>
+
+
+<body>
+<div class="all" id='all'>
+    <div class="screen">
+        <ul>
+            <li><img src="images/1.jpg" width="500" height="200"/></li>
+            <li><img src="images/2.jpg" width="500" height="200"/></li>
+            <li><img src="images/3.jpg" width="500" height="200"/></li>
+            <li><img src="images/4.jpg" width="500" height="200"/></li>
+            <li><img src="images/5.jpg" width="500" height="200"/></li>
+            <li><img src="images/3.jpg" width="500" height="200"/></li>
+            <li><img src="images/4.jpg" width="500" height="200"/></li>
+            <li><img src="images/5.jpg" width="500" height="200"/></li>
+        </ul>
+    </div>
+    <ol></ol>
+</div>
+</body>
+</html>
+<script>
+
+    window.onload = function(){
+
+        var all = document.getElementById('all');
+        var imgs = document.getElementsByTagName('img');
+        var ols = document.getElementsByTagName('ol');
+
+        var uls = document.getElementsByTagName('ul')[0];
+
+        for(var i = 0; i < imgs.length; i++){//遍历imgs创建ol中的li
+            var li = document.createElement("li");
+            li.innerHTML = i + 1;
+            ols[0].appendChild(li);
+        }
+        var childOl = ols[0].children;
+        for(var i = 0; i < childOl.length; i++){//遍历ol中的li给它绑定鼠标移入事件
+            childOl[i].index = i;
+            childOl[i].onmouseover = function(){
+
+                for(var j = 0; j < childOl.length; j++){//排他   给选中的li添加current的class名，未选中的li移除class名
+                    childOl[j].className = "";
+                }
+                this.className = "current";
+
+                aniamte(uls, -this.index * imgs[0].offsetWidth)
+            }
+        }
+
+
+    }
+
+
+
+    function aniamte(obj, target){
+        clearInterval(obj.timer);
+        //控制运动方向。
+        var step = target > obj.offsetLeft ? 10 : -10;
+        console.log(step);
+
+        // setInterval
+        obj.timer = setInterval(function(){
+            //自身位置=当前的位置+10；
+            obj.style.left = obj.offsetLeft + step + "px";
+            if(Math.abs(target - obj.offsetLeft) <= 10){
+                obj.style.left = target + "px";
+                clearInterval(obj.timer);
+            }
+        }, 10)
+    }
+
+
+</script>
