@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0; border: none;}
+			.item {
+				float: left;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+			.item img {
+				width: 180px;
+				border: 1px solid #ccc;
+				padding: 3px;
+			}
+		</style>
+		<script>
+			onload = onresize = layout;
+			function layout(){
+				
+				var items = document.getElementsByClassName("item");
+				
+				//页面宽度
+				var winWidth = document.documentElement.clientWidth;
+				
+				//列数
+				var columns = Math.floor(winWidth / items[0].offsetWidth);
+				
+				//定义数组heightArr来保存每一列的总高度
+				var heightArr = []; 
+				
+				//遍历所有的item（所有的div）
+				for (var i=0; i<items.length; i++){
+					//第一行的div
+					if (i < columns) {
+						items[i].style.position = "static";
+						heightArr.push(items[i].offsetHeight);
+					}
+					//从第二行开始
+					else  {
+						var minHeight = heightArr[0]; //最小高度
+						var minColum = 0; //最小高度的列下标
+						for (var j=0; j<heightArr.length; j++) {
+							if (minHeight > heightArr[j]){
+								minHeight = heightArr[j];
+								minColum = j;
+							}
+						}
+						
+						//
+						items[i].style.position = "absolute";
+						items[i].style.left = items[minColum].offsetLeft + "px";
+						items[i].style.top = minHeight + "px";
+						
+						//将heightArr的第minColum列的总高度再增加当前加入的div的高度
+						heightArr[minColum] += items[i].offsetHeight;
+						
+					}
+				}
+			}
+			
+			//页面滚动
+			onscroll = function(){
+				//scrollTop
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				
+				//页面高度
+				var winHeight = document.documentElement.clientHeight;
+				
+				//最后一个div的底部位置
+				var items = document.getElementsByClassName("item");
+				var lastItemBottom = items[items.length-1].offsetTop + items[items.length-1].offsetHeight;
+				
+				//当滚动到页面底部时
+				if (winHeight + scrollTop >= lastItemBottom){
+					
+					//创建新节点
+					for (var i=1; i<20; i++) {
+						var div = document.createElement("div");
+						div.className = "item";
+						div.innerHTML = "<img src='images/images1/img ("+ i +").jpg' />";
+						document.body.appendChild(div);
+					}
+					
+					//重新布局
+					layout();
+				}
+				
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div class="item"> <img src="images/images1/img (1).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (2).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (3).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (4).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (5).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (6).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (7).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (8).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (9).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (10).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (11).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (12).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (13).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (14).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (15).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (16).jpg" /> </div>
+		<div class="item"> <img src="images/images1/img (17).jpg" /> </div>
+	</body>
+</html>
