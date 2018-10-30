@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;margin: 0;border: none;
+			}
+			ul li{
+				list-style: none;width: 27px;height: 28px;float: left;
+				background: url(images/star.gif) 0 0px;cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				var ali=document.getElementsByTagName("li");
+				var arr=["很差","一般","良心","满意","非常满意"];
+				var p=document.createElement("p");
+				document.body.appendChild(p);
+				//
+				for(var i=0;i<ali.length;i++){
+					ali[i].index=i;
+					ali[i].onclick=function(){
+						for(var j=0;j<ali.length;j++){
+							if(j<=this.index){
+								ali[j].style.background="url(images/star.gif) 0 -28px";
+							}
+							else{
+								ali[j].style.background="url(images/star.gif) 0 0px";
+							}
+							p.innerHTML=arr[this.index];
+						}
+					}
+				}
+				
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<p></p>
+	</body>
+</html>
