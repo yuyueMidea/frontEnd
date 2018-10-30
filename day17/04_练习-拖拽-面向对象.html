@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				//拖拽-面向过程
+				/*
+				var obox = document.getElementById("box");
+				//onmousedown
+				obox.onmousedown = function(e){
+					e = e||event;
+					var disX = e.pageX - obox.offsetLeft;
+					var disY = e.pageY - obox.offsetTop;
+					
+					//onmousemove
+					document.onmousemove = function(e){
+						e = e||event;
+						obox.style.left = e.pageX - disX + "px";
+						obox.style.top = e.pageY - disY + "px";
+					}
+					//onmouseup
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+					}
+				}
+				*/
+				
+				//拖拽-面向对象
+				//属性： box
+				//方法：startMove, moving, stopMove
+				var dragObj = {};
+				//属性
+				//box
+				dragObj.box = document.getElementById("box");
+				dragObj.box.onmousedown = function(e){
+					e = e||event;
+					//console.log(this); //dragObj.box
+					//this.startMove(); //报错
+					dragObj.startMove(e.pageX, e.pageY); //开始移动
+				}
+				
+				//方法
+				//startMove
+				dragObj.startMove = function(x, y){
+					this.disX = x - dragObj.box.offsetLeft;
+					this.disY = y - dragObj.box.offsetTop;
+					
+					//onmousemove
+					document.onmousemove = function(e){
+						e = e||event;
+						dragObj.moving(e.pageX, e.pageY); //移动过程
+					}
+					//onmouseup
+					document.onmouseup = function(){
+						dragObj.stopMove(); //停止移动
+					}
+				}
+				
+				//moving
+				dragObj.moving = function(x, y){
+					dragObj.box.style.left = x - this.disX + "px";
+					dragObj.box.style.top = y - this.disY + "px";
+				}
+				
+				//stopMove 
+				dragObj.stopMove = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 100px; height: 100px; background: green; position: absolute;left: 0; top: 0;"></div>
+	</body>
+</html>
