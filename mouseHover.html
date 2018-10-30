@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标滑动特效</title>
+	<style>
+	body{background: black;}
+	div{
+		height: 100px;
+		width: 100px;
+		border-radius: 5px;
+		position: absolute;
+	}
+	img{width: 100px;height: 100px;}
+	</style>
+</head>
+<body>
+	<div><img src="images/img01.jpg"></div>
+	<div><img src="images/img02.jpg"></div>
+	<div><img src="images/img03.jpg"></div>
+	<div><img src="images/img04.jpg"></div>
+	<div><img src="images/img05.jpg"></div>
+	<div><img src="images/img06.jpg"></div>
+	<div><img src="images/img07.jpg"></div>
+	<div><img src="images/img08.jpg"></div>
+	<div><img src="images/img1.jpg"></div>
+	<div><img src="images/img2.jpg"></div>
+	<div><img src="images/img3.jpg"></div>
+	<div><img src="images/img4.jpg"></div>
+	<div><img src="images/img15.jpg"></div>
+	<div><img src="images/img17.jpg"></div>
+	<div><img src="images/img13.jpg"></div>
+	<div><img src="images/img14.jpg"></div>
+	<div><img src="images/img16.jpg"></div>
+	<!--position 图片的排列顺序是：第一个在最下面，最后一个在最上面 -->
+	<script>
+	var div=document.getElementsByTagName("div");   //拿到所有div
+		document.onmousemove=function(evt){    //绑定鼠标移动事件
+			var e=evt||window.event;
+			e.preventDefault();	
+			
+			div[div.length-1].style.left=e.pageX+"px";  //找到最后一个div，把鼠标的坐标赋值给它.;
+			div[div.length-1].style.top=e.pageY+"px";	
+		
+			div[div.length-2].style.left=div[div.length-1].style.left;
+			div[div.length-2].style.top=div[div.length-1].style.top;
+			
+			for(var i=0;i<div.length-2;i++){   //这里遍历的时候，i的坐标就会变成它后面一个的坐标。（即i+1)的坐标
+				div[i].style.left=div[i+1].style.left;
+			 	div[i].style.top=div[i+1].style.top;
+			}	
+			
+		}
+
+
+
+
+	</script>
+</body>
+</html>
