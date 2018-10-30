@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+	<style>
+
+		*{
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+		.item{
+			padding-left: 5px;
+			padding-right: 5px;
+			float: left;
+		}
+		img{
+			width: 180px;
+			padding: 3px;
+			border: 1px solid #ccc;
+		}
+
+	</style>
+	<script>
+
+		onload = onresize = layout;
+		//设置页面加载后与浏览器重置的布局方法
+
+		var items = document.getElementsByClassName("item");
+
+		
+		function layout(){
+
+			var winWidth = document.documentElement.clientWidth;
+			//获取浏览器宽度
+			var colums = Math.floor(winWidth/items[0].offsetWidth);
+			//计算总列数 = 浏览器宽度/图片宽度
+			// console.log(colums);
+
+			var colHeight =[];
+			//创建一个数组用于存放每一列的高度
+			
+			for (var i =0 ; i <items.length; i++){
+				if (i < colums){
+					items[i].style.position = "static";
+					//第一行默认定位
+					colHeight.push( items[i].offsetHeight);
+				}
+				//保存第一行的每一张图片的高度到 colHeight 数组中
+				else{
+					var minHeight = colHeight[0];//最小高度
+					var index = 0;//最小高度下标
+					for (var j = 0; j<colHeight.length;j++){
+						if (minHeight > colHeight[j]){
+							minHeight = colHeight[j];
+							index = j;
+						}
+					}
+					//判断第一行中高度最小的那张图片，并获取其下标
+					
+					items[i].style.position = "absolute";
+					items[i].style.left = items[index].offsetLeft + "px";   
+					items[i].style.top = minHeight + "px";
+					colHeight[index] += items[i].offsetHeight;
+					//从第二行开始给以绝对定位
+					//第二列图片插入顺序为第一行高度由最低开始的图片下面
+					//定位为其插入图片的左边值以及图片的顶端值
+				}
+			}
+			
+			//滚动事件
+			onscroll = function(){
+				
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				//scrollTop兼容
+				
+				var winHeight = document.documentElement.clientHeight;
+				//获取页面高度
+				
+				var lastItemBottom = items[items.length-1].offsetTop + items[items.length-1].offsetHeight;
+				//最后一张图片的高度=这张图片距离页面顶端的高度+这张图片自身的高度
+				
+				if ( scrollTop + winHeight >= lastItemBottom ) {
+					//如果滚动的高度+页面的隐藏高度>=最后一张插入的图片的高度
+					
+					for (var i=0; i<90; i++){
+						var div = document.createElement("div");
+						div.className = "item";
+						div.innerHTML = "<img src='img/"+ i +".jpg' />";
+						document.body.appendChild(div);
+					}
+					//创建div节点
+					
+					
+					layout();
+					//重新布局
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div class="item"> <img src="img/0.jpg" /> </div>
+	<div class="item"> <img src="img/1.jpg" /> </div>
+	<div class="item"> <img src="img/2.jpg" /> </div>
+	<div class="item"> <img src="img/3.jpg" /> </div>
+	<div class="item"> <img src="img/4.jpg" /> </div>
+	<div class="item"> <img src="img/5.jpg" /> </div>
+	<div class="item"> <img src="img/6.jpg" /> </div>
+	<div class="item"> <img src="img/7.jpg" /> </div>
+	<div class="item"> <img src="img/8.jpg" /> </div>
+	<div class="item"> <img src="img/9.jpg" /> </div>
+	<div class="item"> <img src="img/10.jpg" /> </div>
+	<div class="item"> <img src="img/11.jpg" /> </div>
+	<div class="item"> <img src="img/12.jpg" /> </div>
+	<div class="item"> <img src="img/13.jpg" /> </div>
+	<div class="item"> <img src="img/14.jpg" /> </div>
+	<div class="item"> <img src="img/15.jpg" /> </div>
+	<div class="item"> <img src="img/16.jpg" /> </div>
+	<div class="item"> <img src="img/17.jpg" /> </div>
+	<div class="item"> <img src="img/18.jpg" /> </div>
+	<div class="item"> <img src="img/19.jpg" /> </div>
+	<div class="item"> <img src="img/20.jpg" /> </div>
+	<div class="item"> <img src="img/21.jpg" /> </div>
+	<div class="item"> <img src="img/22.jpg" /> </div>
+	<div class="item"> <img src="img/23.jpg" /> </div>
+	<div class="item"> <img src="img/24.jpg" /> </div>
+	<div class="item"> <img src="img/25.jpg" /> </div>
+	<div class="item"> <img src="img/26.jpg" /> </div>
+	<div class="item"> <img src="img/27.jpg" /> </div>
+	<div class="item"> <img src="img/28.jpg" /> </div>
+	<div class="item"> <img src="img/29.jpg" /> </div>
+	<div class="item"> <img src="img/30.jpg" /> </div>
+	<div class="item"> <img src="img/31.jpg" /> </div>
+	<div class="item"> <img src="img/32.jpg" /> </div>
+	<div class="item"> <img src="img/33.jpg" /> </div>
+	<div class="item"> <img src="img/34.jpg" /> </div>
+	<div class="item"> <img src="img/35.jpg" /> </div>
+	<div class="item"> <img src="img/36.jpg" /> </div>
+	<div class="item"> <img src="img/37.jpg" /> </div>
+	<div class="item"> <img src="img/38.jpg" /> </div>
+	<div class="item"> <img src="img/39.jpg" /> </div>
+	<div class="item"> <img src="img/40.jpg" /> </div>
+	<div class="item"> <img src="img/41.jpg" /> </div>
+	<div class="item"> <img src="img/42.jpg" /> </div>
+	<div class="item"> <img src="img/43.jpg" /> </div>
+	<div class="item"> <img src="img/44.jpg" /> </div>
+	<div class="item"> <img src="img/45.jpg" /> </div>
+	<div class="item"> <img src="img/46.jpg" /> </div>
+	<div class="item"> <img src="img/47.jpg" /> </div>
+	<div class="item"> <img src="img/48.jpg" /> </div>
+	<div class="item"> <img src="img/49.jpg" /> </div>
+	<div class="item"> <img src="img/50.jpg" /> </div>
+</body>
+</html>
