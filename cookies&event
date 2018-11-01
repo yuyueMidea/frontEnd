@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				var aInput = document.getElementsByTagName("input");
+				
+				
+				//事件监听器
+				//相同的事件不会覆盖
+				//addEventListener()  ： IE9+
+				//removeEventListener()
+				
+				//click : 事件类型
+				//fn1: 执行函数
+				//false: 表示使用事件冒泡， （是否使用捕获， false表示使用冒泡）
+				/*
+				aInput[0].addEventListener("click", fn1, false);
+				aInput[0].addEventListener("click", fn2, false);
+				function fn1(){
+					console.log("click-1");
+				}
+				function fn2(){
+					console.log("click-2");
+				}
+				
+				//按钮2
+				aInput[1].onclick = function(){
+					aInput[0].removeEventListener("click", fn1, false); //移除事件
+					aInput[0].removeEventListener("click", fn2, false); //移除事件
+				}
+				*/
+				
+				//IE8-
+				//attachEvent()
+				//detachEvent()
+				/*
+				aInput[0].attachEvent("onclick", fn1);
+				function fn1(){
+					alert("click-1");
+				}
+				
+				aInput[1].onclick = function(){
+					aInput[0].detachEvent("onclick", fn1);
+				}
+				*/
+				
+				//封装事件监听器
+				//添加事件
+				function addEvent(obj, type, fn, flag){
+					if (obj.addEventListener){ //IE9+，非IE
+						obj.addEventListener(type, fn, flag);
+					}
+					else { //IE8-
+						obj.attachEvent("on"+type, fn);
+					}
+				}
+				
+				//移除事件
+				function removeEvent(obj, type, fn, flag){
+					if (obj.removeEventListener){ //IE9+, 非IE
+						obj.removeEventListener(type, fn, flag);
+					}
+					else { //IE8-
+						obj.detachEvent("on"+type, fn);
+					}
+				}
+				
+				//按钮1添加点击事件
+				addEvent(aInput[0], "click", fn1, false);
+				function fn1(){
+					console.log("click-1");
+				}
+				
+				aInput[1].onclick = function(){
+					removeEvent(aInput[0], "click", fn1, false);
+				}
+				
+			}
+			console.log(document.cookie);
+		</script>
+	</head>
+	<body>
+		<input type="button" value="按钮1" />
+		<input type="button" value="按钮2-让按钮1不能点击" />
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			//
+			//Cookie： 浏览器本地存储的一种技术, 存储字符串，每个cookie存4KB
+			//
+			
+			//document.cookie
+			//name=value; expires=过期时间; path=访问路径; domain=访问域名; secure;
+			
+			//添加cookie
+			document.cookie = "username=zhangsan";
+			document.cookie = "username2=lisi";
+			
+			//获取cookie
+			console.log(document.cookie); //"username=zhangsan; username2=lisi"
+			
+			//修改cookie
+			document.cookie = "username=wangwu";
+			console.log(document.cookie);
+			
+			//URI编码
+			//encodeURIComponent() : 对中文和特殊字符进行编码
+			document.cookie = "username3=" + encodeURIComponent("[赵六,");
+			console.log( decodeURIComponent( document.cookie ) );
+			
+			//删除
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script type="text/javascript" src="cookie.js" ></script>
+		<script>
+			onload = function(){
+				
+				/*
+				 练习
+					1, 十天内免登录:
+					    如下图, 有账户,密码输入框, 当用户点击确定按钮, 
+					    如果选择了十天内免登录,则将账户和密码保存在cookie中.
+					    当下一次再进入该页面时, 自动填写上次保存的账户和密码 
+				*/
+				
+				var aInput = document.getElementsByTagName("input");
+				
+				//判断cookie中是否已经存储了username,pwd
+				var username = getCookie("username");
+				var pwd = getCookie("pwd");
+				aInput[0].value = username;
+				aInput[1].value = pwd;
+				
+				//点击确定按钮
+				aInput[3].onclick = function(){
+					//如果勾选了
+					if (aInput[2].checked) {
+						
+						var d = new Date();
+						d.setDate(d.getDate()+10); //十天后的日期
+						setCookie("username", aInput[0].value, d); //保存账号
+						setCookie("pwd", aInput[1].value, d); //保存密码
+						//console.log( document.cookie );
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div style="width: 230px; background: #008B8B; height: 100px; padding: 10px;">
+			账号：<input type="text" /> <br>
+			密码：<input type="password" /> <br>
+				<input type="checkbox"  />十天内免登录 <br>
+				<input type="button" value="确定" /> <input type="reset" />
+		</div>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			
+			//JSON : 一种数据表示方式（数据格式）
+			
+			
+			//json字符串
+			//json对象
+			
+			//json对象
+			var arr = [1,2,3];
+			var obj = {name:"zhangsan"};
+			var arr = [{name:"张三", age:33}, {name:"李四", age:44}];
+			
+			//json字符串
+			//对象中的key值需要加双引号""
+			var str = '[{"name":"张三", "age":33}, {"name":"李四", "age":44}]';
+			
+			
+			//json字符串转换成json对象 : JSON解析
+			//json对象转换成json字符串 : JSON序列化
+			
+			//JSON解析
+			//eval()
+			var str = '[{"name":"张三", "age":33}, {"name":"李四", "age":44}]';
+			var arr = eval(str); //转换成了数组
+			console.log(arr[0].name); //张三
+			
+			var str = '{"name":"张三", "age":33}';
+			var obj = eval( "("+str+")" );
+			console.log(obj);
+			
+			//JSON.parse() : 解析
+			var str = '[{"name":"张三", "age":33}, {"name":"李四", "age":44}]';
+			var arr = JSON.parse(str);
+			console.log(arr);
+			
+			//JSON.stringify() : 序列化
+			var arr = [{"name":"张三", "age":33}, {"name":"李四", "age":44}];
+			var str = JSON.stringify(arr);
+			console.log(str); //"[{"name":"张三","age":33},{"name":"李四","age":44}]"
+			console.log(typeof str); //string
+			
+			
+			
+			/*
+			 [
+			 	{id:id1, name:"单车", price:"100",num:1},
+			 	{id:id2, name:"摩托", price:"1000",num:1},
+			 	{id:id4, name:"坦克", price:"100000",num:1}
+			 ]
+			 
+			 */
+			
+			//setCookie("cart", JSON.stringify(arr), d);
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+
+
+// instanceof : 判断某个对象是否是某个构造函数创建的对象
+// typeof : 判断数据类型
+/*
+var d = new Date();
+console.log(d instanceof Date);
+
+var arr = new Array();
+console.log(arr instanceof Array);
+*/
+
+//cookie增删改查
+// 添加cookie / 修改cookie
+function setCookie(name, value, expires, path){
+	var str = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+	if (expires && expires instanceof Date) {
+		str += ";expires=" + expires;
+	}
+	if (path) {
+		str += ";path=" + path;
+	}
+	document.cookie = str;
+	//console.log(str);  //当前要加入cookie的数据
+	//console.log(document.cookie); //浏览器中所有的cookie数据
+}
+
+//获取cookie
+//user=张三; user2=wangwu; user3=zhaoliu 
+function getCookie(name){
+	var cookieStr = decodeURIComponent(document.cookie);
+	var arr = cookieStr.split("; ");
+	for (var i=0; i<arr.length; i++) {
+		var str = arr[i]; //user=张三
+		var arr2 = str.split("=");
+		if (arr2[0] == name){
+			return arr2[1];
+		}
+	}
+	return "";
+}
+
+//删除cookie
+function removeCookie(name){
+	var d = new Date();
+	d.setDate(d.getDate()-1);
+	document.cookie = encodeURIComponent(name) + "=; expires=" +  d;
+}
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="cookie.js"></script>
+		<script type="text/javascript">
+			onload=function(){
+				var aput=document.getElementsByTagName("input");
+				var name=getCookie("name");
+				var pwd=getCookie("pwd");
+				aput[0].value=name;
+				aput[1].value=pwd;
+				//
+				aput[3].onclick=function(){
+					var d=new Date();
+					d.setDate(d.getDate()+10);
+					if(aput[2].checked){
+						setCookie("name",aput[0].value,d);
+						setCookie("pwd",aput[1].value,d);
+					}
+					
+				}
+				//
+				aput[4].onclick=function(){
+					aput[0].value="";
+					aput[1].value="";
+				}
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 250px;height: 100px;background: orange;
+			border: 1px solid cornflowerblue;margin: 20px;padding: 10px;">
+			姓名：<input type="text"placeholder="请输入姓名"/><br />
+			密码：<input type="text"placeholder="请输入密码"/><br />
+			<input type="checkbox" />十天内免登录<br />
+			<input type="button" value="登录" />
+			<input type="button" value="重置" />
+		</div>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			onload = function(){
+				console.log( Number.parseInt('12.34') );
+				var a= Math.cbrt(8)
+				console.log(a)
+				const isEven = n => n%2==0
+				const square = n =>n *n
+				console.log(isEven(5))
+				console.log(square(3))
+				var arr1 = [1, 2, 3].map(function(x){
+					return x*x
+				})
+				var arr2 = [1,3,5].map(n =>n*n)
+				console.log(arr1)
+				console.log(arr2)
+				//
+				var hander = {
+					id: '123456',
+					init: function(){
+						document.addEventListener('click',event =>this.doSomething(event.type),false)
+					},
+					doSomething: function(type){
+						console.log('hander'+ type +'for'+ this.id)
+					}
+				}
+				hander.init()
+				//
+				function fact(n){
+					if(n===1) return 1;
+					return n* fact(n-1)
+				}
+				console.log(fact(1111))
+				function fact2(n, total){
+					if( n===1) return total;
+					return fact2(n-1, n* total)
+				}
+				console.log(fact2.arguments)
+				function sum(x, y){
+					if(y >0){
+						return sum(x+1, y-1)
+					}else{
+						return x
+					}
+				}
+//				console.log(sum(1, 10000))
+				var argu1 = [1,2,3]
+				var argu2 = [11,22,33]
+				argu2.push(...argu1)
+				console.log( argu2)
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;}
+			ul{position: absolute;left: 0px;top: 20px;}
+			li{list-style: none;float: left;border: 1px solid black;
+			width: 20px;height: 20px;line-height: 20px;text-align: center;
+			cursor: pointer;color: white;margin-left: 1px;
+			margin-top: 1px;}
+			li:first-child{margin-left: 0;}
+			li:nth-child(11){margin-left: 11px;}
+			li:nth-child(20){margin-left: 22px;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				
+				function $(id){
+					return document.getElementById(id)
+				}
+				//水平拖动键盘
+				$("blue").onmousedown=function(e){
+					e=e||event;e.preventDefault();
+					var disX=e.offsetX;
+					document.onmousemove=function(e){
+						e=e||event;
+						var left=parseInt( $("key").style.marginLeft);
+						if(0<left&&left<1100){
+							$("key").style.marginLeft=e.pageX-disX+"px";
+						}
+						else{
+							$("key").style.marginLeft="100px";
+						}
+					}
+					document.onmouseup=function(e){
+						e=e||event;
+						document.onmousemove=false;
+						document.onmouseup=false;
+					}
+				}
+				//end
+				//小写字母变色
+				var ali=document.getElementsByTagName("li");
+				for(var i=0;i<ali.length;i++){
+					ali[i].index=i;
+					ali[i].onclick=function(){
+						for(var j=0;j<ali.length;j++){
+							if(j==this.index){
+								this.style.background="red";
+							}
+							else{ali[j].style.background="gray";}
+						}
+						
+					}
+				}
+				//end
+				document.ondblclick=function(){
+					$("key").style.display="none";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="key" style="width: 230px;height: 90px;
+			background: gray;border: 1px solid black;position: relative;
+			margin-left: 100px;margin-top: 100px;">
+			<div id="blue" style="width: 100%;height: 20px;
+				background: deepskyblue;position: absolute;
+				top: 0;left: 0;cursor: crosshair;"></div>
+			<ul>
+				<li>q</li>
+				<li>w</li>
+				<li>e</li>
+				<li>r</li>
+				<li>t</li>
+				<li>y</li>
+				<li>u</li>
+				<li>i</li>
+				<li>o</li>
+				<li>p</li>
+				<li>a</li>
+				<li>s</li>
+				<li>d</li>
+				<li>f</li>
+				<li>g</li>
+				<li>h</li>
+				<li>j</li>
+				<li>k</li>
+				<li>l</li>
+				<li>z</li>
+				<li>x</li>
+				<li>c</li>
+				<li>v</li>
+				<li>b</li>
+				<li>n</li>
+				<li>m</li>
+			</ul>
+		</div>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			a:hover{color: red;}
+			li{width: 100%;}
+		</style>
+		<script type="text/javascript">
+			onload=function(){
+				function $(id){
+					return document.getElementById(id)
+				}
+				
+				ali=document.getElementsByTagName("a");
+				for(var i=0;i<ali.length-1;i++){
+					ali[i].index=i;
+					var num=1;
+					
+					ali[i].onclick=function(){
+						var name=this.parentNode.children[1].innerHTML;//名称
+						var price=this.parentNode.children[2].innerHTML;//价格
+						
+						var li=document.createElement("li");
+						$("pur").appendChild(li);
+						li.innerHTML="商品名称："+name+"，价格："+price+"，数量："+num;
+					}
+				}
+				ali[6].onclick=function(){
+					$("cart").style.display="block";
+				}
+				
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 300px;height: 200px;border: 1px solid red;
+			background: pink;">
+			<h3>商品列表</h3>
+			<ul id="list"style="position: absolute;top: 40px;">
+				<li><span>id1</span> <span>单车</span> <span>$10</span>    <a href="#">加入购物车</a></li>
+				<li><span>id2</span> <span>摩托</span> <span>$100</span>   <a href="#">加入购物车</a></li>
+				<li><span>id3</span> <span>汽车</span> <span>$1000</span>   <a href="#">加入购物车</a></li>
+				<li><span>id4</span> <span>坦克</span> <span>$10000</span>   <a href="#">加入购物车</a></li>
+				<li><span>id5</span> <span>飞机</span> <span>$100000</span>   <a href="#">加入购物车</a></li>
+				<li><span>id6</span> <span>飞船</span> <span>$1000000</span>   <a href="#">加入购物车</a></li>
+				<li style="list-style: none;"><a href="#">查看购物车</a></li>
+			</ul>
+		</div>
+		<div id="cart" style="width: 400px;height: 300px;
+			border: 1px solid blueviolet;display: none;">
+			<h3>我的购物车</h3>
+			<ul id="pur">
+				
+			</ul>
+		</div>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			onload = function (){			
+			
+				function count(_array){
+					var _duplicated = [];
+					_array.sort();
+					for(var i = 0; i < _array.length; i++){
+						if(_duplicated.indexOf(_array[i]) < 0 && _array[i] == _array[i + 1]){
+							_duplicated.push(_array[i]);
+						}
+					}
+					var _result = 0;
+					for(var i = 0; i < _array.length; i++){
+						if(_duplicated.indexOf(_array[i]) < 0){
+							_result += _array[i];
+						}
+					}
+					return _result;
+				}
+				var a =[3,4,1,2,5,6,6,5,4,3,3,6,7]
+				console.log(count(a));
+				//
+				var compose;
+				var f = compose (x => x * 4) (x => x + 3);
+//				f(2) // 20
+				console.log(f(3))
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="cookie.js"></script>
+		<script type="text/javascript">
+			onload=function(){
+				
+			
+				//cookie的封装
+				function setCookie(name,value,expires,path){
+					var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+					if(expires instanceof Date){
+						cookieText +=";expires=" +expires;
+					}
+					if(path){
+						cookieText +=";path="+path;
+					}
+					document.cookie=cookieText;
+					return decodeURIComponent( document.cookie );
+				}
+				//end
+				//获取cookie
+				function getCookie(name){
+					var cookieStr=decodeURIComponent(document.cookie);
+					var arr=cookieStr.split("; ");
+					for(var i=0;i<arr.length;i++){
+						var str=arr[i];
+						var arr2=str.split("=");
+						if(arr2[0]==name){
+							return arr2[1];
+						}
+					}
+					return "";
+				}
+				
+				
+				//end
+				var aput=document.getElementsByTagName("input");
+				
+				
+				var username = getCookie("username");
+				var pass = getCookie("pass");
+				aput[0].value=username;
+				aput[1].value=pass;
+				 
+				getCookie("pass",aput[1].value);
+				aput[3].onclick=function(){
+					var d=new Date();
+					d.setDate(d.getDate()+10);//
+				
+					if(aput[2].checked){
+						setCookie("username",aput[0].value,d);
+						setCookie("pass",aput[1].value,d);
+					}
+					
+				}
+				aput[4].onclick=function(){
+					aput[0].value="";
+					aput[1].value="";
+				}
+				
+			}	
+		</script>
+	</head>
+	<body>
+		<div id="box" style="width: 250px;height: 100px;
+			border: 1px solid red;background: #008b8b;padding: 10px;">
+		账号：<input type="text"/><br />
+		密码：<input type="password"/><br />
+			<input type="checkbox" />十天内免登陆<br />
+			<input type="submit" />
+			<input type="reset" />
+		</div>
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+			<style type="text/css">
+			</style>
+		<title></title>
+		<script type="text/javascript" src="cookie.js"></script>
+		<script type="text/javascript">
+			onload=function(){
+				
+				function $(id){
+					return document.getElementById(id)
+				}
+				
+				var left=getCookie("left");
+				var top=getCookie("top");
+				$("small").style.left=left+"px";
+				$("small").style.top=top+"px";
+				
+				$("small").onmousedown=function(e){
+					e=e||event;
+					e.preventDefault();
+					var disX=e.offsetX;
+					var disY=e.offsetY;
+					
+					document.onmousemove=function(e){
+						e=e||event;
+						
+						$("small").style.left=e.pageX-disX+"px";
+						$("small").style.top=e.pageY-disY+"px";
+					}
+					document.onmouseup=function(e){
+						e=e||event;//必须有e!!!
+						document.onmousemove=false;
+						document.onmouseup=false;
+						$("small").children[0].innerHTML=e.pageX-disX+"(X坐标)";
+						$("small").children[1].innerHTML=e.pageY-disY+"(Y坐标)";
+						var d=new Date();
+						d.setDate(d.getDate()+10);//
+						setCookie("left",e.pageX-disX,d);
+						setCookie("top",e.pageY-disY,d);
+					}
+				}
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+			<div id="small" style="width: 100px;height: 100px;
+				background: red;cursor: pointer;position: absolute;
+				left: 20px;top: 20px;">
+				<p>(X坐标)</p>
+				<p>(Y坐标)</p>
+			</div>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#iphone {
+				background: url(images/images2/iphone.jpg);
+				width: 426px;
+				height: 640px;
+				position: absolute;
+				left: 30px;
+			}
+			#box {
+				width: 360px;
+				height: 62px;
+				/*background: red;*/
+				position: absolute;
+				left: 32px;
+				bottom: 33px;
+			}
+			#lock {
+				background: url(images/images2/unlock_btn.jpg);
+				width: 93px;
+				height: 62px;
+				position: absolute;
+				left: 0px;
+				top: 0;
+				cursor: pointer;
+			}
+			
+		</style>
+		<script>
+		
+			onload = function(){
+				
+				var oIphone = document.getElementById("iphone");
+				var oBox = document.getElementById("box");
+				var oLock = document.getElementById("lock");
+				
+				//拖拽
+				oLock.onmousedown = function(e){
+					e = e || event;
+					
+					var disX = e.offsetX;
+					var disY = e.offsetY;
+					
+					document.onmousemove = function(e){
+						e = e || event;
+						var x = e.pageX - disX - oIphone.offsetLeft - oBox.offsetLeft;
+						if (x <= 0) {
+							x = 0;
+						}
+						else if (x >= oBox.offsetWidth-oLock.offsetWidth){
+							x = oBox.offsetWidth - oLock.offsetWidth;
+						}
+						oLock.style.left = x + "px";
+					}
+					
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+						
+						if (oLock.offsetLeft < (oBox.offsetWidth-oLock.offsetWidth)/2){
+							oLock.style.left = 0;
+						}
+						else {
+							oLock.style.left = oBox.offsetWidth - oLock.offsetWidth + "px";
+						}
+					}
+					
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="iphone">
+			<div id="box">
+				<div id="lock"></div>
+			</div>
+		</div>
+	</body>
+</html>
+---------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			onload = function(){
+				
+				var oImg = document.getElementsByTagName("img")[0];
+				
+				//onmousedown
+				var lastIndex = 0;
+				document.onmousedown = function(e){
+					e = e || event;
+					e.preventDefault();
+					
+					var startX = e.pageX;
+					
+					var index = 0;
+					document.onmousemove = function(e){
+						e = e || event;
+						
+						index = (parseInt((e.pageX - startX)/10) + lastIndex + 77*10)%77;
+						//console.log(index);
+						
+						oImg.src = "images/images3/"+ index +".jpg";
+					}
+					
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						//console.log(index);
+						lastIndex = index;
+					}
+					
+					//0-1-2...-76-0-1
+					//0    0
+					//-1  76
+					//-2  75
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<img src="images/images3/0.jpg" />
+	</body>
+</html>
