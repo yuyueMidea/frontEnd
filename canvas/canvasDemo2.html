@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvasDemo2</title>
+</head>
+
+<body>
+    <canvas id="example" style="border:1px solid #ccc;"></canvas>
+</body>
+<script type="text/javascript" src="./particleI.js"></script>
+<script>
+window.onload =function(){
+// debugger
+// import { Particle } from "./particleI.js";
+
+class exampleMove extends Particle {
+    //2. 初始化粒子
+    init() {
+        this.particle = [];
+        let amount = this.options.amount;
+        let { width, height } = this;
+        for (let i = 0; i < amount; i++) {
+            this.particle.push({
+                posX: Math.round(Math.random() * width),
+                posY: Math.round(Math.random() * height),
+                r: 4,
+                color: Math.random() < 0.5 ? '#d63e3e' : '#23409b'
+            });
+        }
+    };
+    //4. 定义粒子的运动方式
+    moveFunc(ctx, width, height) {
+        this.particle.map(item => {
+            item.posY = item.posY + 2;
+            if (item.posY > height) {
+                item.posX = Math.round(Math.random() * width);
+                item.posY = Math.round(Math.random() * height);
+            };
+            this.createParticle(ctx, item.posX, item.posY, item.r, item.color);
+        });
+    };
+    //粒子形状
+    createParticle(ctx, x, y, r, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fill();
+    };
+    //4. 定义粒子的运动方式
+    moveFunc(ctx, width, height) {
+        this.particle.map(item => {
+            item.posY = item.posY + 2;
+            if (item.posY > height) {
+                item.posX = Math.round(Math.random() * width);
+                item.posY = Math.round(Math.random() * height);
+            };
+            this.createParticle(ctx, item.posX, item.posY, item.r, item.color);
+        });
+    };
+}
+
+
+
+    var example = new exampleMove('example', 400, 400, { speed: 3, amount: 8 });
+    example.run();
+}
+</script>
+
+</html>
