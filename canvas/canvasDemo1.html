@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvasDemo1</title>
+</head>
+
+<body>
+    <canvas id="example" style="border:1px solid #ccc;"></canvas>
+</body>
+<script>
+    var cvs = document.getElementById('example');
+    var ctx = cvs.getContext('2d');
+    var width = 400;
+    var height = 400;
+    cvs.width = 400;
+    cvs.height = 400;
+    var particle = [];
+    var lineAnimation;
+    function createItem(amount) {
+        for (let i = 0; i < amount; i++) {
+            particle.push({
+                posX: Math.round(Math.random() * width),
+                posY: Math.round(Math.random() * height),
+                r: 4,
+                color: Math.random() < 0.5 ? '#d63e3e' : '#23409b'
+            });
+        }
+
+        draw();
+    };
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        particle.map((item, index) => {
+            ctx.beginPath();
+            ctx.arc(item.posX, item.posY, item.r, 0, 2 * Math.PI);
+            ctx.fillStyle = item.color;
+            ctx.fill(); //画实心圆
+            ctx.closePath();
+
+            item.posY = item.posY + 2;
+            if (item.posY > height) {
+                item.posX = Math.round(Math.random() * width);
+                item.posY = Math.round(Math.random() * height);
+            };
+        })
+        lineAnimation = requestAnimationFrame(draw);
+    }
+    function stop() {
+        cancelAnimationFrame(lineAnimation);
+    }
+    createItem(100);
+</script>
+
+</html>
