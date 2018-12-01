@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>animation1</title>
+    <style>
+        .react {position: absolute;width: 100px;height: 100px;background: #f00;animation: react-run 3s linear 0s infinite;}
+        @keyframes react-run {
+            0% { top: 0px;left: 0px;}
+            25% {top: 0px;left: 200px;}
+            50% {top: 200px;left: 200px;}
+            75% {top: 200px;left: 0px;}
+            100% {top: 0px;left: 0px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="react"></div>
+</body>
+</html>
