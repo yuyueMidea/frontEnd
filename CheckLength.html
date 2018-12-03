@@ -30,7 +30,10 @@
 // }
 </script>
 
-<input id="id" name="id" value="" onKeyUp="CheckLength(this,10)" />
-
+<input id="id" name="id" value="" onKeyUp="CheckLength(this,10)" size="30" />
+<span>限制输入10个半角字符(5个半角字符)</span><br>
+<input type="text" name="comId" size="30" maxlength="12" 
+            onkeyup="value=value.replace(/[^\w+\uFF10-\uFF19]+/g,'')" />
+            <span>限制输入15个半角字符</span><br>
 </body>
 </html>
