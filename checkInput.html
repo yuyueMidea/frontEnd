@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>checkInput</title>
+</head>
+<body>
+<table class="table_std">
+    <tr>
+        <th scope="row">会员ＩＤ</th>
+        <td>
+            <input type="text" name="comId" size="30" onkeyup="value=value.replace(/[^\w+\uFF10-\uFF19]+/g,'')" class="inp" id="comId"/>
+            <span class="small"></span>
+            <input type="hidden" name="userAgent" id="userAgent"/>
+        </td>
+    </tr>
+    <tr class="gray">
+        <th scope="row">登录ID</th>
+        <td>
+            <input id="loginId" type="text" name="login" size="30" class="inp"  value='loginName'/>
+            <span class="small"></span>
+        </td>
+    </tr>
+    <tr>
+                        <th scope="row">日期</th>
+                        <td><s:textfield key="condition.openStartDtm" size="10"
+                            cssClass="inp" maxlength="10" id="admission_from" />  </td>
+                    </tr>
+
+                    <tr class="gray">
+                        <th scope="row">显示件数</th>
+                        <td><s:textfield key="condition.pageNumber" size="5" id="pageNumber" 
+                            maxlength="3" cssClass="inp" /> &nbsp;件<span class="small">
+                        例）100</span> <s:fielderror fieldName="condition.pageNumber" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">研修ID</th>
+                        <td><s:textfield key="condition.id" size="25" maxlength="10" id="condition_id"
+                            cssClass="inp" /> <span class="small"> 例）CCC000001（完全一致）</span>
+                        <s:fielderror fieldName="condition.id" /></td>
+                    </tr>
+</table>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+window.onload =function(){
+    //显示件数，只能输入半角数字，全角数字
+    $("#pageNumber").bind('input propertychange', function() {  
+    	$(this).val($(this).val().replace(/[^0-9+^\uFF10-\uFF19]+/g,''));
+    });
+    
+    //日期只能输入全角，半角数字和'/'
+    $("#admission_from").bind('input propertychange',function(){
+    	$(this).val($(this).val().replace(/[^0-9+\/+^\uFF10-\uFF19]+/g,''));
+    });
+    
+    //登录ID 只能输入半角英文，全角半角数字
+    $('#loginId').bind('input propertychange', function() {  
+		$(this).val($(this).val().replace(/[^\w+\uFF10-\uFF19]+/g,''));
+	}); 
+    $("#condition_id").bind('input propertychange',function(){
+    	$(this).val($(this).val().replace(/[^\w+\uFF10-\uFF19+\uFF41-\uFF5A+\uFF21-\uFF3A]+/g,''));
+    });
+}
+
+</script>
+
+</body>
+</html>
