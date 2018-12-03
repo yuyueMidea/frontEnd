@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>checkLength-demo</title>
+</head>
+<body>
+<script type="text/javascript">
+// window.onload =function(){
+	function CheckLength(txtObj,length) {
+	    var str = txtObj.value;
+	    var len = str.length;
+	    var temp="";
+	    var reLen = 0;
+
+	    for (var i = 0; i < len; i++) {    
+	        if (str.charCodeAt(i) >255 ) {
+	            // 全角   
+	            reLen += 2;
+	        } else {
+	           reLen++;
+	        }
+	        if (reLen < length+1){
+	           temp+=str.charAt(i);
+	        }else{
+	           txtObj.value= temp;
+	        }
+	        
+	    }
+	}
+// }
+</script>
+
+<input id="id" name="id" value="" onKeyUp="CheckLength(this,10)" />
+
+</body>
+</html>
