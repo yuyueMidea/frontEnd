@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fullpage-demo1</title>
+	<style type="text/css">
+		.section h1{
+			text-align: center !important;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../dist/fullpage.css">
+	<link rel="stylesheet" type="text/css" href="example.css">
+</head>
+<body>
+<div id="fullpage1">
+	<div class="section" id="section0"><h1>fullPage.js</h1></div>
+	<div class="section" id="section2"><h1>No wraps, no extra markup</h1></div>
+	<div class="section" id="section3"><h1>Just the simplest demo ever</h1></div>
+<div class="section" id="section4"><h1>ever</h1></div>
+<div class="section" id="section5"><h1>ever</h1></div>
+<div class="section" id="section6"><h1>ever</h1></div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript" src="../dist/fullpage.js"></script>
+<script type="text/javascript">
+window.onload =function(){
+	var myFullpage =new fullpage("#fullpage1",{
+		sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', '#ccddff']
+
+	})
+}
+</script>
