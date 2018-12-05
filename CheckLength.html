@@ -27,6 +27,17 @@
 	        
 	    }
 	}
+	
+	//获取页面上所有节点的ID----------------
+	for (let { id } of document.querySelectorAll('*')) {
+	  if (id) console.log(id);
+	}
+
+	for (let [index, { id }] of document.querySelectorAll('*').entries()) {
+	  if (id) console.log(index, id);
+	}
+
+	document.querySelectorAll('*').forEach(it => console.log(it.id));
 // }
 </script>
 
