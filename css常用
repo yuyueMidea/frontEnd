@@ -1,0 +1,52 @@
+1.怎么让一个不定宽高的 DIV，垂直水平居中?
+只需要在父盒子设置：display: flex; justify-content: center;align-items: center;
+//
+父盒子设置:display:relative
+Div 设置: transform: translate(-50%，-50%);position: absolute;top: 50%;left: 50%;
+/********************************************/
+
+2.消除图片底部间隙的方法
+图片块状化 - 无基线对齐：img { display: block; }
+图片底线对齐：img { vertical-align: bottom; }
+行高足够小 - 基线位置上移：.box { line-height: 0; }
+
+/********************************************/
+
+我们要知道 CSS RESET 的目的是什么？是为了消除不同的浏览器在默认样式上不同表现
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+fieldset, img {
+    border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}
+caption, th {
+    text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+q:before, q:after {
+    content: '';
+}
+abbr, acronym {
+    border: 0;
+}
+
+/********************************************/
+
+谈谈一些有趣的CSS题目（25）-- vh、vw、vmin、vmax 知多少 #15
+1vw 等于1/100的视口宽度 （Viewport Width）
+1vh 等于1/100的视口高度 （Viewport Height）
