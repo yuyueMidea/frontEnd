@@ -47,5 +47,10 @@
 <input type="text" name="comId" size="30" maxlength="12" 
             onkeyup="value=value.replace(/[^\w+\uFF10-\uFF19]+/g,'')" />
             <span>限制输入15个半角字符</span><br>
+	
+<input type="text" name="comId" size="30" maxlength="11" 
+onblur="value=value.toString().replace(/,/g,'').replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')" />
+<span>数字千分位格式化</span><br>
+	
 </body>
 </html>
