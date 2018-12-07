@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>glideDemo1</title>
+	<!-- Required Core stylesheet -->
+<link rel="stylesheet" href="./dist/css/glide.core.min.css">
+
+<!-- Optional Theme stylesheet -->
+<link rel="stylesheet" href="./dist/css/glide.theme.min.css">
+<style>
+	.glide__slides{
+		height: 111px; 
+	}
+	.glide__slides>li{
+		font-size: 88px;line-height: 111px; text-align: center;
+	}
+	.glide__slides>li:nth-child(3n){
+		background: red
+	}
+	.glide__slides>li:nth-child(3n+1){
+		background: pink
+	}
+	.glide__slides>li:nth-child(3n+2){
+		background: yellow
+	}
+	.glide__bullet--active{
+		background: red;
+	}
+</style>
+</head>
+<body>
+
+<div class="glide" style="border: 1px solid #ccc;">
+  <div data-glide-el="track" class="glide__track">
+    <ul class="glide__slides">
+      <li class="glide__slide">1</li>
+      <li class="glide__slide">2</li>
+      <li class="glide__slide">3</li>
+      <li class="glide__slide">4</li>
+      <li class="glide__slide">5</li>
+      <li class="glide__slide">6</li>
+    </ul>
+  </div>
+
+  <div data-glide-el="controls">
+    <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+        <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
+      </svg>
+    </button>
+
+    <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">" style="right:1px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]">
+    
+      <button class="slider__bullet glide__bullet" data-glide-dir="=0"></button>
+      <button class="slider__bullet glide__bullet" data-glide-dir="=1"></button>
+      <button class="slider__bullet glide__bullet" data-glide-dir="=2"></button>
+      <button class="slider__bullet glide__bullet" data-glide-dir="=3"></button>     
+      <button class="slider__bullet glide__bullet" data-glide-dir="=4"></button>     
+      <button class="slider__bullet glide__bullet" data-glide-dir="=5"></button>     
+      <!-- <button class="slider__bullet glide__bullet" data-glide-dir="=6"></button> -->
+    
+  </div>
+
+</div>
+	<button id="api-mount-button">api-mount-button</button>
+</body>
+</html>
+
+<script type="text/javascript" src="./dist/glide.js"></script>
+<script type="text/javascript">
+window.onload =function(){
+	
+	var button = document.querySelector('#api-mount-button')
+
+	var glide = new Glide('.glide', {
+	  startAt: 0,
+	  perView: 3
+	})
+
+	button.addEventListener('click', function () {
+	  glide.mount()
+	})
+}
+</script>
