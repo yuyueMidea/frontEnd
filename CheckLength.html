@@ -2,6 +2,26 @@
 <html>
 <head>
 	<title>checkLength-demo</title>
+	<style>
+	.test-textarea {
+		width: 400px;
+		min-height: 26px;
+		line-height: 20px;
+		_height: 30px;
+		/* max-height: 150px;*/
+		margin-left: auto;
+		margin-right: auto;
+		padding: 3px;
+		outline: 0;
+		border: 1px solid #ccc;
+		font-size: 12px;
+		word-wrap: break-word;
+		overflow-x: hidden;
+		overflow-y: auto;
+		-webkit-user-modify: read-write-plaintext-only;
+		border-radius: 4px;
+	}
+	</style>
 </head>
 <body>
 <script type="text/javascript">
@@ -59,5 +79,6 @@ onblur="value=value.toString().replace(/,/g,'').replace(/\d{1,3}(?=(\d{3})+(\.|$
 	
 	<h2>textarea高度自适应</h2>
 	<textarea class="teatarea1">textaea1</textarea>
+	<div class="test-textarea" contenteditable="true" ><br /></div>
 </body>
 </html>
