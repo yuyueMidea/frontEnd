@@ -39,6 +39,11 @@
 //数字千分位格式化
 //String(10000).replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')
 	document.querySelectorAll('*').forEach(it => console.log(it.id));
+document.querySelector(".teatarea1").onkeyup=function(){
+	this.style.height = 'auto';
+	this.scrollTop = 0; //防抖动
+	this.style.height = this.scrollHeight + 'px';
+}
 // }
 </script>
 
@@ -52,5 +57,7 @@
 onblur="value=value.toString().replace(/,/g,'').replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')" />
 <span>数字千分位格式化</span><br>
 	
+	<h2>textarea高度自适应</h2>
+	<textarea class="teatarea1">textaea1</textarea>
 </body>
 </html>
