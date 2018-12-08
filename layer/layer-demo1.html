@@ -2,6 +2,13 @@
 <html>
 <head>
 	<title>layer-demo1</title>
+	<style type="text/css">
+
+body .demo-class .layui-layer-title{background:#c00; color:#fff; border: none;}
+body .demo-class .layui-layer-btn{border-top:1px solid #E9E7E7}
+body .demo-class .layui-layer-btn a{background:#333;}
+body .demo-class .layui-layer-btn .layui-layer-btn1{background:#999;}
+	</style>
 </head>
 <body>
 
@@ -9,14 +16,15 @@
 	<button class="btn1">btn1</button>
 	<button class="btn2">询问框</button>
 	<button class="btn3">提示层</button><br/>
-	<button class="btn4">btn4</button>
+	<button class="btn4">询问框2</button>
 	<button class="btn5">页面层</button><br/>
 	<button class="btn6">加载层1</button>
 	<button class="btn7">加载层2</button>
 	<button class="btn8">加载层3</button><br/>
-	<button class="btn9">加载层3</button>
-	<button class="btn10">加载层3</button>
-	<button class="btn11">加载层3</button>
+	<button class="btn9">屏蔽浏览器滚动条</button>
+	<button class="btn10">页面层-自定义</button>
+	<button class="btn11">tab层</button>
+	<button class="btn12">tips</button>
 </h2>
 
 </body>
@@ -43,14 +51,17 @@ window.onload =function(){
 				})
 				break;
 			case 'btn3':
-				layer.msg('good job!')
+				layer.msg('打酱油',{
+					icon:4
+				});
 				break;
 			case 'btn4':
 				layer.confirm('今天去不去广州？',{
 					btn:['Y','N'],
 					yes: function(){
 						layer.msg('ok!')
-					}
+					},
+					scrollbar:false
 				})
 				break;
 			case 'btn5':
@@ -73,19 +84,44 @@ window.onload =function(){
 				})
 				break;
 			case 'btn8':
-				layer.load(2,{
-					shade:false,
-					time:1111
-				})
+				layer.msg('加载中', {
+				  icon: 16
+				  ,shade: 0.01
+				});
 				break;
 			case 'btn9':
-				layer.alert('内容');
+				layer.open({
+					content: '浏览器滚动条已锁',
+  					scrollbar: false
+				})
 				break;
 			case 'btn10':
-				layer.alert('内容');
+				layer.open({
+					type:1,
+					title:'hello~layer',
+					area:['60%','60%'],
+					content:'<h1>页面层-自定义~</h1><p>ppp~</p><button>btn</button>',
+					scrollbar: false,
+					skin:'demo-class'
+				})
 				break;
 			case 'btn11':
-				layer.alert('内容');
+				layer.tab({
+					area:['60%','80%'],
+					tab:[{
+						title:'tab1',
+						content:'<h1>内容1~</h1>'	
+					},{
+						title:'tab2',
+						content:'<h2>内容2~</h2>'	
+					},{
+						title:'tab3',
+						content:'<h3>内容3</h3>'	
+					}]
+				})
+				break;
+			case 'btn12':
+				layer.tips('我是一个tips');
 				break;
 		}
 	})
