@@ -97,6 +97,16 @@
 		
 		</div>
 		<hr>
+		<div class="layui-row">
+		    <!-- 基础评分用法 -->
+		    <span>评分</span>
+		    <div class="layui-rate-div layui-col-xm4 layui-col-xm-offset4 ">
+		      <h3>基础用法</h3>
+		      <hr>
+		      <div id="rate-test1"></div>
+		    </div>
+		</div>
+		<hr>
 		<div>
 			<span>徽章：</span>
 			<span class="layui-badge-dot"></span>
@@ -121,6 +131,8 @@
 		</div>
 		<hr>
 		<div>
+			<span>滑块</span><div id="slideTest1" style="height: 30px;"></div>
+			<span>进度条</span>
 			<div class="layui-progress">
 			  <div class="layui-progress-bar layui-bg-red" lay-percent="20%"></div>
 			</div>
@@ -212,7 +224,99 @@
 		      <div class="layui-tab-item">6</div>
 		    </div>
 		</div>
-
+		<div>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+  <legend>将一段已知数组分页展示</legend>
+</fieldset>
+ 
+<div id="demo9"></div>
+ 
+<ul id="biuuu_city_list" style="border: 1px solid #ccc;"></ul>
+		</div>
+		<div style="width: 800px;">
+			<h3>富文本编辑器</h3>
+		  <form class="layui-form">
+		    <div class="layui-form-item">
+		      <textarea name="demo" id="demo" class="layui-hide">
+		    <p><span>一个范围具有两个边界点，即一个开始点和一个结束点。每个边界点由一个节点和那个节点的偏移量指定。该节点通常是&nbsp;</span><a href="http://www.w3school.com.cn/xmldom/dom_element.asp" title="XML DOM - Element 对象">Element 节点</a><span>、</span><a href="http://www.w3school.com.cn/xmldom/dom_document.asp" title="XML DOM - Document 对象">Document 节点</a><span>或&nbsp;</span><a href="http://www.w3school.com.cn/xmldom/dom_text.asp" title="XML DOM - Text 对象">Text 节点</a><span>。对于 Element 节点和 Document 节点，偏移量指该节点的子节点。偏移量为 0，说明边界点位于该节点的第一个子节点之前。偏移量为 1，说明边界点位于该节点的第一个子节点之后，第二个子节点之前。但如果边界节点是 Text 节点，偏移量则指的是文本中两个字符之间的位置。</span></p>
+		      </textarea>
+		    </div>
+		    <button class="layui-btn">提交</button>
+		    <a class="layui-btn" id="getChoose">获取选中内容</a>
+		  </form>
+		</div>
+		<div class="datepicker">
+		<span>日期时间范围选择：</span>			
+			<div class="layui-inline">
+			  <input type="text" class="layui-input" id="date-test1">
+			</div>
+			<span>日期选择器：</span>			
+			<div class="layui-inline">
+			  <input type="text" class="layui-input" id="date-test2">
+			</div>
+		</div>
+		<hr>
+		<div class="layui-form">
+			<div class="layui-form-item" pane>
+			    <label class="layui-form-label">复选框</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="like[write]" title="写作">
+			      <input type="checkbox" name="like[read]" title="阅读">
+			      <input type="checkbox" name="like[game]" title="游戏" disabled>
+			    </div>
+			</div>
+			<div class="layui-form-item" pane>
+			    <label class="layui-form-label">原始复选框</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作">
+			      <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+			      <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏" disabled>
+			    </div>
+			</div>
+			<div class="layui-form-item" pane>
+			    <label class="layui-form-label">开关关</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="close" lay-skin="switch" title="开关">
+			    </div>
+			</div>
+			<div class="layui-form-item" pane>
+			    <label class="layui-form-label">开关开</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" checked name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+			      <input type="checkbox" name="open2" lay-skin="switch" lay-filter="switchTest" lay-text="已绑定|绑定">
+			    </div>
+			</div>
+			<div class="layui-form-item" pane>
+			    <label class="layui-form-label">单选框</label>
+			    <div class="layui-input-block">
+			      <input type="radio" name="sex" value="男" title="男">
+			      <input type="radio" name="sex" value="女" title="女" checked>
+			      <input type="radio" name="sex" value="中型" title="中" disabled>
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label class="layui-form-label">搜索选择框</label>
+			    <div class="layui-input-inline">
+			      <select name="interest-search" lay-filter="interest-search" lay-search>
+			        <option value="">请搜索</option>
+			        <option value="写作">写作</option>
+			        <option value="阅读" disabled>阅读</option>
+			        <option value="游戏" disabled>游戏</option>
+			        <option value="音乐">音乐</option>
+			        <option value="旅行">旅行</option>
+			        <option value="读书">读书</option>
+			        <option value="1">layer</option>
+			        <option value="2" disabled>laydate</option>
+			        <option value="3">3</option>
+			        <option value="4">layim</option>
+			        <option value="5">laypage</option>
+			        <option value="6">6</option>
+			        <option value="7">7</option>
+			        <option value="8">8</option>
+			      </select>
+			    </div>	
+  			</div>
+		</div>
     </div>
   </div>
   
@@ -241,5 +345,161 @@ window.onload =function(){
         document.body.style.backgroundColor = color;
       }
     });
+    //
+    var slider = layui.slider;
+  
+	slider.render({
+	    elem: '#slideTest1'
+	    //,type: 'vertical'
+	    //,min: -20 //最小值
+	    //,max: 20 //最大值
+	    //,value: 10 //[40, 60] //初始值
+	    //,step: 10 //间隔值
+	    //,showstep: true //间隔点
+	    //,tips: false //关闭提示文本
+	    ,input: true //输入框
+	    //,range: true //范围选择
+	    ,change: function(value){ //回调实时显示当前值
+	      console.log(value)
+	    }
+	    //,setTips: function(value){ //自定义提示文本
+	      //return '离世界末日还有 ' + value + ' 天';
+	    //}
+	    //,height: '300' //配合 type:'vertical' 参数使用，默认200px
+	    //,disabled: true //禁用滑块
+	    //,theme: '#c00' //主题色
+	});
+	var rate = layui.rate;
+	 rate.render({
+	    elem: '#rate-test1'
+	    ,length: 3
+	    ,value: 2.2
+	    ,text: true
+	    ,half: true
+	    ,setText: function(value){
+
+	      var arrs = {
+	        '0.5': '极差'
+	        , '1' : '一般'
+	        ,'1.5': '满意'
+	        ,'2': '极满意'
+	      };
+
+	      this.span.text(arrs[value] || ( value + "星"));
+	    }
+	})
+ 	//测试数据
+  var data = [
+    '北京',
+    '上海',
+    '广州',
+    '深圳',
+    '杭州',
+    '长沙',
+    '合肥',
+    '宁夏',
+    '成都',
+    '西安',
+    '南昌',
+    '上饶',
+    '沈阳',
+    '济南',
+    '厦门',
+    '福州',
+    '九江',
+    '宜春',
+    '赣州',
+    '宁波',
+    '绍兴',
+    '无锡',
+    '苏州',
+    '徐州',
+    '东莞',
+    '佛山',
+    '中山',
+    '成都',
+    '武汉',
+    '青岛',
+    '天津',
+    '重庆',
+    '南京',
+    '九江',
+    '香港',
+    '澳门',
+    '台北'
+  ];
+  var laypage = layui.laypage;
+  //调用分页
+	laypage.render({
+	    elem: 'demo9'
+	    ,count: data.length
+	    ,layout: ['prev', 'page', 'next', 'refresh', 'skip']
+	    ,jump: function(obj){
+	      //模拟渲染
+	      document.getElementById('biuuu_city_list').innerHTML = function(){
+	        var arr = []
+	        ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
+	        layui.each(thisData, function(index, item){
+	          arr.push('<li>'+ item +'</li>');
+	        });
+	        return arr.join('');
+	      }();
+	    }
+	});
+	//
+	var layedit = layui.layedit;
+  
+	var index = layedit.build('demo', {
+	    //hideTool: ['image']
+	    uploadImage: {
+	      url: 'json/upload/demoLayEdit.json'
+	      ,type: 'get'
+	    }
+	    //,tool: []
+	    //,height: 100
+	});
+	  
+	getChoose.onclick = function(){
+	    alert(layedit.getSelection(index));
+	};
+	//
+	var laydate = layui.laydate;
+  
+	  //双控件
+	laydate.render({
+	    elem: '#date-test1' //指定元素
+	    ,type: 'datetime'
+	    ,trigger: 'click'
+	    ,lang: 'en'
+	    //,lang: 'en'
+	    ,range: true //开启日期范围，默认使用“_”分割
+	    ,done: function(value, date, endDate){
+	      console.log(value, date, endDate);
+	    }
+	    ,change: function(value, date, endDate){
+	      console.log(value, date, endDate);
+	    }
+	});
+	  
+	  //单控件
+	laydate.render({
+	    elem: '#date-test2'
+	    //,format: 'yyyy年MM月dd日'
+	    //,value: new Date(1989,9,14)
+	    ,isInitValue: false
+	    ,format: 'yyyyMMdd'
+	    ,value: '20170910'
+	   
+	    //,max: 0
+	    //,min: '2016-10-14'
+	    //,max: -1
+	    //,value: '1989年10月14日'
+	    ,ready: function(date){
+	      console.log(date);
+	    }
+	    ,done: function(value, date, endDate){
+	      console.log(value, date, endDate);
+	    }
+	});
 }
 </script>
