@@ -83,7 +83,137 @@
 
     <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">内容主体区域</div>
+    <div style="padding: 15px;">
+    	<h2>内容主体区域</h2>
+    	<hr>
+    	<div class="layui-container">
+    		<h3>颜色选择器</h3>
+    		<div class="test-box">
+		      <div class="layui-inline">
+		        <input class="layui-input" id="LAY-test1">
+		      </div>
+		      <div id="test1"></div>
+		    </div>
+		
+		</div>
+		<hr>
+		<div>
+			<span>徽章：</span>
+			<span class="layui-badge-dot"></span>
+			<span class="layui-badge-dot layui-bg-orange"></span>
+			<span class="layui-badge-dot layui-bg-green"></span>
+			<span class="layui-badge-dot layui-bg-cyan"></span>
+			<span class="layui-badge-dot layui-bg-blue"></span>
+			<span class="layui-badge-dot layui-bg-black"></span>
+			<span class="layui-badge-dot layui-bg-gray"></span>
+
+			<span class="layui-badge">6</span>
+			<span class="layui-badge">99</span>
+			<span class="layui-badge">61728</span>
+
+			<span class="layui-badge">赤</span>
+			<span class="layui-badge layui-bg-orange">橙</span>
+			<span class="layui-badge layui-bg-green">绿</span>
+			<span class="layui-badge layui-bg-cyan">青</span>
+			<span class="layui-badge layui-bg-blue">蓝</span>
+			<span class="layui-badge layui-bg-black">黑</span>
+			<span class="layui-badge layui-bg-gray">灰</span>
+		</div>
+		<hr>
+		<div>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar layui-bg-red" lay-percent="20%"></div>
+			</div>
+			<br>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar layui-bg-orange" lay-percent="30%"></div>
+			</div>
+			<br>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar layui-bg-green" lay-percent="40%"></div>
+			</div>
+			<br>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar layui-bg-blue" lay-percent="50%"></div>
+			</div>
+			<br>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar layui-bg-cyan" lay-percent="60%"></div>
+			</div>
+			<br>
+			<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showPercent="true">
+			  <div class="layui-progress-bar" lay-percent="100%"></div>
+			</div>
+			<br>
+
+			<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showPercent="true">
+			  <div class="layui-progress-bar" lay-percent="1700 / 2000"></div>
+			</div>
+			<br>
+		</div>
+		<div>
+			赤色分割线
+			<hr class="layui-bg-red">
+			 
+			橙色分割线
+			<hr class="layui-bg-orange">
+			 
+			墨绿分割线
+			<hr class="layui-bg-green">
+			 
+			青色分割线
+			<hr class="layui-bg-cyan">
+		</div>
+		<div class="layui-tab" lay-filter="tabDemo" lay-allowClose="true">
+		  <ul class="layui-tab-title">
+		    <li class="layui-this" lay-id="1">标题1</li>
+		    <li lay-id="2">标题2</li>
+		    <li lay-id="3">标题3</li>
+		    <li lay-id="4">标题4</li>
+		    <li lay-id="5">标题5</li>
+		  </ul>
+		  <div class="layui-tab-content">
+		    <div class="layui-tab-item layui-show">1</div>
+		    <div class="layui-tab-item">2</div>
+		    <div class="layui-tab-item">3</div>
+		    <div class="layui-tab-item">4</div>
+		    <div class="layui-tab-item">5</div>
+		  </div>
+<button class="layui-btn" onclick="layui.element.tabChange('tabDemo', 3)">手工切换到“标题3”</button>
+<button class="layui-btn" onclick="layui.element.tabAdd('tabDemo', {title:'新标题', content:'新内容', id: +new Date})">添加Tab</button>
+<button class="layui-btn" onclick="layui.element.tabDelete('tabDemo', 4)">删除“标题4”</button>
+		</div>
+		<div class="layui-tab layui-tab-card layui-inline">
+		    <ul class="layui-tab-title">
+		      <li class="layui-this">标题一</li>
+		      <li>标题2</li>
+		      <li>标题3</li>
+		      <li>标题4</li>
+		      <li>标题5</li>
+		      <li>标题6</li>
+		    </ul>
+		    <div class="layui-tab-content">
+		      <div class="layui-tab-item layui-show">
+		        <div class="layui-form">
+		          <select>
+		            <option>1</option>
+		            <option>2</option>
+		            <option>3</option>
+		            <option>4</option>
+		            <option>5</option>
+		            <option>6</option>
+		          </select>
+		        </div>
+		      </div>
+		      <div class="layui-tab-item">2</div>
+		      <div class="layui-tab-item">3</div>
+		      <div class="layui-tab-item">4</div>
+		      <div class="layui-tab-item">5</div>
+		      <div class="layui-tab-item">6</div>
+		    </div>
+		</div>
+
+    </div>
   </div>
   
   <div class="layui-footer">
@@ -94,12 +224,22 @@
 </body>
 </html>
 
-<script type="text/javascript" src="./src/layui.all.js"></script>
+<script type="text/javascript" src="./dist/layui.all.js"></script>
 <script type="text/javascript">
 window.onload =function(){
-	layui.use('element', function(){
-	  var element = layui.element;
-	  
-	});
+	var colorpicker = layui.colorpicker;
+
+    colorpicker.render({
+      elem: '#test1'
+      //,predefine: true //开启预定义颜色
+      //,colors: ['#F00','#0F0','#00F','rgb(255, 69, 0)','rgba(255, 69, 0, 0.5)']
+      ,change: function(color){
+        document.body.style.backgroundColor = color;
+      }
+      ,done: function(color){
+        layui.$('#LAY-test1').val(color);
+        document.body.style.backgroundColor = color;
+      }
+    });
 }
 </script>
