@@ -64,6 +64,13 @@ document.querySelector(".teatarea1").onkeyup=function(){
 	this.scrollTop = 0; //防抖动
 	this.style.height = this.scrollHeight + 'px';
 }
+	/////-------------
+	var str='sdwprwqsjxg', json ={};
+	for(var i=0,l=str.length;i<l;i++){
+		json[str[i]] =(json[str[i]] +1)|| 1
+	}
+	console.log(json);//得到一个对象，各个字符出现的次数~
+	//////------------
 // }
 </script>
 
