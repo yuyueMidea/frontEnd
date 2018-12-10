@@ -55,9 +55,27 @@ Alex Walker 曾对SVG表达了自己的喜爱，认为SVG是在网页上最棒�
 
 /********************************************************************/
 
+1、h5新语义标签---
+header标签包含引导和导航等，通常包含h1~h6、搜索框、logo等。
+footer标签一般配合address标签（显示地址）没包含作者信息、相关链接等。
+2、本地存储---
+sessionStorage/localStoreage/indexDB
+3---
+页面缓存-是指还有网络的情况下，
+-离线web应用-是指没有网络状态可以运行应用
+4----
+地理定位：
+Geolocation api访问地理位置--
+            即通过window.navigator.geolocation来实现访问-
+CSS3-----
+CSS3提供了更多的选择器：before、after、first-child、nth-child、、
+提供的效果包括text-shadow、box-shadow、background-size、等等-----
 
 /********************************************************************/
-
+jQuery提供4种时间监听方式：
+      bind/live/delegate/on------
+   对应的解除方式：unbind/die/undelegate/off---
+   
 
 /********************************************************************/
 
