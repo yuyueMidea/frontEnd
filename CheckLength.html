@@ -2,28 +2,79 @@
 <html>
 <head>
 	<title>checkLength-demo</title>
-	<style>
-	.test-textarea {
-		width: 400px;
-		min-height: 26px;
-		line-height: 20px;
-		_height: 30px;
-		/* max-height: 150px;*/
-		margin-left: auto;
-		margin-right: auto;
-		padding: 3px;
-		outline: 0;
-		border: 1px solid #ccc;
-		font-size: 12px;
-		word-wrap: break-word;
-		overflow-x: hidden;
-		overflow-y: auto;
-		-webkit-user-modify: read-write-plaintext-only;
-		border-radius: 4px;
-	}
-	</style>
+<style type="text/css">
+    textarea, 
+    pre {
+      margin: 0;
+      padding: 0;
+      outline: 0;
+      border: 0;
+    }
+    .expandingArea {
+      position: relative;
+      border: 1px solid #888;
+      background: #fff;
+    }
+    .expandingArea textarea,
+    .expandingArea  pre {
+      padding: 5px;
+      background: transparent;
+      font: 400 13px/16px helvetica, arial, sans-serif;
+      /* Make the text soft-wrap */
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .expandingArea  textarea {
+      /* The border-box box model is used to allow
+       * padding whilst still keeping the overall width
+       * at exactly that of the containing element.
+       */
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       -ms-box-sizing: border-box;
+       box-sizing: border-box;
+       width: 100%;
+       /* This height is used when JS is disabled */
+       height: 100px;
+     }
+     .expandingArea.active  textarea {
+      /* Hide any scrollbars */
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      /* Remove WebKit user-resize widget */
+      resize: none;
+    }
+    .expandingArea  pre {
+      display: none;
+    }
+    .expandingArea.active  pre {
+      display: block;
+      /* Hide the text; just using it for sizing */
+      visibility: hidden;
+    }
+</style>
+
 </head>
 <body>
+
+<input id="id" name="id" value="" onKeyUp="CheckLength(this,10)" size="30" />
+<span>限制输入10个半角字符(5个半角字符)</span><br>
+            <input type="text" name="comId" size="30" maxlength="10" 
+            onkeyup="value=value.replace(/[^0-9]/g,'')" />
+            <span>限制输入数字（）</span><br>
+
+<input type="text" name="comId" size="30" maxlength="11" onkeyup="value=value.replace(/[^0-9]/g,'')"
+onblur="value=value.toString().replace(/,/g,'').replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')" />
+<span>数字千分位格式化</span><br>
+<h3>textarea高度自适应自动增高撑开</h3>
+<div class="expandingArea " id="textarea">
+  <pre><span></span><br></pre>
+  <textarea></textarea>
+</div>
+
 <script type="text/javascript">
 // window.onload =function(){
 	function CheckLength(txtObj,length) {
@@ -56,36 +107,48 @@
 	for (let [index, { id }] of document.querySelectorAll('*').entries()) {
 	  if (id) console.log(index, id);
 	}
-//数字千分位格式化
-//String(10000).replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')
-	document.querySelectorAll('*').forEach(it => console.log(it.id));
-document.querySelector(".teatarea1").onkeyup=function(){
-	this.style.height = 'auto';
-	this.scrollTop = 0; //防抖动
-	this.style.height = this.scrollHeight + 'px';
+	//
+function makeExpandingArea(container) {
+	var area = container.getElementsByTagName('textarea')[0] ;
+	var span = container.getElementsByTagName('span')[0] ;
+	if (area.addEventListener) {
+		area.addEventListener('input', function() {
+		span.textContent = area.value;
+	}, false);
+	span.textContent = area.value;
+	} else if (area.attachEvent) {
+		area.attachEvent('onpropertychange', function() {
+		var html = area.value.replace(/\n/g,'<br/>');
+		span.innerText = html; 
+		});
+		var html = area.value.replace(/\n/g,'<br/>');
+		span.innerText = html;
+	}
+	if(window.VBArray && window.addEventListener) { //IE9
+		area.attachEvent("onkeydown", function() {
+			var key = window.event.keyCode;
+			if(key == 8 || key == 46) span.textContent = area.value;
+		});
+		area.attachEvent("oncut", function(){
+			span.textContent = area.value;
+		});//处理粘贴
+	}
+	container.className += "active";
 }
-	/////-------------
-	var str='sdwprwqsjxg', json ={};
+
+var areas = document.getElementById('textarea') ;
+makeExpandingArea(areas);
+///数字千分位格式化
+///String(10000).replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')
+///replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')
+	document.querySelectorAll('*').forEach(it => console.log(it.id));
+// }
+var str='sdwprwqsjxg', json ={};
 	for(var i=0,l=str.length;i<l;i++){
 		json[str[i]] =(json[str[i]] +1)|| 1
 	}
 	console.log(json);//得到一个对象，各个字符出现的次数~
-	//////------------
-// }
 </script>
 
-<input id="id" name="id" value="" onKeyUp="CheckLength(this,10)" size="30" />
-<span>限制输入10个半角字符(5个半角字符)</span><br>
-<input type="text" name="comId" size="30" maxlength="12" 
-            onkeyup="value=value.replace(/[^\w+\uFF10-\uFF19]+/g,'')" />
-            <span>限制输入15个半角字符</span><br>
-	
-<input type="text" name="comId" size="30" maxlength="11" 
-onblur="value=value.toString().replace(/,/g,'').replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,')" />
-<span>数字千分位格式化</span><br>
-	
-	<h2>textarea高度自适应</h2>
-	<textarea class="teatarea1">textaea1</textarea>
-	<div class="test-textarea" contenteditable="true" ><br /></div>
 </body>
 </html>
