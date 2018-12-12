@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>range</title>
+	<style>
+		input[type=range]{ 
+				 margin-top: 8px;
+			         outline: none; 
+				 -webkit-appearance: none;/*清除系统默认样式*/  
+				 width:56% !important;  
+				 background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat, #ddd;  
+			         background-size: 30% 100%;/*设置左右宽度比例*/  
+				height: 3px;/*横条的高度*/  
+		} 
+		 /*拖动块的样式*/  
+		   input[type=range]::-webkit-slider-thumb {  
+			 -webkit-appearance: none;/*清除系统默认样式*/  
+			height:16px;/*拖动块高度*/  
+		        width: 16px;/*拖动块宽度*/  
+		        background: #fff;/*拖动块背景*/  
+			border-radius: 50%; /*外观设置为圆形*/  
+			 border: solid 1px #ddd; /*设置边框*/  
+		} 
+
+	</style>
+</head>
+<body>
+
+
+<div class="an_speed after_clear">
+   <span>速度:</span>
+   <input type="range" name="range_speed" id="range_speed" value="30" oninput="changeSpeed()" />
+   <span id="value1">3.0</span>秒
+</div>
+	<!-- 注意：引入jquery.js -->
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		
+		function changeSpeed() {
+			var value = $('#range_speed').val();
+			var valStr = value + "% 100%";
+			$('#value1').html((value / 10).toFixed(1));
+			$('#range_speed').css({
+			  "background-size": valStr
+			})
+			$("input[name='animat_speed']").val((value / 10).toFixed(1));
+		};
+	</script>
+
+</body>
+</html>
