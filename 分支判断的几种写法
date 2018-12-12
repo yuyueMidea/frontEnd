@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+				<p>@param {number} status 活动状态：1 开团进行中 2 开团失败 3 商品售罄 4 开团成功 5 系统取消</p>
+				<input type="text" id='input'>
+				<button onclick="onButtonClick(data.value)">btn</button>
+				<button onclick="onButtonClick2(data.value)">btn2</button>
+		<script type="text/javascript">
+//			'use strict'
+			const data = {};
+			const input = document.getElementById('input');
+			Object.defineProperty(data, 'text', {
+			  set(value) {
+			    input.value = value;
+			    this.value = value;
+			  }
+			});
+			input.onchange = function(e) {
+			  data.text = e.target.value;
+			}
+			//
+			/**
+ * 按钮点击事件
+ * @param {number} status 活动状态：1 开团进行中 2 开团失败 3 商品售罄 4 开团成功 5 系统取消
+ */
+const onButtonClick = (status)=>{
+  status =data.value;
+  if(status == 1){
+    sendLog('processing')
+    jumpTo('IndexPage')
+  }else if(status == 2){
+    sendLog('fail')
+    jumpTo('FailPage')
+  }else if(status == 3){
+    sendLog('fail')
+    jumpTo('FailPage')
+  }else if(status == 4){
+    sendLog('success')
+    jumpTo('SuccessPage')
+  }else if(status == 5){
+    sendLog('cancel')
+    jumpTo('CancelPage')
+  }else {
+    sendLog('other')
+    jumpTo('Index')
+  }
+}
+const sendLog =(msg)=>{
+	console.log(msg.repeat(3));
+}
+const jumpTo =(msg)=>{
+	console.log(msg.repeat(3));
+}
+//
+const actions = {
+  '1': ['processing','IndexPage'],
+  '2': ['fail','FailPage'],
+  '3': ['fail','FailPage'],
+  '4': ['success','SuccessPage'],
+  '5': ['cancel','CancelPage'],
+  'default': ['other','Index'],
+}
+/**
+ * 按钮点击事件
+ * @param {number} status 活动状态：1开团进行中 2开团失败 3 商品售罄 4 开团成功 5 系统取消
+ */
+const onButtonClick2 = (status)=>{
+  debugger
+  let action = actions[status] || actions['default'],
+      logName = action[0],
+      pageName = action[1]
+  sendLog(logName)
+  jumpTo(pageName)
+}
+
+			// var test = function(){
+			// 	console.log(this)
+			// }.bind({
+			// 	name:"zhangsan",
+			// 	age: '33',
+			// 	tel: '18825237023'
+			// })
+			// test();
+			
+			/*for (let i=0; i<5; i++) {
+				setTimeout(function(){
+					console.log(i)
+				},2000)
+			}*/
+			const obj1 ={
+				name:"zhangsan",
+				age: '33',
+				tel: '18825237023'
+			};
+			obj1.name="wangwu"
+			console.log(obj1.name);
+			
+			var arr1 =[1,[2,3,4],5];
+			var arr2 =[22,44];
+			var [a,b] = arr1;
+			console.log(a+';'+b);
+			[arr1, arr2]=[arr2, arr1];
+			console.log(arr1);
+			console.log(arr2);
+			//
+			/*var obj2 = {
+				o: {},
+				arr3: new Array(11),
+				str: '123',
+				foo: function(){
+					console.log(this.str)
+				}
+			}
+			console.log(obj2.foo());
+			var num =0;
+			for (var i=1; i<10; i++) {
+				if( i%5==0){
+					break;
+				}
+				num ++;
+			}
+			console.log(num);
+			var arr1 =[];
+			var arr2=[ , , , ];
+			var arr3 = ['red', 'blue', 'green'];
+			var item1 = arr3.pop()
+			arr3.push('what', 'when');
+			console.log(arr3.toString())
+			console.log(arr3.valueOf())
+			console.log(item1)
+			//
+			var item2 = arr3.shift();
+			arr3.unshift('the_head')
+			console.log(arr3.valueOf())
+			console.log(item2);
+			//
+			var arr4=[1,11,33,2,5,43,26,8,41];
+			function compare(a,b){
+				return b -a;
+			}
+			console.log( arr4.sort(compare ) )
+			arr4.splice(3,0,'aaa', 'bbb');
+			console.log(arr4)
+			console.log(arr4.indexOf('aaa'))//3
+			var filterRes = arr4.filter(function(item, index){
+				return item >=22
+			});
+			console.log(filterRes);
+			var mapRes = arr4.map(function(item, index){
+				return item +2;
+			});
+			console.log(mapRes);
+			//
+			var arr5 = [1,3,5,7,9,11,33,55,77,99];
+			var sum_total = arr5.reduce(function(prev, cur, index, array){
+				return prev +cur
+			})
+			console.log(sum_total);			
+			var start = new Date();
+			var stop = Date.now();
+			console.log(stop - start);
+			var pattern1 =/what/g;
+			var pattern2 = /.a/gi;
+			console.log(typeof pattern1);
+			console.log(pattern2.test('What are you doing what?'));
+			//
+			function fac1(num){
+				if(num <=1){
+					return 1
+				}else{
+					return num *fac1(num -1)
+				}
+			};
+			function fac2(num){
+				if(num <=1){
+					return 1
+				}else{
+					return num * arguments.callee(num -1)
+				}
+			};
+			console.log(fac1(5))
+			console.log(fac2(5))
+			window.color='red';
+			var obj2 ={
+				color:'blue'
+			};
+			function sayColor(){
+				console.log(this.color);
+			}
+			sayColor();*/
+			var num1 =11;
+			console.log(num1.toString());
+			console.log(num1.toString(2));
+			console.log(num1.toString(16));
+			var num2 = 11.007
+			console.log(num2.toFixed(2));
+			//
+			var num3 =1234;
+			function pre(num){
+				for (var i=1; i<10; i++) {
+					console.log(num.toPrecision(i))
+				}
+			}
+			pre(num3)
+			
+			
+		</script>
+	</body>
+</html>
