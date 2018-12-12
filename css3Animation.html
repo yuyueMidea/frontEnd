@@ -1,0 +1,250 @@
+
+<!DOCTYPE HTML>
+<html>
+<meta charset="utf-8"/>
+<head>
+<title>开源社区</title>
+<!--收藏用logo图标-->
+<link rel="Bookmark" href="image/favicon.ico" /> 
+<!--网站显示页logo图标-->
+<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon" /> 
+<link rel="icon" href="image/favicon.ico" type="image/x-icon" />
+<style type="text/css">
+#divA{border: 1px solid transparent;width: 100%;}
+#divA a{margin: 0 auto;display:block;}
+a:link { 
+font-size: 12px; 
+color: #FF1493; 
+text-decoration: none; 
+} 
+a:visited { 
+font-size: 12px; 
+color: #FF1493; 
+text-decoration: none; 
+} 
+a:hover { 
+font-size: 12px; 
+color: #0000FF; 
+text-decoration: underline; 
+} 
+body {
+    background: #00000000;
+}
+
+#world {
+    position: absolute;
+	z-index : -1;
+    left: 0px;
+    top: 0px;
+    margin: 0px;
+    background: #00000000;
+    border: thin solid #00000000;
+	pointer-events: none;
+}
+#bg{
+    left: 0px;
+    top: 0px;
+    margin: 0px;
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+#textcolor{
+color:#fff;
+}
+</style>
+</head>
+<body>
+
+<div><canvas id='world'></canvas></div>
+
+<a style="font-size:18px;" align="center" href="home.html" target="_blank"><h1 align="center">开源社区官网</h1></a>
+
+<h3 align="center" id="textcolor">正在建设中...</h3>
+<h2 align="center" id="textcolor">社区招募中，欢迎IT届的伙伴们加入</h2>
+
+<div style="text-align: center; width: 100%; border: transparent solid 1px;">
+<img src="image/GroupCode.png" alt="开源社区官网群" style="margin: 0 auto;" >
+</div>
+
+<p style="text-align: center;">
+<!--
+<video align="center" width="480" height="320" controls="controls" autoplay="autoplay">
+  <source src="http://wvideo.spriteapp.cn/video/2017/1011/59ddf2bc463a8_wpd.mp4" type="video/mp4">
+你的浏览器不支持视频？换电脑吧！
+</video></p>
+-->
+
+<p style="text-align: center;">
+    <a style="font-size:30px;" align="center" href="https://www.jianshu.com/p/e6f072839282">接口博客地址</a>
+</p>
+
+
+<p style="text-align: center;">
+    <a style="font-size:30px;" align="center" href="https://github.com/zhangzhichaolove/OpenSourceCommunity">开源项目地址</a>
+</p>
+
+
+
+<script>
+// One of my first <canvas> experiments, woop! :D 
+
+var SCREEN_WIDTH = window.innerWidth;
+var SCREEN_HEIGHT = window.innerHeight;
+
+var RADIUS = 70;
+
+var RADIUS_SCALE = 1;
+var RADIUS_SCALE_MIN = 1;
+var RADIUS_SCALE_MAX = 1.5;
+
+var QUANTITY = 25;
+
+var canvas;
+var context;
+var particles;
+
+var mouseX = SCREEN_WIDTH * 0.5;
+var mouseY = SCREEN_HEIGHT * 0.5;
+var mouseIsDown = false;
+
+function init() {
+
+  canvas = document.getElementById( 'world' );
+  
+  if (canvas && canvas.getContext) {
+		context = canvas.getContext('2d');
+		
+		// Register event listeners
+		window.addEventListener('mousemove', documentMouseMoveHandler, false);
+		window.addEventListener('mousedown', documentMouseDownHandler, false);
+		window.addEventListener('mouseup', documentMouseUpHandler, false);
+		document.addEventListener('touchstart', documentTouchStartHandler, false);
+		document.addEventListener('touchmove', documentTouchMoveHandler, false);
+		window.addEventListener('resize', windowResizeHandler, false);
+		
+		createParticles();
+		
+		windowResizeHandler();
+		
+		setInterval( loop, 1000 / 60 );
+	}
+}
+
+function createParticles() {
+	particles = [];
+	
+	for (var i = 0; i < QUANTITY; i++) {
+		var particle = {
+			size: 1,
+			position: { x: mouseX, y: mouseY },
+			offset: { x: 0, y: 0 },
+			shift: { x: mouseX, y: mouseY },
+			speed: 0.01+Math.random()*0.04,
+			targetSize: 1,
+			fillColor: '#' + (Math.random() * 0x904040 + 0xaaaaaa | 0).toString(16),
+			orbit: RADIUS*.5 + (RADIUS * .5 * Math.random())
+		};
+		
+		particles.push( particle );
+	}
+}
+
+function documentMouseMoveHandler(event) {
+	mouseX = event.clientX - (window.innerWidth - SCREEN_WIDTH) * .5;
+	mouseY = event.clientY - (window.innerHeight - SCREEN_HEIGHT) * .5;
+}
+
+function documentMouseDownHandler(event) {
+	mouseIsDown = true;
+}
+
+function documentMouseUpHandler(event) {
+	mouseIsDown = false;
+}
+
+function documentTouchStartHandler(event) {
+	if(event.touches.length == 1) {
+		event.preventDefault();
+
+		mouseX = event.touches[0].pageX - (window.innerWidth - SCREEN_WIDTH) * .5;;
+		mouseY = event.touches[0].pageY - (window.innerHeight - SCREEN_HEIGHT) * .5;
+	}
+}
+
+function documentTouchMoveHandler(event) {
+	if(event.touches.length == 1) {
+		event.preventDefault();
+
+		mouseX = event.touches[0].pageX - (window.innerWidth - SCREEN_WIDTH) * .5;;
+		mouseY = event.touches[0].pageY - (window.innerHeight - SCREEN_HEIGHT) * .5;
+	}
+}
+
+function windowResizeHandler() {
+	SCREEN_WIDTH = window.innerWidth;
+	SCREEN_HEIGHT = window.innerHeight;
+	
+	canvas.width = SCREEN_WIDTH;
+	canvas.height = SCREEN_HEIGHT;
+}
+
+function loop() {
+	
+	if( mouseIsDown ) {
+		RADIUS_SCALE += ( RADIUS_SCALE_MAX - RADIUS_SCALE ) * (0.02);
+	}
+	else {
+		RADIUS_SCALE -= ( RADIUS_SCALE - RADIUS_SCALE_MIN ) * (0.02);
+	}
+	
+	RADIUS_SCALE = Math.min( RADIUS_SCALE, RADIUS_SCALE_MAX );
+	
+	context.fillStyle = 'rgba(0,0,0,0.05)';
+		 context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+	
+	for (i = 0, len = particles.length; i < len; i++) {
+		var particle = particles[i];
+		
+		var lp = { x: particle.position.x, y: particle.position.y };
+		
+		// Rotation
+		particle.offset.x += particle.speed;
+		particle.offset.y += particle.speed;
+		
+		// Follow mouse with some lag
+		particle.shift.x += ( mouseX - particle.shift.x) * (particle.speed);
+		particle.shift.y += ( mouseY - particle.shift.y) * (particle.speed);
+		
+		// Apply position
+		particle.position.x = particle.shift.x + Math.cos(i + particle.offset.x) * (particle.orbit*RADIUS_SCALE);
+		particle.position.y = particle.shift.y + Math.sin(i + particle.offset.y) * (particle.orbit*RADIUS_SCALE);
+		
+		// Limit to screen bounds
+		particle.position.x = Math.max( Math.min( particle.position.x, SCREEN_WIDTH ), 0 );
+		particle.position.y = Math.max( Math.min( particle.position.y, SCREEN_HEIGHT ), 0 );
+		
+		particle.size += ( particle.targetSize - particle.size ) * 0.01;
+		
+		if( Math.round( particle.size ) == Math.round( particle.targetSize ) ) {
+			particle.targetSize = 1 + Math.random() * 2;
+		}
+		
+		context.beginPath();
+		context.fillStyle = particle.fillColor;
+		context.strokeStyle = particle.fillColor;
+		context.lineWidth = particle.size;
+		context.moveTo(lp.x, lp.y);
+		context.lineTo(particle.position.x, particle.position.y);
+		context.stroke();
+		context.arc(particle.position.x, particle.position.y, particle.size/2, 0, Math.PI*2, true);
+		context.fill();
+	}
+}
+
+window.onload = init;</script>
+
+
+
+</body>
+</html>
