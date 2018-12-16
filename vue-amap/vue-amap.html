@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>demo | vue-amap</title>
+    <meta charset="UTF-8">
+    	<style>
+    		*{
+    			padding: 0; margin: 0;
+    		}
+    		#app{
+    			width:90%; height: 700px; margin: 30px auto;
+    		}
+    	</style>
+  </head>
+  <body>
+    <div id="app">
+      <el-amap vid="amap"></el-amap>
+    </div>
+  </body>
+  <!-- 先引入 Vue -->
+  <script src="./vue.min.js"></script>
+  <!-- 引入组件库 -->
+  <script src="./vue-amap.js"></script>
+  <script>
+    // 初始化高德地图的 key 和插件
+    window.VueAMap.initAMapApiLoader({
+      key: 'YOUR_KEY',
+      plugin: ['Autocomplete', 'PlaceSearch', 'Scale', 'OverView', 'ToolBar', 'MapType', 'PolyEditor', 'AMap.CircleEditor'],
+      // 默认高德 sdk 版本为 1.4.4
+      v: '1.4.4'
+    });
+    //
+		window.VueAMap.lazyAMapApiLoaderInstance.load().then(() => {
+		  // your code ...
+		  this.map = new AMap.Map('amapContainer', {
+		    center: new AMap.LngLat(121.59996, 31.197646)
+		  });
+		});
+
+    new Vue({
+      el: '#app',
+      data: function(){
+        return { }
+      }
+    });
+  </script>
+</html>
