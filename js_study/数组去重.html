@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+//数组去重的几种方法
+//第一种 用arr1.indexOf(arr[i])==-1
+
+//var arr=[1,2,2,2,3,3,4,4,5,5,6,2,3,4]
+//var arr1=[];
+//for(var i=0;i<arr.length;i++){
+//		if(arr1.indexOf(arr[i])==-1){
+//		arr1.push(arr[i]);
+//	}
+//}
+//console.log(arr1);
+
+//第二种 用arr.indexOf(arr[i])==i；
+//var arr=[1,1，2,2,2,3,3,4,4,5,5,6,2,3,4]
+//indexof 第一次找到这个元素的下标
+i=0 arr.indexOf(arr[0])=0
+//                1
+//i=1
+arr.indexOf(arr[i])=0
+
+
+//var arr1=[];
+//for(var i=0;i<arr.length;i++){
+//		if(arr.indexOf(arr[i])==i){
+//			arr1.push(arr[i]);
+//		
+//	}
+//}
+
+
+//第三种删除重复的
+//function only1(arr){							
+//				for(var i = 0; i < arr.length; i ++){
+//					for(var j = i + 1; j < arr.length; j ++){
+//						if(arr[i] === arr[j]){
+//						    arr.splice(j,1);//删除
+//						    j--;//退一位
+//						}
+//					}
+//				}
+//				return arr;
+//			}
+//			console.log(only1([1,1,9,8,8,0,6,0,6]));//[1, 9, 8, 0, 6]
+//
+//console.log(arr1);
+
+			
+			//方法四种
+			// 往新数组中插入不重复的元素
+//			function only2(arr){
+//				var newArr = [];
+//				for(var i = 0; i < arr.length; i ++){
+//				    for(var j = i + 1; j < arr.length; j ++){ 
+//				        if(arr[i] === arr[j]){
+//							j = false;
+//							break;
+//				    	}
+//					}
+//					if(j){
+//				    	newArr.push(arr[i]);
+//					}
+//				}
+//				return newArr;
+//			}
+//			console.log(only2([1,1,9,8,8,0,6,0,6]));//[1, 9, 8, 0, 6]
+			
+//
+			
+			
+		
+						
+			//方法五
+			//ES6方法。ES6-Set :
+//数据结构Set类似于数组，但是成员的值都是唯一的，没有重复的值。
+//			var arr = [1,9,8,8,0,6,0,6];
+//			var set = new Set(arr);
+//			var newArr = new Array(...set);
+//			console.log(newArr);//[1, 9, 8, 0, 6]
+
+			
+		
+			
+		
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
