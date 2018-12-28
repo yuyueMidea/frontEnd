@@ -39,7 +39,7 @@
             :table-data="formTableData"
             :show-vertical-border="false"
     ></v-table>
-    <v-pagination :total="25" @page-change="pageChange1" @page-size-change="pageSizeChange1"></v-pagination>
+    <v-pagination :total="totalNum" :page-size-option=[5,10,20] @page-change="pageChange1" @page-size-change="pageSizeChange1"></v-pagination>
 </div>
 </body>
 <!-- 先引入 Vue -->
@@ -86,22 +86,19 @@
                 ],
                 formTableData:[],
                 pageIndex:1,
-                pageSize:10,
+                pageSize: 10,
+                totalNum:100,
             }
         },
         methods: {
 
             pageChange1(pageIndex){
                 this.pageIndex = pageIndex;
-                console.log(pageIndex)
-                debugger
                 this.getTableData();
             },
 
             pageSizeChange1(pageSize){
                 this.pageSize = pageSize;
-                console.log(pageSize);
-                debugger
                 this.getTableData();
             },
             getTableData(){
@@ -110,6 +107,7 @@
         },
         created(){
             this.getTableData();
+            this.totalNum = this.tableData.length;
         }
     })
 </script>
