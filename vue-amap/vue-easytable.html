@@ -41,7 +41,7 @@
             :height="440"
             :columns="columns"
             :table-data="formTableData"
-            :show-vertical-border="false"
+            :show-vertical-border="true"
             row-hover-color="#eee"
             row-click-color="#edf7ff"
             even-bg-color="#f2f2f2"
@@ -120,7 +120,7 @@
                     {"name":"吴伟5","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"}
                 ],
                 columns: [
-                {width: 60, titleAlign: 'center',columnAlign:'center',type: 'selection'},
+                {width: 30, titleAlign: 'center',columnAlign:'center',type: 'selection'},
 {
     field: 'custome', title:'序号', width: 50, titleAlign: 'center', columnAlign: 'center',
     formatter: function (rowData,rowIndex,pagingIndex,field) {
@@ -131,7 +131,7 @@
                     {field: 'tel', title: '手机号码', width: 130, titleAlign: 'center',columnAlign:'center'},
                     {field: 'hobby', title: '爱好', width: 250, titleAlign: 'center',columnAlign:'center'},
                     {field: 'address', title: '地址',width: 310,titleAlign: 'center',columnAlign:'left'},
-                    {field: 'custome-adv', title: '操作',width: 100, titleAlign: 'center',columnAlign:'center',componentName:'table-operation'}
+                    {field: 'custome-adv', title: '操作',width: 120, titleAlign: 'center',columnAlign:'center',componentName:'table-operation'}
                 ],
                 formTableData:[],
                 pageIndex:1,
