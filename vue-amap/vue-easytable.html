@@ -26,7 +26,7 @@
     {
         border-radius: 10px;
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-        background-color: #666;
+        background-color: #aaa;
     }
     </style>
 </head>
@@ -38,6 +38,11 @@
             :columns="columns"
             :table-data="formTableData"
             :show-vertical-border="false"
+            row-hover-color="#eee"
+            row-click-color="#edf7ff"
+            even-bg-color="#f2f2f2"
+            :row-click="rowClick"
+            @on-custom-comp="customCompFunc"
     ></v-table>
     <v-pagination :total="totalNum" :page-size-option=[5,10,20] @page-change="pageChange1" @page-size-change="pageSizeChange1"></v-pagination>
 </div>
@@ -47,13 +52,42 @@
 <!-- 引入组件库 -->
 <script src="https://unpkg.com/vue-easytable/umd/js/index.js"></script>
 <script>
+    // 自定义列组件
+    Vue.component('table-operation',{
+        template:`<span>
+        <a href="" @click.stop.prevent="update(rowData,index)">编辑</a>&nbsp;
+        <a href="" @click.stop.prevent="deleteRow(rowData,index)">删除</a>
+        </span>`,
+        props:{
+            rowData:{
+                type:Object
+            },
+            field:{
+                type:String
+            },
+            index:{
+                type:Number
+            }
+        },
+        methods:{
+            update(){              // 参数根据业务场景随意构造
+               let params = {type:'edit',index:this.index,rowData:this.rowData};
+               this.$emit('on-custom-comp',params);
+            },
+
+            deleteRow(){               // 参数根据业务场景随意构造
+                let params = {type:'delete',index:this.index};
+                this.$emit('on-custom-comp',params);
+            }
+        }
+    })
     new Vue({
         el: '#app',
         data: function() {
             return {
                 tableData: [
-                    {"name":"赵伟1","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
-                    {"name":"李伟1","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"赵伟1","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼","rowId":1},
+                    {"name":"李伟1","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼","rowId":2},
                     {"name":"孙伟1","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
                     {"name":"周伟1","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
                     {"name":"吴伟1","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"},
@@ -79,10 +113,17 @@
                     {"name":"吴伟5","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"}
                 ],
                 columns: [
-                    {field: 'name', title:'姓名', width: 100, titleAlign: 'center',columnAlign:'center'},
-                    {field: 'tel', title: '手机号码', width: 260, titleAlign: 'center',columnAlign:'center'},
-                    {field: 'hobby', title: '爱好', width: 330, titleAlign: 'center',columnAlign:'center'},
-                    {field: 'address', title: '地址',width: 310,titleAlign: 'center',columnAlign:'left'}
+{
+    field: 'custome', title:'序号', width: 50, titleAlign: 'center', columnAlign: 'center',
+    formatter: function (rowData,rowIndex,pagingIndex,field) {
+        return rowIndex + 1
+    }
+},
+                    {field: 'name', title:'姓名', width: 140, titleAlign: 'center',columnAlign:'center'},
+                    {field: 'tel', title: '手机号码', width: 150, titleAlign: 'center',columnAlign:'center'},
+                    {field: 'hobby', title: '爱好', width: 250, titleAlign: 'center',columnAlign:'center'},
+                    {field: 'address', title: '地址',width: 310,titleAlign: 'center',columnAlign:'left'},
+                    {field: 'custome-adv', title: '操作',width: 100, titleAlign: 'center',columnAlign:'center',componentName:'table-operation'}
                 ],
                 formTableData:[],
                 pageIndex:1,
@@ -98,11 +139,29 @@
             },
 
             pageSizeChange1(pageSize){
+                this.pageIndex = 1;
                 this.pageSize = pageSize;
                 this.getTableData();
             },
             getTableData(){
                 this.formTableData = this.tableData.slice((this.pageIndex-1)*this.pageSize,this.pageIndex*this.pageSize);
+            },
+            rowClick(rowIndex,rowData){
+               console.log(rowIndex);
+               console.log(rowData);
+               // debugger
+            },
+            customCompFunc(params){
+
+                console.log(params);
+
+                if (params.type === 'delete'){ // do delete operation
+                    this.$delete(this.tableData,params.index);
+                    this.getTableData();
+                }else if (params.type === 'edit'){ // do edit operation
+                    alert(`行号：${params.index} 姓名：${params.rowData['name']}`)
+                }
+
             }
         },
         created(){
