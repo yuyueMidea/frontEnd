@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lowDB</title>
+	<style>
+		*{padding: 0;margin:0;}
+		ul li{list-style: none;}
+		.dataBox{
+			border: 1px solid #ccc;height: 300px;width: 90%;margin:0 auto;
+			display: flex;
+		}
+		.dataBox li{
+			border: 1px solid #ccc; flex: 1;
+		}
+		.dataBox li input{
+			padding: 4px; margin:5px;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+
+<ul class="dataBox">
+	<li class="setDataLi">
+		<h2>setData---hello~lowdb</h2>
+		<input type="text" v-model="uname" placeholder="enter your name...">
+		<input type="password" v-model="upwd" placeholder="enter your password">
+		<input type="button" value="submit" @click="addData">
+	</li>
+	<li>
+		<h2><input type="button" value="getData" @click="getData"></h2>
+		<ul>
+			<li v-for="(item,key) in userList" :key>{{item.uname}}-------{{item.uname}}</li>
+		</ul>
+	</li>
+</ul>
+</div>
+</body>
+</html>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/lodash@4/lodash.min.js"></script>
+<script src="https://unpkg.com/lowdb@0.17/dist/low.min.js"></script>
+<script src="https://unpkg.com/lowdb@0.17/dist/LocalStorage.min.js"></script>
+<script>
+  var adapter = new LocalStorage('db')
+  var db = low(adapter);
+  // document.querySelector(".setDataLi")
+  
+  new Vue({
+  	el:"#app",
+  	data(){
+  		return{
+  			uname:'',
+  			upwd:'',
+  			userList:[]
+  		}
+  	},
+  	methods:{
+  		addData(){
+  			if(!this.uname || !this.upwd) return;
+  			// debugger
+  			db.get('posts').push({
+  				uname: this.uname,
+  				upwd: this.upwd
+  			}).write()
+  		},
+  		getData(){
+  			console.log(db.getState().posts)//
+  			this.userList =(db.getState().posts)//userList
+  		}
+  	},
+  	created(){
+  		//-------init...
+  		db.defaults({ posts: [], user: {}, count: 0 }).write()
+  	}
+  })
+</script>
