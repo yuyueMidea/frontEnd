@@ -33,6 +33,14 @@
                 <button class="btn btn-primary btn-block example-p-70-type">Alert types</button>
                 <p class="text-success">Success, error, warning</p>
             </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block example-dialog-type">example dialog</button>
+                <p class="text-success">Success, error, warning</p>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block example-button-type">Button text test</button>
+                <p class="text-success">Success, error, warning</p>
+            </div>
            
         </div>
 
@@ -110,7 +118,29 @@
                 '<hr>' +
                 'More types: red, green, orange, blue, purple, dark',
             });
-        }); 
+        });
+        $('.example-dialog-type').on('click', function () {
+            $.dialog({
+                title: 'Text content!',
+                content: 'Simple modal!',
+            });
+        }); //
+        $('.example-button-type').on('click', function () {
+            $.confirm({
+                buttons: {
+                    hey: function () {
+                        // here the button key 'hey' will be used as the text.
+                        $.alert('You clicked on "hey".');
+                    },
+                    heyThere: {
+                        text: 'hey there!', // With spaces and symbols
+                        action: function () {
+                            $.alert('You clicked on "heyThere"');
+                        }
+                    }
+                }
+            });
+        }); //
 </script>
 </body>
 </html>
