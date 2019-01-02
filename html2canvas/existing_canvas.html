@@ -26,6 +26,7 @@
 </div>
 <h1>Existing canvas:</h1>
 <canvas width="500" height="200"></canvas>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script type="text/javascript" src="html2canvas.min.js"></script>
 <script src="canvas2image.js"></script>
 <button>Run html2canvas</button>
@@ -36,6 +37,9 @@
     <option value="bmp">bmp</option>
 </select>
 <button id="save">save</button>
+<button id="saveAsPDF">saveAsPDF</button>
+<button id="saveAsPDF2">saveAsPDF-input</button>
+<!-- saveAsPDF -->
 <script type="text/javascript">
     var canvas = document.querySelector("canvas");
     var ctx = canvas.getContext("2d");
@@ -63,6 +67,36 @@
             h = parseInt(document.querySelector("canvas").style.height);
             // debugger
         Canvas2Image.saveAsImage(canvas, w, h, type);
+    }
+    document.getElementById('saveAsPDF').onclick = function (e) {
+        var doc = new jsPDF()
+        doc.text('Hello world!', 10, 10)
+        doc.save('a4.pdf')
+    }
+    document.getElementById('saveAsPDF2').onclick = function (e) {
+        var name = prompt('What is your name?');
+        var multiplier = prompt('Enter a number:');
+        multiplier = parseInt(multiplier);
+
+        var doc = new jsPDF();
+        doc.setFontSize(22);
+        doc.text(20, 20, 'Questions');
+        doc.setFontSize(16);
+        doc.text(20, 30, 'This belongs to: ' + name);
+
+        for(var i = 1; i <= 12; i ++) {
+            doc.text(20, 30 + (i * 10), i + ' x ' + multiplier + ' = ___');
+        }
+
+        doc.addPage();
+        doc.setFontSize(22);
+        doc.text(20, 20, 'Answers');
+        doc.setFontSize(16);
+
+        for(var i = 1; i <= 12; i ++) {
+            doc.text(20, 30 + (i * 10), i + ' x ' + multiplier + ' = ' + (i * multiplier));
+        }
+        doc.save('Test.pdf')
     }
 </script>
 </body>
