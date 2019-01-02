@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>jqPaginator</title>
+    <link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="js/jquery-confirm.css">
+</head>
+<body style="padding:10px;">
+    <p id="p1"></p>
+    <ul class="pagination" id="pagination1"></ul>
+    <p id="p2"></p>
+    <ul class="pagination" id="pagination2"></ul>
+
+    <hr>
+    <p>55个数字分页<span id="span1" style="padding-left:22px;"></span></p>
+    <select class="selectIndex">
+        <option value='1'>5</option>
+        <option value='1'>10</option>
+        <option value='1'>20</option>
+    </select>
+    <p class="showtext" style="font-size:18px;color:red;"></p>
+    <ul class="pagination" id="pagination3"></ul>
+    <hr>
+        <div class="container">
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block example-p-1">Alerts</button>
+                <p class="text-success">Elegant Alerts.</p>
+            </div>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block example-p-70-type">Alert types</button>
+                <p class="text-success">Success, error, warning</p>
+            </div>
+           
+        </div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jqPaginator.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.js"></script>
+<script type="text/javascript">
+    $.jqPaginator('#pagination1', {
+        totalPages: 50,
+        visiblePages: 20,
+        currentPage: 3,
+        onPageChange: function (num, type) {
+            $('#p1').text(type + '：' + num);
+        }
+    });
+    $.jqPaginator('#pagination2', {
+        totalPages: 100,
+        visiblePages: 10,
+        currentPage: 3,
+        prev: '<li class="prev"><a href="javascript:;">Previous</a></li>',
+        next: '<li class="next"><a href="javascript:;">Next</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            $('#p2').text(type + '：' + num);
+        }
+    });
+    var showArr =[], pageSize =10, pageNo =1;
+    for(var i=0;i<967;i++){
+        showArr.push('xxx'+(i+1));
+    }
+    //
+    $.jqPaginator('#pagination3', {
+        totalPages: Math.ceil(showArr.length /pageSize),
+        visiblePages: pageSize,
+        currentPage: pageNo,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            $('#span1').text('当前页数:' + num+'; '+'当前显示条数:'+(num -1)*pageSize+' ~ ' +num*pageSize);
+            
+            var receiveArr = showArr.slice((num -1)*pageSize, (num)*pageSize);
+            $('.showtext').text(receiveArr)
+            // debugger
+        }
+    });
+    $('.selectIndex').change(function(event){
+        // debugger
+        pageSize = $('.selectIndex').find("option:selected").text();
+    })
+    // alert
+        $('.example-p-1').on('click', function () {
+            $.alert({
+                title: 'Alert alert!',
+                content: 'This is a simple alert. <br> with some <strong>HTML</strong> <em>contents</em>',
+                icon: 'fa fa-rocket',
+                animation: 'scale',
+                closeAnimation: 'scale',
+                buttons: {
+                    okay: {
+                        text: 'Okay',
+                        btnClass: 'btn-blue'
+                    }
+                }
+            });
+        });
+       
+        // alert types
+        $('.example-p-70-type').on('click', function () {
+            $.alert({
+                title: 'Error',
+                icon: 'fa fa-warning',
+                type: 'orange',
+                content: 'Something went wrong, please retry again after sometime.' +
+                '<hr>' +
+                'More types: red, green, orange, blue, purple, dark',
+            });
+        }); 
+</script>
+</body>
+</html>
