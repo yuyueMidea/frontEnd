@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>demo</title>
+  <style type="text/css">
+	*{padding:0;margin: 0;}
+	.content{margin:11px auto;width:80%;}
+	.num{border:1px solid #ccc;width: 222px;height: 22px;}
+	.num .ctnr {padding: 0 3px;}
+	.content button{padding:4px;margin:5px;}
+  </style>
+</head>
+<body>
+  <div class="content">
+	  <div class="flip"></div>
+	  <div class="num" ></div>
+	  <button class="shuffle">点击生成四位数字</button>
+	  <button class="shuffle2">点击生成四位大写数字</button>
+  </div>
+
+  <script type="text/javascript" src="../dist/number-flip.min.js"></script>
+  <script type="text/javascript">
+  onload =function (){
+  	
+  	document.querySelector('.shuffle').onclick =function(){
+		// body...先清空子节点
+  	document.querySelector('.num').innerHTML=''
+		new Flip({
+		  node: document.querySelector('.num'),
+		  from: 9527,
+		  to: 42,
+		  // duration: 2 // second
+		})
+	}
+  }
+document.querySelector('.shuffle2').onclick =function(){
+	document.querySelector('.num').innerHTML=''
+	new Flip({
+		node: document.querySelector('.num'),
+		from: 73,
+		to: 25,
+		// duration: 2,
+		delay: 1,
+		easeFn: function(pos) {
+		if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,3);
+		return 0.5 * (Math.pow((pos-2),3) + 2);
+		},
+		// for more easing function, see https://github.com/danro/easing-js/blob/master/easing.js
+		systemArr: ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
+	})
+}  
+  </script>
+</body>
+</html>
