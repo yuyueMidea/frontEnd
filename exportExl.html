@@ -68,6 +68,13 @@
                     v: v.v
                 });
                 var outputPos = Object.keys(tmpdata); //设置区域,比如表格从A1到D10
+                 //列的宽度
+        tmpdata["!cols"] = [{wpx: 80}, {wpx: 160}, {wpx: 160}, {wpx:240}];
+        //设置标题字体、加粗、居中
+        tmpdata["A1"].s = {font: { sz: 13, bold: true, }, alignment: {horizontal: "center", vertical: "center", wrap_text:true} };//<====设置xlsx单元格样式
+        tmpdata["B1"].s = {font: { sz: 13, bold: true, }, alignment: {horizontal: "center", vertical: "center", wrap_text:true} };//<====设置xlsx单元格样式
+        tmpdata["C1"].s = {font: { sz: 18, bold: true, }, alignment: {horizontal: "center", vertical: "center", wrap_text:true} };//<====设置xlsx单元格样式
+
                 var tmpWB = {
                     SheetNames: ['mySheet'], //保存的表标题
                     Sheets: {
@@ -78,6 +85,8 @@
                             })
                     }
                 };
+               
+
                 tmpDown = new Blob([s2ab(XLSX.write(tmpWB, 
                     {bookType: (type == undefined ? 'xlsx':type),bookSST: false, type: 'binary'}//这里的数据是用来定义导出的格式类型
                     ))], {
