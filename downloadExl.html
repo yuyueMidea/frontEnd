@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    *{padding: 0;margin: 0;}
+    #txtArea1 {border-collapse: collapse;}
+    #txtArea1 td,#txtArea2 td,#txtArea3 td{border: 1px solid #ccc;}
+    </style>
+    <!-- <script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
+    </head>
+<body>
+    <script type="text/javascript" src="xlsx.core.min.js"></script>
+    <script type="text/javascript" src="vue-amap/vue.min.js"></script>
+
+<table style="width:80%;margin-left:10%;margin-top:30px;">
+    <td align="right" style="width: 50%;">
+            <h3 align="center">导入参赛名单：</h3>
+        </td>
+        <td align="left" style="width: 50%;">
+            <input type="file" id="uploadfile" onchange="importf(this);"/>
+        </td>
+</table>
+<div style="width:80%;margin-left:10%;margin-top:30px;">
+<div style="width:80%;height:100%;float:left;">
+    <table id="txtArea1" style="width:100%;" cellspacing="0" cellpadding="0"> </table>
+</div>
+<div style="width:30%;height:100%;margin-left:5%;margin-right:5%;float:left;">
+    <table id="txtArea2" style="width:100%;" cellspacing="0" cellpadding="0"> </table>
+</div>
+<div style="width:30%;height:100%;float:left;">
+    <table id="txtArea3" style="width:100%;" cellspacing="0" cellpadding="0"> </table>
+</div>
+</div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    // 遍历每张表读取
+    var persons1 = [];
+    var persons2 = [];
+    var persons3 = [];
+
+    function importf(obj) {
+        var wb;// 读取完成的数据
+        var f = obj.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            wb = XLSX.read(data, {
+                type : 'binary'
+            });   // 以二进制流方式读取得到整份excel表格对象
+
+            // 表格的表格范围，可用于判断表头是否数量是否正确
+            var fromTo = '';
+            // wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+            // wb.Sheets[Sheet名]获取第一个Sheet的数据JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
+            for (var i = 0; i < wb.SheetNames.length; i++) {
+                if (wb.Sheets.hasOwnProperty(wb.SheetNames[i])) {
+                    fromTo = wb.Sheets[wb.SheetNames[i]]['!ref']; 
+                    // output: A1:D5
+                    // debugger
+                    if(i==0){
+                        persons1 = persons1.concat(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[i]]));
+                    }else if(i==1){
+                        persons2 = persons2.concat(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[i]]));
+                    }else if(i==2){
+                        persons3 = persons3.concat(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[i]]));
+                    }
+                    //break; //如果只取第一张表，就加上这行
+                }
+            }
+            // debugger
+            //document.getElementById("txtArea1").innerHTML= JSON.stringify(persons1)+JSON.stringify(persons2)+JSON.stringify(persons3);
+            appendTr("txtArea1",persons1);
+            appendTr("txtArea2",persons2);
+            appendTr("txtArea3",persons3);
+        };        
+
+        reader.readAsBinaryString(f);
+    }
+    function appendTr(id, array){
+        if(array.length>0){
+            var trX =document.createElement("TR");
+            
+            debugger
+            for(var k in array[0]){
+                console.log(k,array[0][k]);
+                var tdX =document.createElement("TD");
+                tdX.innerHTML = k;//表头
+                trX.appendChild(tdX);
+            }
+            document.getElementById(id).appendChild(trX);
+            debugger
+            //先添加表头，在添加tbody
+            for(var i = 0; i < array.length; i++){
+                var trXXX =document.createElement("TR");
+                
+                
+                for(var j in array[i]){
+                    // console.log(i,array[0][i]);
+                    var tdXXX =document.createElement("TD");
+                    tdXXX.innerHTML=array[i][j];//tbody
+                    trXXX.appendChild(tdXXX);
+                }
+                document.getElementById(id).appendChild(trXXX);
+            
+            }
+        }
+    }
+</script>
+
