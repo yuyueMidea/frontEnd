@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制表格</title>
+</head>
+<body>
+    <div id="container">
+        <canvas id="cavsTable">
+            您的浏览器不支持canvas,请升级浏览器
+        </canvas>
+    </div>
+    <script>
+        (function(){
+            var canvas = document.querySelector('#cavsTable');
+            var ctx = canvas.getContext('2d');
+ 
+            canvas.width = 500;
+            canvas.height = 500;
+            canvas.style.border = '1px solid red';
+ 
+            //定义每个小格的宽高
+            var rectH = 50;
+            var rectW = 50;
+            //绘制横线
+            for(var i=0; i < canvas.height/rectH; i++){
+                ctx.moveTo(0,i*rectH);
+                ctx.lineTo(canvas.width,i*rectH);
+            }
+            //绘制竖线
+            for(var j=0; j < canvas.width/rectW; j++){
+                ctx.moveTo(j*rectW,0);
+                ctx.lineTo(j*rectW,canvas.height);
+            }
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = '#555';
+            ctx.stroke();
+        })();
+    </script>
+</body>
+</html>
