@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>parcel-demo</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+</head>
+<body>
+
+<h2 class="h2">hello-parcel!</h2>
+<h3 class="h3">his is a h3</h3>
+<p class="p1">this is a paragraph</p>
+<input type="text" value="123" class="input1"><br>
+<button class="btn1">btn1</button>
+<button>btn2</button>
+<button>btn3</button>
+<button>btn4</button>
+
+</body>
+</html>
+<script type="text/javascript" src="index.js"></script>
+<!-- <script type="text/javascript" src="purifycss.es.js"></script> -->
+<script type="text/javascript">
+// onload =function(){
+var driver =new Driver();
+document.addEventListener('click',function(e){
+	var thisClass =null;
+	if(e.target.classList.length ===1){
+		thisClass ='.'+ e.target.classList.value;
+		driver.highlight(thisClass);
+	}
+})
+// }
+</script>
