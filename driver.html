@@ -5,6 +5,12 @@
 	<link rel="stylesheet" href="main.css">
 	<script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+<style type="text/css">
+	.liColl li{
+		list-style: none;font-size: 44px;line-height: 50px; width:50px;
+		border: 1px solid red;text-align: center;margin: 4px;
+	}
+</style>
 </head>
 <body>
 
@@ -15,12 +21,18 @@
 <button class="btn1">btn1</button>
 <button>btn2</button>
 <button>btn3</button>
-<button>btn4</button>
+<button id="animate1">play</button>
+<button id="animate2">pause</button>
+<ul class="liColl">
+	<li class="li1">1</li>
+	<li class="li2">2</li>
+	<li class="li3">3</li>
+</ul>
 
 </body>
 </html>
 <script type="text/javascript" src="index.js"></script>
-<!-- <script type="text/javascript" src="purifycss.es.js"></script> -->
+<script type="text/javascript" src="anime.min.js"></script>
 <script type="text/javascript">
 // onload =function(){
 var driver =new Driver();
@@ -30,6 +42,23 @@ document.addEventListener('click',function(e){
 		thisClass ='.'+ e.target.classList.value;
 		driver.highlight(thisClass);
 	}
+	// debuggers
 })
+var playPauseAnim = anime({
+	  targets: '.liColl .li1',
+	  translateX: 100,
+	  easing: [.91,-0.54,.29,1.56],
+	  // direction: 'alternate',
+	  loop: true,
+	  autoplay: false // prevent the instance from playing
+	});
+document.querySelector("#animate1").onclick = function(){
+	// playPauseAnim.play(); //  Manually play
+	playPauseAnim.restart();
+	// playPauseAnim.pause(); //  Manually pause
+}
+document.querySelector("#animate2").onclick = function(){
+	playPauseAnim.pause(); //  Manually pause
+}
 // }
 </script>
