@@ -8,7 +8,7 @@
 <style type="text/css">
 	.liColl li{
 		list-style: none;font-size: 44px;line-height: 50px; width:50px;
-		border: 1px solid red;text-align: center;margin: 4px;
+		border: 1px solid red;text-align: center;margin: 11px;
 	}
 </style>
 </head>
@@ -21,7 +21,7 @@
 <button class="btn1">btn1</button>
 <button>btn2</button>
 <button>btn3</button>
-<button id="animate1">play</button>
+<button id="animate1">restart</button>
 <button id="animate2">pause</button>
 <ul class="liColl">
 	<li class="li1">1</li>
@@ -52,13 +52,43 @@ var playPauseAnim = anime({
 	  loop: true,
 	  autoplay: false // prevent the instance from playing
 	});
+var cssProperties = anime({
+  targets: '.liColl .li2',
+  opacity: .5,
+  translateX: 100,
+  loop: true,
+  backgroundColor: '#FFF',
+  borderRadius: ['0em', '2em'],
+  easing: 'easeInOutQuad',
+  autoplay: false 
+});
+var CSStransforms = anime({
+  targets: '.liColl .li3',
+  translateX: 250,
+  scale: 2,
+  rotate: '1turn',
+  autoplay: false,
+  loop: true
+});
 document.querySelector("#animate1").onclick = function(){
 	// playPauseAnim.play(); //  Manually play
 	playPauseAnim.restart();
+	cssProperties.restart();
+	CSStransforms.restart();
 	// playPauseAnim.pause(); //  Manually pause
 }
-document.querySelector("#animate2").onclick = function(){
-	playPauseAnim.pause(); //  Manually pause
+var playFlag =true;
+document.querySelector("#animate2").onclick = function(){	
+	if(playFlag){
+		playPauseAnim.pause(); //  Manually pause
+		cssProperties.pause();
+		CSStransforms.pause();
+	}else{
+		playPauseAnim.play(); //  Manually pause
+		cssProperties.play();
+		CSStransforms.play();
+	}
+	playFlag =!playFlag;
 }
 // }
 </script>
