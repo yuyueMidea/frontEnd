@@ -4,6 +4,42 @@
 	<title>tab-change</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css">
+<style type="text/css">
+  .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  #red, #green, #blue {
+    float: left;
+    clear: left;
+    width: 300px;
+    margin: 15px;
+  }
+  #swatch {
+    width: 120px;
+    height: 100px;
+    margin-top: 18px;
+    margin-left: 350px;
+    background-image: none;
+  }
+  #red .ui-slider-range { background: #ef2929; }
+  #red .ui-slider-handle { border-color: #ef2929; }
+  #green .ui-slider-range { background: #8ae234; }
+  #green .ui-slider-handle { border-color: #8ae234; }
+  #blue .ui-slider-range { background: #729fcf; }
+  #blue .ui-slider-handle { border-color: #729fcf; }
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+  #resizable { width: 150px; height: 150px; padding: 0.5em; }
+  #resizable h3 { text-align: center; margin: 0; }
+</style>
 </head>
 <body>
 <div id="tabs">
@@ -15,43 +51,24 @@
     </ul>
 
     <div id="tabs-basic">
-    	<div id="accordion-basic">
-    		<h2><a href="#">Simple two-page text document</a></h2>
-    		<div>
-    		<ul>
-    			<li>1111</li>
-    			<li>3333</li>
-    			<li>5555</li>
-    			<li>77777</li>
-    		</ul>
-    		<p>this is a paragraph~<button onclick="alert(1)">btn1</button></p>
-    		<p>this is a paragraph~</p>
-    		</div>
-    		<h2><a href="#">Simple two-page text document</a></h2>
-    		<div>
-    			<ul>
-    			<li>111aaa1</li>
-    			<li>3333bbbb</li>
-    			<li>5555ccccc</li>
-    			<li>77777dddd</li>
-    		</ul>
-    		<input type="text" name="date" id="date" />
-    		</div>
-    	</div>
+    	<input type="text" name="date" id="date" />
     </div>
+
     <div id="tabs-text">
-    	<div id="accordion-text">
-    		<h2><a href="#">Simple two-page text document</a></h2>
-    		<div>
-    		<h1>this is a h1</h1>
-    		<h2>this is a h2---<button id="opendialog">open</button></h2>
-    		</div>
-    	</div>
+    	<h2>this is a h2---<button id="opendialog">open</button></h2>
+    	<p>排序</p>
+		<ul id="sortable">
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+		  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+		</ul>
     </div>
     <div id="tabs-graphic">
-    	<div id="accordion-graphic">
-    	<h2><a href="#">Simple two-page text document</a></h2>	
-			<ul id="menu">
+    	<ul id="menu">
 			  <li class="ui-state-disabled"><a href="#">Aberdeen</a></li>
 			  <li><a href="#">Ada</a></li>
 			  <li><a href="#">Adamsville</a></li>
@@ -89,15 +106,16 @@
 			  </li>
 			  <li class="ui-state-disabled"><a href="#">Amesville</a></li>
 			</ul>
-			<h2><a href="#">Simple two-page text document</a></h2>
-			<h3>this is a h3-</h3>
-    	</div>
     </div>
     <div id="tabs-font">
-    	<div id="accordion-font">44444</div>
+    	<div id="resizable" class="ui-widget-content">
+		  <h3 class="ui-widget-header">缩放（Resizable）</h3>
+		</div>
     </div>
 </div>
-<h1>this is a big h1</h1>
+<div id="progressbar" style="margin: 11px auto;">
+	<div class="progress-label">加载...</div>
+</div>
 <div id="dialog" title="基本的对话框" style="display: none;">
   <p class="validateTips">所有的表单字段都是必填的。</p>
  
@@ -118,10 +136,7 @@
 <script src="js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
 <script>
         $(function() {
-            $("#accordion-basic, #accordion-text, #accordion-graphic, #accordion-font").accordion({
-                autoHeight: false,
-                navigation: true
-            });
+           
             $( "#tabs" ).tabs();
             $(".button").button();
             $( "#date" ).datepicker();
@@ -134,5 +149,29 @@
             	});
             });
             $( "#menu" ).menu();
+            //-----------progressbar------------
+            var progressbar = $( "#progressbar" ),
+      			progressLabel = $( ".progress-label" );
+            $( "#progressbar" ).progressbar({
+		    	  value: false,
+			      change: function() {
+			        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+			      },
+			      complete: function() {
+			        progressLabel.text( "完成！" );
+			      }
+		    });
+			function progress() {
+				var val = progressbar.progressbar( "value" ) || 0;
+				progressbar.progressbar( "value", val + 1 );
+				if ( val < 99 ) {
+			    	setTimeout( progress, 100 );
+			 	}
+			}
+			setTimeout( progress, 3000 );
+			//sortable-------------
+			$( "#sortable" ).sortable();
+    		$( "#sortable" ).disableSelection();
+    		$( "#resizable" ).resizable();
         });
     </script>
