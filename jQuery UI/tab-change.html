@@ -8,9 +8,9 @@
 <body>
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-basic">Basic elements</a></li>
-        <li><a href="#tabs-text">Text elements</a></li>
-        <li><a href="#tabs-graphic">Graphic elements</a></li>
+        <li><a href="#tabs-basic">折叠面板</a></li>
+        <li><a href="#tabs-text">弹框</a></li>
+        <li><a href="#tabs-graphic">jQuery UI 菜单（Menu）</a></li>
         <li><a href="#tabs-font">Using Fonts</a></li>
     </ul>
 
@@ -44,13 +44,53 @@
     		<h2><a href="#">Simple two-page text document</a></h2>
     		<div>
     		<h1>this is a h1</h1>
-    		<h2>this is a h2</h2>
+    		<h2>this is a h2---<button id="opendialog">open</button></h2>
     		</div>
     	</div>
     </div>
     <div id="tabs-graphic">
     	<div id="accordion-graphic">
-    		<img src="" title="pic1.jpg">
+    	<h2><a href="#">Simple two-page text document</a></h2>	
+			<ul id="menu">
+			  <li class="ui-state-disabled"><a href="#">Aberdeen</a></li>
+			  <li><a href="#">Ada</a></li>
+			  <li><a href="#">Adamsville</a></li>
+			  <li><a href="#">Addyston</a></li>
+			  <li>
+			    <a href="#">Delphi</a>
+			    <ul>
+			      <li class="ui-state-disabled"><a href="#">Ada</a></li>
+			      <li><a href="#">Saarland</a></li>
+			      <li><a href="#">Salzburg</a></li>
+			    </ul>
+			  </li>
+			  <li><a href="#">Saarland</a></li>
+			  <li>
+			    <a href="#">Salzburg</a>
+			    <ul>
+			      <li>
+			        <a href="#">Delphi</a>
+			        <ul>
+			          <li><a href="#">Ada</a></li>
+			          <li><a href="#">Saarland</a></li>
+			          <li><a href="#">Salzburg</a></li>
+			        </ul>
+			      </li>
+			      <li>
+			        <a href="#">Delphi</a>
+			        <ul>
+			          <li><a href="#">Ada</a></li>
+			          <li><a href="#">Saarland</a></li>
+			          <li><a href="#">Salzburg</a></li>
+			        </ul>
+			      </li>
+			      <li><a href="#">Perch</a></li>
+			    </ul>
+			  </li>
+			  <li class="ui-state-disabled"><a href="#">Amesville</a></li>
+			</ul>
+			<h2><a href="#">Simple two-page text document</a></h2>
+			<h3>this is a h3-</h3>
     	</div>
     </div>
     <div id="tabs-font">
@@ -58,6 +98,20 @@
     </div>
 </div>
 <h1>this is a big h1</h1>
+<div id="dialog" title="基本的对话框" style="display: none;">
+  <p class="validateTips">所有的表单字段都是必填的。</p>
+ 
+  <form>
+  <fieldset>
+    <label for="name">名字</label>
+    <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"><br>
+    <label for="email">邮箱</label>
+    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all"><br>
+    <label for="password">密码</label>
+    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all"><br>
+  </fieldset>
+  </form>
+</div>
 </body>
 </html>
 <script src="js/jquery/jquery-1.7.1.min.js"></script>
@@ -71,5 +125,14 @@
             $( "#tabs" ).tabs();
             $(".button").button();
             $( "#date" ).datepicker();
+            $("#opendialog").click(function(){
+            	$( "#dialog" ).dialog({
+            		// autoOpen: false,
+					height: 500,
+					width: 800,
+					modal: true,
+            	});
+            });
+            $( "#menu" ).menu();
         });
     </script>
