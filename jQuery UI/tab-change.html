@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>tab-change</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css">
+</head>
+<body>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-basic">Basic elements</a></li>
+        <li><a href="#tabs-text">Text elements</a></li>
+        <li><a href="#tabs-graphic">Graphic elements</a></li>
+        <li><a href="#tabs-font">Using Fonts</a></li>
+    </ul>
+
+    <div id="tabs-basic">
+    	<div id="accordion-basic">
+    		<h2><a href="#">Simple two-page text document</a></h2>
+    		<div>
+    		<ul>
+    			<li>1111</li>
+    			<li>3333</li>
+    			<li>5555</li>
+    			<li>77777</li>
+    		</ul>
+    		<p>this is a paragraph~<button onclick="alert(1)">btn1</button></p>
+    		<p>this is a paragraph~</p>
+    		</div>
+    		<h2><a href="#">Simple two-page text document</a></h2>
+    		<div>
+    			<ul>
+    			<li>111aaa1</li>
+    			<li>3333bbbb</li>
+    			<li>5555ccccc</li>
+    			<li>77777dddd</li>
+    		</ul>
+    		<input type="text" name="date" id="date" />
+    		</div>
+    	</div>
+    </div>
+    <div id="tabs-text">
+    	<div id="accordion-text">
+    		<h2><a href="#">Simple two-page text document</a></h2>
+    		<div>
+    		<h1>this is a h1</h1>
+    		<h2>this is a h2</h2>
+    		</div>
+    	</div>
+    </div>
+    <div id="tabs-graphic">
+    	<div id="accordion-graphic">
+    		<img src="" title="pic1.jpg">
+    	</div>
+    </div>
+    <div id="tabs-font">
+    	<div id="accordion-font">44444</div>
+    </div>
+</div>
+<h1>this is a big h1</h1>
+</body>
+</html>
+<script src="js/jquery/jquery-1.7.1.min.js"></script>
+<script src="js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+        $(function() {
+            $("#accordion-basic, #accordion-text, #accordion-graphic, #accordion-font").accordion({
+                autoHeight: false,
+                navigation: true
+            });
+            $( "#tabs" ).tabs();
+            $(".button").button();
+            $( "#date" ).datepicker();
+        });
+    </script>
