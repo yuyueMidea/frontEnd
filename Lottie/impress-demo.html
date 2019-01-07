@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>impress-demo</title>
+	<style>
+		*{padding: 0;margin:0;}
+		.step {
+		    position: relative;
+		    display: block;
+
+		    width: 900px;
+		    height: 700px;
+		    margin: 20px auto;
+		    padding: 40px 60px;
+
+		    text-shadow: 0 2px 2px rgba(0, 10, 0, .5);
+
+		    font-family: 'Open Sans', Arial, sans-serif;
+		    font-size: 30px;
+		    letter-spacing: -1px;
+
+		}
+	</style>
+</head>
+<body class="impress-not-supported">
+<div id="impress" data-transition-duration="1000">
+		<div class="step" data-scale="2" data-x="-500" data-y="-500">
+		        <h1>2D navigation----我是入口页面</h1>
+        </div>
+        <div id="contents" class="step" data-rel-x="1500" data-rel-y="1500" data-scale="1">
+        	<h1>Choosing a treat---我是第1个页面</h1>
+        </div>
+        <div id="icecream" class="step" data-x="2000" data-y="2000"
+         data-goto-key-list="ArrowUp ArrowDown ArrowLeft ArrowRight"
+         data-goto-next-list="contents icecream-pro contents crisps">
+        	<h1>Ice cream---我是第2个页面</h1>
+        </div>
+        <div id="icecream-pro" class="step" data-rel-x="0" data-rel-y="1000"
+	         data-goto-key-list="ArrowUp ArrowDown ArrowLeft ArrowRight"
+	         data-goto-next-list="icecream icecream-con applepie crisps-pro">
+		        <h1>Ice cream: Pro's----我是第3个页面</h1>
+		        <ul>
+	            <li>Great for dessert or snack</li>
+	            <li>Great in the Summer</li>
+	        </ul>
+	    </div>
+	    <div id="icecream-con" class="step" data-rel-x="0" data-rel-y="1000"
+	         data-goto-key-list="ArrowUp ArrowDown ArrowLeft ArrowRight"
+	         data-goto-next-list="icecream-pro crisps applepie-pro crisps-con">
+	        <h1>Ice cream: Con's---我是第4个页面</h1>
+	        <ul>
+	            <li>Not so great in the Winter</li>
+	            <li>If you're allergic to lactose/milk</li>
+	            <li>Diet alternatives are not real ice cream</li>
+	        </ul>
+	    </div>
+
+	    <div id="overview" class="step" data-x="3000" data-y="2000" data-scale="9" style="pointer-events: none;">
+    	</div>
+
+</div>
+
+<div id="impress-toolbar"></div>
+
+<div class="impress-progressbar"><div></div></div>
+<div class="impress-progress"></div>
+
+<div id="impress-help"></div>
+
+</body>
+</html>
+<script type="text/javascript" src="../../js/impress.js"></script>
+<script>impress().init();</script>
