@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/vue-easytable/umd/css/index.css">
+    <style type="text/css">
+		*{padding: 0;margin:0;}
+        .inputDiv input{padding:3px;margin: 3px;}
+        .bottom{width: 80%;border: 1px solid #ccc;margin: 11px auto;padding:11px;}
+    </style>
+</head>
+<body>
+<div id="app">
+<div style="width: 80%;border: 1px solid #ccc;margin: 11px auto;padding:11px;" class="inputDiv">
+    <input type="button" @click="initData" value="初始化数据">
+    
+    书名<input type="text" v-model="bookName"><br>
+    编码<input type="text" v-model="bookCode"><br>
+    作者<input type="text" v-model="bookAuthor"><br>
+    出版年份<input type="text" v-model="bookYear"> <br>
+    <input type="button" @click="addOrEditData" value="新增修改"/>
+</div>
+<div style="width: 80%;border: 1px solid #ccc;margin: 11px auto;padding:11px;">
+    <v-table
+          
+            is-vertical-resize
+			:vertical-resize-offset='60'
+			is-horizontal-resize
+			style="width:100%"
+            :min-height='200'
+            :columns="booksColumns"
+            :table-data="formtableData"
+            row-hover-color="#eee"
+            row-click-color="#edf7ff"
+            @on-custom-comp="customCompFunc"
+    ></v-table>
+    </div>
+    <!-- <div class="mt20 mb20 bold" style="padding: 5px;"></div> -->
+                    <div class="bottom">
+                       <v-pagination @page-change="pageChange" @page-size-change="pageSizeChange" :total="booksDataLen" :page-size="pageSize" :layout="['total', 'prev', 'pager', 'next', 'sizer', 'jumper']"></v-pagination>
+                       <button @click="exportExl">导出Excel</button>
+                    </div>
+                       
+       </div>
+</div>
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/vue-easytable/umd/js/index.js"></script>
+<!-- <script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
+<script src="localstoragedb.js"></script>
+<script>
+var lib;
+
+// 自定义列组件
+    Vue.component('table-operation',{
+        template:`<span>
+        <a href="" @click.stop.prevent="update(rowData,index)">编辑</a>&nbsp;
+        <a href="" @click.stop.prevent="deleteRow(rowData,index)">删除</a>
+        </span>`,
+        props:{
+            rowData:{
+                type:Object
+            },
+            field:{
+                type:String
+            },
+            index:{
+                type:Number
+            }
+        },
+        methods:{
+            update(){
+               // 参数根据业务场景随意构造
+            let params = {type:'edit',index:this.index,rowData:this.rowData};
+               this.$emit('on-custom-comp',params);
+            },
+            deleteRow(){
+                // 参数根据业务场景随意构造
+            let params = {type:'delete',index:this.index,rowData:this.rowData};
+                this.$emit('on-custom-comp',params);
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                tableData: [
+                    {"name":"赵伟1","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
+                    {"name":"李伟1","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"孙伟1","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
+                    {"name":"周伟1","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
+                    {"name":"吴伟1","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"},
+                    {"name":"赵伟2","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
+                    {"name":"李伟2","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"孙伟2","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
+                    {"name":"周伟2","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
+                    {"name":"吴伟2","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"},
+                    {"name":"赵伟3","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
+                    {"name":"李伟3","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"孙伟3","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
+                    {"name":"周伟3","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
+                    {"name":"吴伟3","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"},
+                    {"name":"赵伟4","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
+                    {"name":"李伟4","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"孙伟4","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
+                    {"name":"周伟4","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
+                    {"name":"吴伟4","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"},
+                    {"name":"赵伟5","tel":"156*****1987","hobby":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
+                    {"name":"李伟5","tel":"182*****1538","hobby":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
+                    {"name":"孙伟5","tel":"161*****0097","hobby":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
+                    {"name":"周伟5","tel":"197*****1123","hobby":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
+                    {"name":"吴伟5","tel":"183*****6678","hobby":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"}
+                 ],
+                columns: [
+                    {field: 'custome', title:'序号', width: 50, titleAlign: 'center',columnAlign: 'center',isResize:true},
+                    {field: 'name', title: '姓名', width: 80, titleAlign: 'center', columnAlign: 'center',isResize:true},
+                    {field: 'tel', title: '手机号码', width: 150, titleAlign: 'center', columnAlign: 'center',isResize:true},
+                    {field: 'hobby', title: '爱好', width: 150, titleAlign: 'center', columnAlign: 'center',isResize:true},
+                    {field: 'address', title: '地址', width: 280, titleAlign: 'center', columnAlign: 'left',isResize:true},
+{field: 'custome-adv', title: '操作',width: 200, titleAlign: 'center',columnAlign:'center',componentName:'table-operation',isResize:true}
+                ],
+                booksColumns:[
+                    {field: 'code', title:'序号', width: 100,isResize:true},
+                    {field: 'title', title:'书名', width: 250,isResize:true},
+                    {field: 'author', title:'作者', width: 100,isResize:true},
+                    {field: 'year', title:'出版年份',width: 100,isResize:true},
+                    {field: 'custome-adv', title: '操作',width: 150,componentName:'table-operation',isResize:true}
+                ],
+                booksData:[],
+                booksDataLen:0,
+                formtableData:[],
+                pageIndex:1,
+                pageSize:10,
+                bookName:'',
+                bookYear:'',
+                bookAuthor:'',
+                bookCode:'',
+            }
+        },
+        methods:{
+            customCompFunc(params){
+                if (params.type === 'delete'){ // do delete operation
+                    // this.$delete(this.tableData,params.index);
+                    var isDel = confirm('确认删除吗？')
+                    if(isDel) {
+                        lib.deleteRows("books", {code: params.rowData['code']});
+                        lib.commit();
+                        // debugger//params.rowData['code']
+                        this.getTableData();
+                    }
+                }else if (params.type === 'edit'){ // do edit operation
+                    debugger//params.rowData
+                    this.bookCode = params.rowData.code
+                    this.bookName = params.rowData.title;
+                    this.bookAuthor =params.rowData.author;
+                    this.bookYear = params.rowData.year;
+                }
+            },
+            pageChange(pageIndex){
+                 this.pageIndex = pageIndex;
+                 this.getTableData();
+                 // console.log(pageIndex)
+            },
+            pageSizeChange(pageSize){
+
+                this.pageIndex = 1;
+                this.pageSize = pageSize;
+                this.getTableData();
+           },
+           getTableData(){
+                this.booksData = lib ?lib.queryAll('books') :[];
+                this.booksDataLen = lib ?lib.queryAll('books').length :0;
+                this.formtableData = this.booksData.slice((this.pageIndex-1)*this.pageSize,(this.pageIndex)*this.pageSize)
+            },
+            exportExl(){
+            	var wb = XLSX.utils.table_to_book(document.querySelector('.v-table-class'));
+            	XLSX.writeFile(wb, "D://sheetjs_html.xlsx");
+            },
+            initData(){
+lib = new localStorageDB("library", localStorage);
+if( lib.isNew() ) {
+    // create the "books" table
+    lib.createTable("books", ["code", "title", "author", "year", "copies"]);
+    // insert some data
+    lib.insert("books", {code: "B001", title: "Phantoms in the brain", author: "Ramachandran", year: 1999, copies: 10});
+    lib.commit();
+}
+this.getTableData();
+            },
+            addOrEditData(){
+                if(!this.bookCode ||!this.bookName ||!this.bookAuthor||!this.bookYear)return;
+                lib.insertOrUpdate("books",{code: this.bookCode}, {
+                        code: this.bookCode, 
+                        title: this.bookName, 
+                        author: this.bookAuthor, 
+                        year: this.bookYear, 
+                        copies: 10});
+                lib.commit();
+                this.getTableData();
+                this.bookCode = '';
+                this.bookName ='' ;
+                this.bookAuthor ='';
+                this.bookYear ='';
+            }
+        },
+        created(){
+            lib = new localStorageDB("library", localStorage);
+            this.getTableData();
+        }
+    })
+    //
+
+</script>
+</html>
