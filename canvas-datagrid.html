@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制表格</title>
+    <style type="text/css">
+        #container p{line-height: 44px;}
+body {
+    background-image: linear-gradient(to right top, #ffcc00 50%, #eee 50%);
+    background-repeat: no-repeat;
+    background-size: 100% calc(100% - 100vh + 5px);
+}
+body::after {
+    content: "";
+    position: fixed;
+    top: 5px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    z-index: -1;
+}
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="cavsTable">
+            您的浏览器不支持canvas,请升级浏览器
+        </canvas>
+        
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+        <p>不可思议的纯 CSS 滚动进度条效果</p>
+
+    </div>
+    <script>
+        (function(){
+            var canvas = document.querySelector('#cavsTable');
+            var ctx = canvas.getContext('2d');
+ 
+            canvas.width = 500;
+            canvas.height = 500;
+            canvas.style.border = '1px solid red';
+ 
+            //定义每个小格的宽高
+            var rectH = 50;
+            var rectW = 50;
+            //绘制横线
+            for(var i=0; i < canvas.height/rectH; i++){
+                ctx.moveTo(0,i*rectH);
+                ctx.lineTo(canvas.width,i*rectH);
+            }
+            //绘制竖线
+            for(var j=0; j < canvas.width/rectW; j++){
+                ctx.moveTo(j*rectW,0);
+                ctx.lineTo(j*rectW,canvas.height);
+            }
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = '#555';
+            ctx.stroke();
+        })();
+    </script>
+</body>
+</html>
