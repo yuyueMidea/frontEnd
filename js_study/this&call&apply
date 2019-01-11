@@ -12,3 +12,16 @@ var getName = function(){
 getName();     // 输出：window
 getName.call( obj1 ); // 输出: sven
 getName.call( obj2 ); // 输出: anne
+
+-----------------------------------------------------------
+
+当函数不作为对象的属性被调用时，也就是我们常说的普通函数方式,此时的 this 总是指向全局对象。在浏览器的 JavaScript 里，这个全局对象是 window 对象。
+window.name = 'globalName';
+var myObject = { 
+    name: 'sven',
+    getName: function(){ 
+        return this.name;
+    } 
+};
+var getName = myObject.getName; 
+console.log( getName() ); // globalName
