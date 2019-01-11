@@ -25,3 +25,18 @@ var myObject = {
 };
 var getName = myObject.getName; 
 console.log( getName() ); // globalName
+
+------------------------------------------------
+闭包可以延续变量的生存周期
+var func = function(){ 
+    var a = 1;
+    return function(){ 
+        a++;
+        alert ( a );
+    } 
+};
+var f =  func(); 
+f();  // 输出:2
+f();  // 输出:3
+f();  // 输出:4
+f();  // 输出:5
