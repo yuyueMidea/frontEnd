@@ -40,3 +40,9 @@ f();  // 输出:2
 f();  // 输出:3
 f();  // 输出:4
 f();  // 输出:5
+
+-------------------------------------------------------
+判断数据的类型
+Object.prototype.toString.call([]).slice(8).replace(']','')     //Array
+Object.prototype.toString.call({}).slice(8).replace(']','')     //Object
+Object.prototype.toString.call('').slice(8).replace(']','')     //String
