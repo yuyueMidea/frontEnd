@@ -9,6 +9,19 @@
 </head>
 <body>
   <div id="app" v-padding="20">
+  <hr>
+	<h2>DropdownCustom 自定义下拉控件</h2>
+	<h-dropdowncustom class-name="h-text-dropdown">
+	    <span>个人信息</span>
+	    <div slot="content" v-width="200">
+	      <div v-padding="20">
+	        <img :width="80" :height="80" style="border-radius:80px;float:left" src="http://www.ch-un.com/images/head.jpg">
+	        <div style="height:80px;margin-left:90px;line-height:80px;">LAN</div>
+	      </div>
+	      <h-row style="line-height:40px;border-top:1px solid #EEE;"><h-col width=12 class="text-center" style="border-right:1px solid #EEE;"><a>个人信息</a></h-col><h-col width=12 class="text-center"><a>注销</a></h-col></h-row>
+	    </div>
+	</h-dropdowncustom>
+	<hr>
     <p><h-button color="primary" @click="show = true">打开vue弹框</h-button></p>
     <p><h-button color="primary" @click="openModal">打开js弹框</h-button></p>
 
@@ -76,6 +89,22 @@
 	    <p>切换到{{page}}</p>
 	    <h-carousel :datas="params2" :height="300" pageTheme="circle" @change="change" @click="click"></h-carousel>
 	</div>
+	<hr>
+	<h2>Collapse 折叠面板</h2>
+	<div class="">
+	    <h-collapse v-model="showvalue">
+	      <h-collapseitem title="迈尔斯·莫拉莱斯">
+	        终极宇宙里的蜘蛛侠，被一只放射性蜘蛛咬伤，并因此获得了超能力。偶然和其他宇宙的蜘蛛侠相遇，将和他们共同对抗最强反派。
+	      </h-collapseitem>
+	      <h-collapseitem title="彼得·帕克">
+	        616宇宙的蜘蛛侠，他帮助训练迈尔斯·莫拉莱斯正视自己，勇于承担肩上的责任，在这期间也慢慢的找回自我。
+	      </h-collapseitem>
+	      <h-collapseitem title="格温·史黛西">
+	        我是她是一个非常聪明、反应极快的女孩儿，能够以宛如舞者般优雅的身姿穿梭往来，是她所属那个世界的蜘蛛侠。
+	      </h-collapseitem>
+	    </h-collapse>
+	</div>
+	
 
     
 
@@ -136,6 +165,7 @@
           image:'http://pic.58pic.com/58pic/14/48/31/98R58PICUsm_1024.jpg',
         },
       ],
+      showvalue: [0]
     },
     methods: {
       openModal() {
