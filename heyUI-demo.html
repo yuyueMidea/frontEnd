@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>heyUI-demo</title>
 </head>
 <body>
+  <h1 style="text-align: center;">hello~heyUI</h1>
   <div id="app" v-padding="20">
   <hr>
 	<h2>DropdownCustom 自定义下拉控件</h2>
@@ -21,10 +22,65 @@
 	      <h-row style="line-height:40px;border-top:1px solid #EEE;"><h-col width=12 class="text-center" style="border-right:1px solid #EEE;"><a>个人信息</a></h-col><h-col width=12 class="text-center"><a>注销</a></h-col></h-row>
 	    </div>
 	</h-dropdowncustom>
-	<hr>
-    <p><h-button color="primary" @click="show = true">打开vue弹框</h-button></p>
-    <p><h-button color="primary" @click="openModal">打开js弹框</h-button></p>
+  <hr>
+  <p>
+    <button class='h-btn h-btn-blue' @click="message('info')">消息</button>
+    <button class='h-btn h-btn-green' @click="message('success')">成功</button>
+    <button class='h-btn h-btn-yellow' @click="message('warn')">警告</button>
+    <button class='h-btn h-btn-red' @click="message('error')">错误</button>
+  <button class='h-btn' @click="messageLoad()">显示加载中</button></p>
+    <p><h-button color="primary" @click="show = true">打开vue弹框</h-button>
+    <h-button color="primary" @click="openModal">打开js弹框</h-button></p>
+  <hr>
+  <div class="tooltip2-demo">
+      <h-row :space="10" v-width="300" style="margin-left:80px;">
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="top-start" content="提示语">上左</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="top" content="提示语">上中</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="top-end" content="提示语">上右</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="left-start" content="提示语">左上</button></h-col>
+        <h-col :width="8"><button class="h-btn h-btn-text">中间</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="right-start" content="提示语">右上</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="left" content="提示语">左中</button></h-col>
+        <h-col :width="8"><button class="h-btn h-btn-text">中间</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="right" content="提示语">右中</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="left-end" content="提示语">左下</button></h-col>
+        <h-col :width="8"><button class="h-btn h-btn-text">中间</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="right-end" content="提示语">右下</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="bottom-start" content="提示语">下左</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="bottom" content="提示语">下中</button></h-col>
+        <h-col :width="8"><button class="h-btn" v-tooltip placement="bottom-end" content="提示语">下右</button></h-col>
+      </h-row>
+  </div>
+  <hr>
+  <div>
+      <h-poptip content="确定删除此段工作经历，是否永久删除？" @confirm="confirm"><button class="h-btn h-btn-red">删除</button></h-poptip>
+      <h-poptip content="确认删除?" @confirm="confirm"><button class="h-btn h-btn-text-red h-btn-no-border"><i class="h-icon-trash"></i></button></h-poptip>
+  </div>
+  <hr>
 
+<div class="h-panel">
+    <div class="h-panel-bar">
+      <span class="h-panel-title">标题</span>
+      <span v-color:gray v-font="13">说明~~</span>
+      <div class="h-panel-right"><h-search placeholder="查询" v-width="200"></h-search><i class="h-split"></i><button class="h-btn h-btn-green h-btn-m">查询</button></div>
+    </div>
+    <div class="h-panel-bar">
+      <span class="link">下载</span><i class="h-split" v-width="10"></i><span class="link" :disabled="!selectAll">分享</span>
+      <i class="h-split"></i>
+      <h-dropdownMenu :datas="menus" class-name="h-text-dropdown"><span :disabled="!selectAll">更多</span></h-dropdownMenu>
+      <div class="h-panel-right">
+        <h-pagination :cur="page.cur" :total="page.total" :small="true" layout="pager" @change="currentChange"></h-pagination>
+      </div>
+    </div>
+    <div class="h-panel-body bottom-line">
+      <h-table :datas="datas" checkbox :columns="columns"></h-table>
+    </div>
+    <div class="h-panel-bar">
+      <h-pagination :cur="page.cur" :total="page.total" :small="true" align="right" @change="currentChange"></h-pagination>
+    </div>
+</div>
+
+  <hr>
     <p>[普通选择日期控件]value:{{datevalue}}</p>
     <p><h-switch v-model="disabled" :small="true">禁用</h-switch></p>
     <p><h-switch v-model="readonly" :small="true">只读</h-switch></p>
@@ -40,8 +96,7 @@
 	<p>[TagInput 标签输入]{{tagValue}}</p>
 	<p><h-taginput v-model="tagValue"></h-taginput></p>
 	<hr>
-	<p>精确2位小数点：{{precisionValue}}</p>
-	<p><h-numberinput v-model="precisionValue" :precision="2" v-width="300"></h-numberinput></p>
+	
 
 	<hr>
 	<h2>Badge 徽标数</h2>
@@ -86,7 +141,7 @@
     <hr>
     <h2>Carousel 走马灯</h2>
 	<div>
-	    <p>切换到{{page}}</p>
+	    <p>切换到{{page1}}</p>
 	    <h-carousel :datas="params2" :height="300" pageTheme="circle" @change="change" @click="click"></h-carousel>
 	</div>
 	<hr>
@@ -126,7 +181,6 @@
   var app = new Vue({
     el: '#app',
     data: {
-      message: 'Hello Vue!',
       show: false,
       datevalue:'2017-01-01',
       disabled: false,
@@ -135,7 +189,6 @@
       slidervalue: 20,
       rateValue: 3,
       tagValue: ['test1'],
-      precisionValue: 0,
       operationValue: 3,
       count: 2,
       dataStep: {
@@ -145,9 +198,30 @@
         d: 'step4',
       },
       step: 0,
+      menus: ['Operate1','Operate2','Operate3'],
+      selectAll: false,
+      page: {
+        cur: 3,
+        total: 58
+      },
+      columns: [
+        { title: '序号', prop: '$index', width: 100 },
+        { title: 'ID', prop: 'id', width: 100},
+        { title: '姓名', prop: 'name'},
+        { title: '年龄', prop: 'age'},
+        { title: '地址', prop: 'address' },
+      ],
+      datas: [
+        { id: 5, name: '测试5', age: 12, address: "上海" },
+        { id: 6, name: '测试6', age: 13, address: "上海" },
+        { id: 7, name: '测试7', age: 14, address: "上海" },
+        { id: 5, name: '测试5', age: 17, address: "上海" },
+        { id: 6, name: '测试6', age: 18, address: "上海" },
+        { id: 7, name: '测试7', age: 12, address: "上海" },
+      ],
       switchValue: '选择1',
       param1: ['选择1', '选择2', '选择3'],
-      page: 'Page 1',
+      page1: 'Page 1',
       params2:[
         {
           title:'Page 1',
@@ -175,11 +249,35 @@
         })
       },
 	    change(index, data){
-	      this.page = data.title;
+	      this.page1 = data.title;
 	    },
 	    click(index, data){
 	      this.$Message(`点击了${data.title}`);
-	    }
+	    },
+      message(type) {
+        let text = { info: '消息', success: '成功', warn: '警告', error: '错误' }[type];
+        this.$Message({
+          type,
+          text: `这是一个${text}的消息`
+        });
+      },
+      messageLoad() {
+        let message = this.$Message.loading(`正在加载中`, 0);
+        // this.$Message({
+        //   type: 'loading',
+        //   text:`正在加载中`, 
+        //   timeout: 0
+        // })
+        setTimeout(()=>{
+          message.close();
+        }, 4000);
+      },
+      confirm() {
+        this.$Message.success("删除成功");
+      },
+      currentChange(page) {
+        this.page.cur = page.cur;
+      }
 
     }
   })
