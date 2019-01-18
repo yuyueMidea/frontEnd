@@ -15,7 +15,23 @@
     <p>[普通选择日期控件]value:{{datevalue}}</p>
     <p><h-switch v-model="disabled" :small="true">禁用</h-switch></p>
     <p><h-switch v-model="readonly" :small="true">只读</h-switch></p>
-    <p><h-datepicker v-model="datevalue" :readonly="readonly" :disabled="disabled"></h-datepicker></p>
+    <p><h-switchlist v-model="datetype" :datas="{year: '年', month: '月', quarter: '季度', week: '周', date: '日'}"></h-switchlist></p>
+    <p><h-datepicker v-model="datevalue" :readonly="readonly" :disabled="disabled" :type="datetype"></h-datepicker></p>
+    <hr>
+	<p>[滑块]对应的值：{{slidervalue}}</p>
+	<p><h-slider v-model="slidervalue"></h-slider></p>
+	<hr>
+	<p>[评分]{{rateValue}}</p>
+	<p><h-rate v-model="rateValue" show-text></h-rate></p>
+	<hr>
+	<p>[TagInput 标签输入]{{tagValue}}</p>
+	<p><h-taginput v-model="tagValue"></h-taginput></p>
+	<hr>
+	<p>精确2位小数点：{{precisionValue}}</p>
+	<p><h-numberinput v-model="precisionValue" :precision="2" v-width="300"></h-numberinput></p>
+	
+    
+
     <Modal v-model="show">
       <div slot="header">标题</div>
       <div>
@@ -37,8 +53,14 @@
       message: 'Hello Vue!',
       show: false,
       datevalue:'2017-01-01',
-      disabled: true,
-      readonly: true
+      disabled: false,
+      readonly: false,
+      datetype: 'date',
+      slidervalue: 20,
+      rateValue: 3,
+      tagValue: ['test1'],
+      precisionValue: 0,
+      operationValue: 3,
     },
     methods: {
       openModal() {
