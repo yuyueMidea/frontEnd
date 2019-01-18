@@ -29,7 +29,54 @@
 	<hr>
 	<p>精确2位小数点：{{precisionValue}}</p>
 	<p><h-numberinput v-model="precisionValue" :precision="2" v-width="300"></h-numberinput></p>
-	
+
+	<hr>
+	<h2>Badge 徽标数</h2>
+	<p>
+		<h-buttongroup size="s">
+		<h-button icon="h-icon-plus" @click="count++"></h-button>
+      <h-button icon="h-icon-minus" @click="count<=0||count--"></h-button>
+      </h-buttongroup>
+      <!-- <i class="h-split"></i> -->
+      <h-badge :count="count"><span >消息</span></h-badge>
+	</p>
+	<hr>
+	<div v-width="600">
+	<h2>Progress 进度条</h2>
+	    <p><h-progress :percent="60"><span slot="title">项目1</span><span slot="text"><span class="primary-color">180</span> K</span></h-progress></p>
+	    <p><h-progress :percent="99" color="green"><span slot="title">项目2</span><span slot="text">成功</span></h-progress></p>
+	    <p><h-progress :percent="12" color="red"><span slot="title">项目2</span><span slot="text">失败</span></h-progress></p>
+	</div>
+	<hr>
+	<h2>Circle 进度环</h2>
+	<div>
+	    <h-circle :percent="60"><span >项目1</span></h-circle>
+	    <h-circle :percent="99" color="#13CE66"><span>项目2</span></h-circle>
+	    <h-circle :percent="12" color="#E11617"><span>项目2</span></h-circle>
+	</div>
+	<hr>
+	<h2>Steps 步骤条</h2>
+	<div>
+	    <p>
+	      <h-buttongroup size="s">
+	        <h-button icon="h-icon-plus" @click="step>=3||step++"></h-button>
+	        <h-button icon="h-icon-minus" @click="step<=0||step--"></h-button>
+	      </h-buttongroup>
+	    </p>
+	    <Steps :datas="dataStep" :step="step"></Steps>
+	</div>
+	<hr>
+	<h2>SwitchList 选项</h2>
+	<p v-color:gray>{{switchValue}}</p>
+    <div><h-switchlist v-model="switchValue" :datas="param1"></h-switchlist>
+    </div>
+    <hr>
+    <h2>Carousel 走马灯</h2>
+	<div>
+	    <p>切换到{{page}}</p>
+	    <h-carousel :datas="params2" :height="300" pageTheme="circle" @change="change" @click="click"></h-carousel>
+	</div>
+
     
 
     <Modal v-model="show">
@@ -61,6 +108,34 @@
       tagValue: ['test1'],
       precisionValue: 0,
       operationValue: 3,
+      count: 2,
+      dataStep: {
+        a: 'step1',
+        b: 'step2',
+        c: 'step3',
+        d: 'step4',
+      },
+      step: 0,
+      switchValue: '选择1',
+      param1: ['选择1', '选择2', '选择3'],
+      page: 'Page 1',
+      params2:[
+        {
+          title:'Page 1',
+          link: true,
+          image:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540197899055&di=75c86ca282306c46d9de3dccac8f5e0b&imgtype=0&src=http%3A%2F%2Fimg17.3lian.com%2Fd%2Ffile%2F201702%2F27%2Fd27cb266e19ab3e5ecffa2bd8c8e9426.jpg',
+        },{
+          title:'Page 2',
+          link: 'http://www.baidu.com',
+          image:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540197899054&di=3367ff0605072bc351651cfffb8dac08&imgtype=0&src=http%3A%2F%2Fimg534.ph.126.net%2FEGAn7UXOMIr5XJ7HWEUylw%3D%3D%2F2650649855685047930.jpg',
+        },{
+          title:'Page 3',
+          image:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=436156375,527884653&fm=27&gp=0.jpg',
+        },{
+          title:'Page 4',
+          image:'http://pic.58pic.com/58pic/14/48/31/98R58PICUsm_1024.jpg',
+        },
+      ],
     },
     methods: {
       openModal() {
@@ -68,7 +143,14 @@
           title: '标题',
           content: '这是一个js调用的弹框'
         })
-      }
+      },
+	    change(index, data){
+	      this.page = data.title;
+	    },
+	    click(index, data){
+	      this.$Message(`点击了${data.title}`);
+	    }
+
     }
   })
 </script>
