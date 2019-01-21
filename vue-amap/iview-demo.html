@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>iview-demo</title>
+	<title>iview example</title>
+<link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+<script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+<script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+<style type="text/css">
+*{padding: 0;margin: 0}
+.carousel{border: 1px solid red;width: 500px;padding: 5px;}
+.carousel .demo-carousel:nth-child(2n){background: pink;}
+.demo-carousel{font-size: 50px;text-align: center;}
+</style>
+</head>
+<body>
+<div id="app">
+<h2>iview-demo</h2>
+<hr>
+<p>
+<i-input v-model="inputVal"  style="width: 300px" size="small" ></i-input>
+<i-input v-model="inputVal2"  style="width: 300px" size="large" ></i-input>
+</p>
+
+<p>
+	<i-button>Default</i-button>
+    <i-button type="primary">Primary</i-button>
+    <i-button type="ghost">Ghost</i-button>
+    <i-button type="dashed">Dashed</i-button>
+    <i-button type="text">Text</i-button>
+    <br><br>
+    <i-button type="info">信息按钮</i-button>
+    <i-button type="success">成功按钮</i-button>
+    <i-button type="warning">警告按钮</i-button>
+    <i-button type="error">错误按钮</i-button>
+
+<i-button type="primary" shape="circle" icon="ios-search"></i-button>
+    <i-button type="primary" icon="ios-search">搜索</i-button>
+    <i-button type="primary" shape="circle" icon="ios-search">搜索</i-button>
+    <i-button type="primary" shape="circle">圆角按钮</i-button>
+    <Dropdown>
+        <i-button type="primary">
+            下拉菜单
+        </i-button>
+        <dropdown-menu slot="list">
+            <dropdown-item>驴打滚</dropdown-item>
+            <dropdown-item>炸酱面</dropdown-item>
+            <dropdown-item disabled>豆汁儿</dropdown-item>
+            <dropdown-item>冰糖葫芦</dropdown-item>
+            <dropdown-item divided>北京烤鸭</dropdown-item>
+        </dropdown-menu>
+    </Dropdown>
+</p>
+<p>
+<i-slider :value="value8" show-input></i-slider>
+</p>
+<hr>
+<p style="border:1px solid red">
+<input-number :max="10" :min="1" :value="1"></input-number>
+  <Rate :value.sync="ratevalue"></Rate>
+  <Checkbox :checked.sync="singleChk">Checkbox</Checkbox>
+</p>
+<p>
+<i-button type="primary" @click="info">显示普通提醒</i-button>
+</p>
+<p>
+<i-progress :percent="percent" style="width:333px"></i-progress>
+<!-- <Button-group size="large"> -->
+        <i-button type="primary" @click="add">+</i-button>
+        <i-button type="primary" @click="minus">-</i-button>
+    <!-- </Button-group> -->
+</p>
+<p>
+<Tooltip content="Top Left 文字提示" placement="top-start">
+            <i-button>上左</i-button>
+        </Tooltip>
+        <Tooltip content="Top Center 文字提示" placement="top">
+            <i-button>上边</i-button>
+        </Tooltip>
+</p>
+<p>
+<i-circle :percent="80">
+        <span class="demo-circle-inner" style="font-size:24px">80%</span>
+    </i-circle>
+    <i-circle :percent="100" stroke-color="#5cb85c">
+        good job!!!
+    </i-circle>
+    <i-circle :percent="35" stroke-color="#ff5500">
+        <span class="demo-circle-inner">
+           not~
+        </span>
+    </i-circle>
+
+    <i-circle :percent="percent2" :stroke-color="color">
+        <Icon v-if="percent2 == 100" type="ios-checkmark-empty" size="60" style="color:#5cb85c"></Icon>
+        <span v-else style="font-size:24px">{{ percent2 }}%</span>
+    </i-circle>
+    <i-button-group size="large">
+        <i-button type="success" @click="add1">+</i-button>
+        <i-button type="danger" @click="minus1">-</i-button>
+    </i-button-group>
+</p>
+<hr>
+<div class="carousel">
+<Carousel autoplay>
+        <carousel-item>
+            <div class="demo-carousel">1</div>
+        </carousel-item>
+        <carousel-item>
+            <div class="demo-carousel">2</div>
+        </carousel-item>
+        <carousel-item>
+            <div class="demo-carousel">3</div>
+        </carousel-item>
+        <carousel-item>
+            <div class="demo-carousel">4</div>
+        </carousel-item>
+    </Carousel>
+</div>
+
+<hr>
+
+<p>
+<i-switch size="large"></i-switch>
+<i-switch size="small" ></i-switch>
+<i-select :model.sync="model1" style="width:200px">
+        <i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>
+    </i-select>
+</p>
+<br>
+<hr>
+<i-table  border :columns="columns2" :data="data3"></i-table>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+var app = new Vue({
+	el: '#app',
+	data:{
+		inputVal:'hi~iview~',
+		inputVal2:'hi~iview2~',
+		value8:12,
+		percent: 10,
+		percent2: 0,
+		ratevalue:0,
+		phone: 'apple',
+		single:false,
+		singleChk: false,
+		cityList: [
+            {
+                value: 'beijing',
+                label: '北京市'
+            },
+            {
+                value: 'shanghai',
+                label: '上海市'
+            },
+            {
+                value: 'shenzhen',
+                label: '深圳市'
+            },
+            {
+                value: 'hangzhou',
+                label: '杭州市'
+            },
+            {
+                value: 'nanjing',
+                label: '南京市'
+            },
+            {
+                value: 'chongqing',
+                label: '重庆市'
+            }
+        ],
+        model1: '',	
+		columns2: [
+            {
+                title: '姓名',
+                key: 'name',
+                width: 100,
+                fixed: 'left'
+            },
+            {
+                title: '年龄',
+                key: 'age',
+                width: 100
+            },
+            {
+                title: '省份',
+                key: 'province',
+                width: 100
+            },
+            {
+                title: '市区',
+                key: 'city',
+                width: 100
+            },
+            {
+                title: '地址',
+                key: 'address',
+                width: 200
+            },
+            {
+                title: '邮编',
+                key: 'zip',
+                width: 100
+            }
+            
+        ],
+        data3: [
+            {
+                name: '王小明',
+                age: 18,
+                address: '北京市朝阳区芍药居',
+                province: '北京市',
+                city: '朝阳区',
+                zip: 100000
+            },
+            {
+                name: '张小刚',
+                age: 25,
+                address: '北京市海淀区西二旗',
+                province: '北京市',
+                city: '海淀区',
+                zip: 100000
+            },
+            {
+                name: '李小红',
+                age: 30,
+                address: '上海市浦东新区世纪大道',
+                province: '上海市',
+                city: '浦东新区',
+                zip: 100000
+            },
+            {
+                name: '周小伟',
+                age: 26,
+                address: '深圳市南山区深南大道',
+                province: '广东',
+                city: '南山区',
+                zip: 100000
+            }
+        ]
+	},
+	computed: {
+        color () {
+            let color = '#2db7f5';
+            if (this.percent == 100) {
+                color = '#5cb85c';
+            }
+            return color;
+        }
+    },
+	methods:{
+		info () {
+                this.$Message.info('这是一条普通的提醒');
+            },
+            add () {
+                if (this.percent >= 100) {
+                    return false;
+                }
+                this.percent += 10;
+            },
+            minus () {
+                if (this.percent <= 0) {
+                    return false;
+                }
+                this.percent -= 10;
+            },
+            add1 () {
+                if (this.percent2 >= 100) {
+                    return false;
+                }
+                this.percent2 += 10;
+            },
+            minus1 () {
+                if (this.percent2 <= 0) {
+                    return false;
+                }
+                this.percent2 -= 10;
+            }
+	}
+})
+</script>
