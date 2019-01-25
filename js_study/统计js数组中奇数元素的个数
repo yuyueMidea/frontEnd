@@ -1,0 +1,10 @@
+function getOddNum(array){
+	var str =array.join(',')+',';
+	var len = str.length;
+	var list =[/1,/g, /3,/g, /5,/g, /7,/g, /9,/g];
+	for(var i=0;i<list.length;i++){
+		str =str.replace(list[i],'');
+		
+	}
+	return (len -str.length)/2;
+}
