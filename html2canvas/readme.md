@@ -1,0 +1,1 @@
+# html2canvas将HTML内容写入Canvas生成图片
