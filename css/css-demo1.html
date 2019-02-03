@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-demo1</title>
+	<style type="text/css">
+.exciting-text::after {
+  content: " <- EXCITING!"; 
+  color: green;
+}
+
+.boring-text::after {
+  content: " <- BORING";
+  color: red;
+}
+
+.ribbon {
+  background-color: #5BC8F7;
+}
+
+.ribbon::after {
+  content: "This is a fancy orange box.";
+  background-color: #FFBA10;
+  border-color: black;
+  border-style: dotted;
+}
+span[data-mdn]{
+	position: relative; text-decoration: underline;
+	color: #00f;cursor: help;
+}
+span[data-mdn]:hover::after{
+	content: attr(data-what);
+	position: absolute;left: 0; top: 14px;
+	border: 1px solid #ccc; color: #000;
+	background: #ffc; width:200px; border-radius: 5px; padding: 4px;
+}
+span[data-descr] {
+  position: relative;
+  text-decoration: underline;
+  color: #00F;
+  cursor: help;
+}
+
+span[data-descr]:hover::after {
+  content: attr(data-descr);
+  position: absolute;
+  left: 0;
+  top: 24px;
+  min-width: 200px;
+  border: 1px #aaaaaa solid;
+  border-radius: 10px;
+  background-color: #ffffcc;
+  padding: 12px;
+  color: #000000;
+  font-size: 14px;
+  z-index: 1;
+}
+	</style>
+</head>
+<body>
+
+<p class="boring-text">Here is some plain old boring text.</p>
+<p>Here is some normal text that is neither boring nor exciting.</p>
+<p class="exciting-text">Contributing to 
+<span data-mdn="hi~MDN" data-what="hi-you">MDN</span> is easy and fun.</p>
+<br>
+<span class="ribbon">Look at the orange box after this text. </span>
+<br>
+
+<p>Here we have some
+  <span data-descr="collection of words and punctuation">text</span> with a few
+  <span data-descr="small popups that appear when hovering">tooltips</span>.
+</p>
+</body>
+</html>
