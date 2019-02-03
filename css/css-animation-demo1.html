@@ -36,6 +36,31 @@
 @keyframes move_eye { 
 	from { margin-left: -20%; } to { margin-left: 100%; }  
 }
+
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.slidein {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: 3;
+  animation-direction: alternate;
+}
+
+@keyframes slidein {
+  from {
+    margin-left:100%;
+    width:300%
+  }
+  
+  to {
+    margin-left:0%;
+    width:100%;
+  }
+}
 	</style>
 </head>
 <body>
@@ -45,5 +70,7 @@
   </div>
   <div class="cylon_eye"></div>
 </div>
+<hr>
+<p>The Caterpillar and Alice looked at each other for some time in silence: at last the Caterpillar took the hookah out of its mouth, and addressed her in a languid, sleepy voice.</p>
 </body>
 </html>
