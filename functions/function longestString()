@@ -1,3 +1,5 @@
+******************************************************************************
+获取最长的入参
 function longestString() {
   var longest = '';
   for (var i=0; i < arguments.length; i++) {
@@ -7,3 +9,25 @@ function longestString() {
   }
   return longest;
 }
+******************************************************************************
+拼接入参
+function myConcat(separator) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return args.join(separator);
+}
+
+// returns "red, orange, blue"
+myConcat(', ', 'red', 'orange', 'blue');
+// returns "elephant; giraffe; lion; cheetah"
+myConcat('; ', 'elephant', 'giraffe', 'lion', 'cheetah');
+
+******************************************************************************
+
+
+******************************************************************************
+
+
+******************************************************************************
+
+
+******************************************************************************
