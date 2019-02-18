@@ -8,17 +8,47 @@
 <body>
 <div class="reveal">
 			<div class="slides">
-				<section>Single Horizontal Slide</section>
+		
+				
+				<section data-background="#dddddd" >
+					<h1>Reveal.js</h1>
+					<h3>The HTML Presentation Framework</h3>
+					<p>
+						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> and <a href="https://github.com/hakimel/reveal.js/graphs/contributors">contributors</a></small>
+					</p>
+				</section>
 				<section>
 					<section>Vertical Slide 1</section>
 					<section>Vertical Slide 2</section>
 				</section>
-				<section data-markdown>
-					<textarea data-template>
-						## Page title
-
-						A paragraph with some text and a [link](http://hakim.se).
-					</textarea>
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 			</div>
 		</div>
@@ -26,6 +56,7 @@
 		<script src="js/reveal.js"></script>
 		<script>
 			Reveal.initialize();
+			Reveal.configure({autoSlide:1111})
 		</script>
 </body>
 </html>
