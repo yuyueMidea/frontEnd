@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lit-css-demo</title>
+	<link rel="stylesheet" href="dist/lit.css">
+    <!-- <link rel="stylesheet" href="dist/util.css"> -->
+     <script async defer src="https://buttons.github.io/buttons.js"></script>
+     <style>
+		/**{padding: 0;margin: 0;}*/
+     </style>
+</head>
+<body>
+<div class="row">
+<div class="col card">span1<button class="btn primary">primary</button></div>
+<div class="col card">span2<button class="btn info">primary</button></div>
+<div class="col card">span3<button class="btn ">primary</button></div>
+</div>
+<hr>
+<div class="example-grid">
+<div class="row">
+<div class="col">head1</div>
+<div class="col">head2</div>
+<div class="col">head3</div>
+</div>
+<div class="row">
+<div class="col">111</div>
+<div class="col">222</div>
+<div class="col">333</div>
+</div>
+<div class="row">
+<div class="col">aaa</div>
+<div class="col">bbb</div>
+<div class="col">ccc</div>
+</div>
+<div class="row">
+<div class="col">a1</div>
+<div class="col">a2</div>
+<div class="col">a3</div>
+</div>
+</div>
+	<div class="row">
+        <div class="6 col">
+            Email
+            <input class="card w-100" type="email" placeholder="opensource@mail.com">
+        </div>
+        <div class="3 col"></div>
+        <div class="6 col">
+            Additional Info
+            <select class="card w-100">
+                <option value="Option 1">Question</option>
+                <option value="Option 2">Compliment</option>
+                <option value="Option 3">Problem</option>
+            </select>
+        </div>
+    </div>
+    <br><hr><br>
+
+    <table class="w-100">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Feature Parity (compared to lit)</th>
+                <th>Size (bytes)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>lit</td>
+                <td>Full</td>
+                <td>395</td>
+            </tr>
+            <tr>
+                <td>Skeleton</td>
+                <td>Full</td>
+                <td>1650</td>
+            </tr>
+            <tr>
+                <td>Milligram</td>
+                <td>Mostly, missing blockquote and clear buttons</td>
+                <td>2240</td>
+            </tr>
+            <tr>
+                <td>Min</td>
+                <td>Mostly, missing messages</td>
+                <td>955</td>
+            </tr>
+            <tr>
+                <td>Pure</td>
+                <td>Decent, but Pure has more options per element</td>
+                <td>3910</td>
+            </tr>
+            <tr>
+                <td>Furtive</td>
+                <td>Decent, but Furtive has many utility classes and media objects</td>
+                <td>2470</td>
+            </tr>
+            <tr>
+                <td>Basscss</td>
+                <td>Decent, but Basscss is atomic based, difficult to compare</td>
+                <td>2220</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
