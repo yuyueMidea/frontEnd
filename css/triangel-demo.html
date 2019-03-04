@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>CSS实现带阴影效果的三角形</title>
+        <style>
+            .box {
+                position: relative;
+                width: 200px;
+                height: 100px;
+                background: #f6f6f6;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+            }
+            .box::before {
+                position: absolute;
+                bottom: -5px;
+                left: 45px;
+                content: '';
+                width: 10px;
+                height: 10px;
+                background: #f6f6f6;
+                transform: rotate(135deg);
+                box-shadow: 1px -2px 5px rgba(0, 0, 0, .2);
+            }
+            .box::after {
+                position: absolute;
+                bottom: 0px;
+                left: 40px;
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: #f6f6f6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+    </body>
+</html>
