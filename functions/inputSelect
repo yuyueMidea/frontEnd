@@ -1,0 +1,6 @@
+var inputSelect = document.querySelector('.inputSelect');
+inputSelect.focus(function(){
+	inputSelect.select()
+})
+
+//文本框点击选中事件------只要文本框获得焦点，就会选中所有的文本
