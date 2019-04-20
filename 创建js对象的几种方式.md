@@ -47,12 +47,64 @@ console.log(person2.name); // Ciris
 
 -----------------------------
 
+## 构造函数模式
+function Person(name, age, job) {
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.sayName = function () {
+        console.log(this.name);
+    }
+}
+var person1 = createPerson('Jhonha', 22, 'dancer');
+var person2 = createPerson('Ciris', 22, 'Software engineer');
+console.log(person1.name); // Jhonha
+console.log(person2.name); // Ciris
 
 -----------------------------
 
+## 原型模式
+function Person(){}
+Person.prototype = {
+    constructor : Person,
+    name: "Jhonha",
+    age : 29 ,
+    job: "Software Engineer",
+    sayName: function(){
+        return this.name;
+    }
+};
+var person1 = new Person();
+console.log(person1.name); // Jhonha
+console.log(person1.age); // 29
+console.log(person1.job); // Software Engineer
+console.log(person1.sayName()); // Jhonha
 
 -----------------------------
 
+## 组合使用构造函数模式和原型模式
+function Person(name, age, job) {
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.friends = ["Jhonha","Nick"]
+}
+
+Person.prototype = {
+    constructor: Person,
+    sayName: function () {
+        console.log(this.name);
+    }
+}
+var person1 = new Person('bob', 22, 'frontend');
+var person2 = new Person('lynn', 22, 'doctor');
+
+person1.friends.push("Van");
+console.log(person1.friends); // Jhonha Nick Van
+console.log(person2.friends); // Jhonha Nick
+console.log(person1.name); // bob
+console.log(person2.name); // lynn
+console.log(person1.sayName === person2.sayName); // true
 
 -----------------------------
 
