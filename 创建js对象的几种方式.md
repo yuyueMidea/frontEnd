@@ -1,4 +1,4 @@
-## Object构造函数模式
+ Object构造函数模式
  var person = new Object();
 person.name = "Jhonha";
 person.age = '27';
