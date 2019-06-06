@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>barranger-demo</title>
+
+	<link rel="stylesheet" type="text/css" href="dist/css/barrager.css">
+</head>
+<body>
+<h2>Jquery.barrager.js
+专业的网页弹幕插件</h2>
+</body>
+</html>
+
+<script type="text/javascript" src="static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="dist/js/jquery.barrager.min.js"></script>
+    <script type="text/javascript">
+$(function(){
+	var  default_item={
+                // 'img':'static/heisenberg.png',
+                'info':'弹幕文字信息',
+                'href':'http://www.yaseng.org',
+                'close':false,
+                'speed':6,
+                'bottom':70,
+                'color':'#fff' ,
+                'old_ie_color':'#000000'
+            };
+            $('body').barrager(default_item);
+            $('body').barrager({'info':'Hello world!'});
+})
+    </script>
