@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-responsive-demo1</title>
+	<style type="text/css">
+	*{
+		padding: 0; margin: 0;
+	}
+.container {
+    display: grid; text-align: center;
+    grid-gap: 15px;
+    /*grid-template-columns: 100px 100px 100px;*/
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 50px 50px;
+}
+.container div:nth-child(2n){
+	background: pink;
+}
+.container div:nth-child(2n+1){
+	background: lightblue;
+}
+
+.container2 {
+    display: grid;
+    grid-gap: 5px;
+    /*grid-template-columns: repeat(auto-fit, 300px);*/
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: repeat(5, 100px);
+}
+.container2 div:nth-child(2n){
+	background: pink;
+}
+.container2 div:nth-child(2n+1){
+	background: lightblue;
+}
+
+	</style>
+</head>
+<body>
+
+<div class="container">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+</div>
+<br/>
+<hr/><br/>
+<div class="container2">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+  <div>7</div>
+  <div>8</div>
+  <div>9</div>
+  <div>10</div>
+  <div>11</div>
+  <div>12</div>
+  <div>13</div>
+  <div>14</div>
+</div>
+
+
+</body>
+</html>
