@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-tabs-demo1</title>
+	<style type="text/css">
+#radio1:checked ~ label,#radio2:checked ~ label,#radio3:checked ~ label{
+  background:#e67e22;
+}
+
+#radio1:checked ~ section,#radio2:checked ~ section,#radio3:checked ~ section{
+  z-index:1
+}
+.tabs-box{
+  margin:30px auto;
+  width:80%;
+  height:100px;
+  position:relative;
+}
+.tab{
+  float:left
+}
+
+input{
+  position:absolute;
+  opacity:0;
+}
+label{
+  padding:.5em .5em;
+  background:#2980b9;
+  color:#fff;
+  border-radius:3px;
+}
+
+section{
+  width:100%;
+  background:#ddd;
+  height:150px;
+  position:absolute;
+  padding:10px;
+  top:30px;
+  left:0;
+  overflow: auto;
+}
+
+	</style>
+</head>
+<body>
+<div class="tabs-box">
+  <div class="tab">
+    <input type="radio" id="radio1" name="radiogroup"/>
+    <label for="radio1">标签1</label>
+    <section>
+    	<h2>内容1</h2>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~</p>
+    </section>
+  </div>
+  
+  <div class="tab">
+    <input type="radio" id="radio2" name="radiogroup"/>
+    <label for="radio2">标签2</label>
+    <section>内容2</section>
+  </div>
+
+  <div class="tab">
+    <input type="radio" id="radio3" name="radiogroup"/>
+    <label for="radio3">标签3</label>
+    <section>内容3</section>
+  </div>
+</div>
+
+
+
+</body>
+</html>
