@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-dialog-demo1</title>
+	<style>
+.dialog-btn{
+  margin:10px auto;
+  width:200px;
+  color:#fff;
+  text-align:center;
+  background:#ffaf40;
+  padding:30px;
+  display:block;
+  text-decoration:none
+}
+.dialog-box{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.1);
+  visibility:hidden;
+}
+.dialog-con{
+  width:500px;
+  height: 300px;
+  overflow: auto;
+  background:#cd84f1;
+  margin:10px auto;
+  color:#fff;
+  text-align:center;
+  position:relative;
+}
+.dialog-box:target{
+  visibility:visible
+}
+.dialog-close{
+  position:absolute;
+  right:10px;
+  top:10px;
+  text-decoration:none;
+  color:#fff;
+}
+	</style>
+</head>
+<body>
+
+<a href="#dialog" class="dialog-btn">click me</a>
+<div class="dialog-box" id="dialog">
+  <div class="dialog-con">
+    <a href="#" class="dialog-close">X</a>
+    <section>
+			<h2>内容1</h2>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~222</p>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~4444</p>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~rrr</p>
+    	<p>this is a paragraph~~~</p>
+    	<p>this is a paragraph~~~6666</p>
+    	<p>this is a paragraph~~~eee</p>
+    </section>
+  </div>
+</div>
+
+</body>
+</html>
