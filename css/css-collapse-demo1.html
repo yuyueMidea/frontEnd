@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-collapse-demo1</title>
+	<style>
+.toggle-box{
+  width:50%;
+  margin:30px auto;
+  border:1px solid red;
+}
+.panel-title{
+  background:orange;
+  color:#fff;
+  display:block;
+  position:relative;
+  padding:.2em;
+  border-bottom:1px solid #fff;
+  cursor: pointer;
+}
+.checkbox-common{
+  position:absolute;
+}
+#checkbox1:checked ~ #content1,#checkbox2:checked ~ #content2,#checkbox3:checked ~ #content3{
+  height:100px;
+}
+.panel-content{
+    height:0;
+   transition:all 300ms;
+  overflow:hidden
+}
+
+	</style>
+</head>
+<body>
+
+<div class="toggle-box">
+  <input type="checkbox" id="checkbox1" class="checkbox-common"/>
+  <label for="checkbox1" class="panel-title">面板1</label>
+  <section class="panel-content" id="content1">内容1</section>
+  
+  <input type="checkbox" id="checkbox2" class="checkbox-common"/>
+  <label for="checkbox2" class="panel-title">面板2</label>
+  <section class="panel-content" id="content2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ea veritatis cumque unde dolore quasi hic praesentium, </section>
+  
+  <input type="checkbox" id="checkbox3" class="checkbox-common"/>
+  <label for="checkbox3" class="panel-title">面板2</label>
+  <section class="panel-content" id="content3">内容3</section>
+</div>
+
+</body>
+</html>
