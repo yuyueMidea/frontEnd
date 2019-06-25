@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>text-editor-demo1</title>
+<!--全部样式就这些，这里就都先给出来了-->
+<style >
+.xr-editor {
+  margin: 50px auto;
+  width: 1000px;
+}
+  .nav {
+    display: flex;
+}
+button {
+  cursor: pointer;
+}
+
+  .row {
+    display: flex;
+    width: 100%;
+    height: 300px;
+  }
+  .editor {
+    flex: 1;
+    position: relative;
+    margin-right: 20px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #000;
+    overflow-y: scroll;
+}
+ 
+
+</style>
+
+
+
+</head>
+<body>
+
+    <div class="xr-editor">
+        <!--按钮区-->
+        <div class="nav">
+            <button onclick="execCommand('bold')">加粗</button>
+            <button onclick="execCommand('insertUnorderedList')">无序列表</button>
+				<button onclick="execCommand('indent')">缩进</button>
+				<button onclick="execCommand('undo')">后退</button>
+				<button onclick="execCommand('redo')">前进</button>
+				<button onclick="execCommand('insertText')">插入文本内容</button>
+
+        </div>
+        <!--编辑区-->
+        <div class="editor" contenteditable="true"></div>
+    </div>
+
+
+
+
+</body>
+</html>
