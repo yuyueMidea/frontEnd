@@ -3,19 +3,37 @@
 <head>
 	<title>垂直居中demo</title>
 	<style type="text/css">
+	/*第1种实现方式*/
 	div.parent{
 	  display:flex;
 	}
 	div.child{
 	  margin:auto;
 	}
-/*第二种实现方式*/
+/*第2种实现方式*/
 div.parent2 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+/*第3种实现方式*/
+div.parent3 {
+    position: relative; 
+}
+div.child3 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}
+/*第4种实现方式*/
+div.parent4 {
+    display: grid;
+}
+div.child4 {
+    justify-self: center;
+    align-self: center;
+}
 	</style>
 </head>
 <body>
@@ -27,6 +45,18 @@ div.parent2 {
 
 <div class="parent2" style="border: 1px solid #ccc;padding: 100px;">
 	<div class="child2" style="border: 1px solid #f44">i am a dog--222</div>
+</div>
+
+<br><hr><br>
+
+<div class="parent3" style="border: 1px solid #ccc;padding: 100px;">
+	<div class="child3" style="border: 1px solid #f44">i am a dog--333</div>
+</div>
+
+<br><hr><br>
+
+<div class="parent4" style="border: 1px solid #ccc;padding: 100px;">
+	<div class="child4" style="border: 1px solid #f44">i am a dog--444</div>
 </div>
 
 </body>
