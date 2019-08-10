@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-hack-demo1</title>
+	<meta charset="utf-8">
+<style type="text/css">
+
+.container{
+	display: flex;
+	border: 1px dashed lightblue;width: 80%; height: 100px;
+}
+.container>div{
+	width: 22px; height: 22px; background: pink;margin: auto;
+}
+.container2 {
+	position: relative;border: 1px dashed lightblue;
+	padding: 11px; height: 33px;
+}
+.container2>div{
+	position: absolute; left: 111px; right: 222px;
+	background: lightpink;
+}
+ul{
+	list-style: none; width: 30%;
+	border: 1px solid red;
+}
+ul>li+li{
+	border-top: 1px solid lightblue;
+}
+.container3{
+	border: 1px solid red; padding: 12px;
+}
+.container3 h1+p{
+	border-top: 1px solid lightblue;
+}
+.color{
+	height: 0; width: 0; border: 50px solid; border-color: red transparent transparent transparent;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+</div>
+<div class="color"></div>
+<input type="text" placeholder="enter..." size="50">
+<div class="container2">
+	<div>1</div>
+</div>
+<ul>
+	<li>111</li>
+	<li>222</li>
+	<li>333</li>
+	<li>444</li>
+	<li>555</li>
+</ul>
+<div class="container3">
+<h1>h1111111111</h1>
+<p>pppppppppppppp</p>
+</div>
+
+</body>
+</html>
