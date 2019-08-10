@@ -4,7 +4,9 @@
 	<title>css-hack-demo1</title>
 	<meta charset="utf-8">
 <style type="text/css">
-
+body{
+	padding: 11px 0;
+}
 .container{
 	display: flex;
 	border: 1px dashed lightblue;width: 80%; height: 100px;
@@ -36,6 +38,14 @@ ul>li+li{
 .color{
 	height: 0; width: 0; border: 50px solid; border-color: red transparent transparent transparent;
 }
+.tablediv{
+	display: table; width: 100%; border-spacing: 22px; border: 1px solid;
+}
+.tablediv>div{
+	background: #0ff; height: 100px;
+	display: table-cell; border: 1px solid;
+}
+
 </style>
 </head>
 <body>
@@ -62,6 +72,11 @@ ul>li+li{
 <h1>h1111111111</h1>
 <p>pppppppppppppp</p>
 </div>
-
+<div class="tablediv">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+</div>
 </body>
 </html>
