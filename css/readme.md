@@ -4,3 +4,5 @@
 	document.querySelector('#para').onclick=function(){
 		document.querySelector('#para').classList.toggle('red')
 	}
+	//getBoundingClientRect---可以获取指定元素在当前页面的空间信息：
+	document.querySelector('#para').getBoundingClientRect()
