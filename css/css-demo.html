@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-demo</title>
+	<style type="text/css">
+.box,.box2,.box3{height: 100px;margin-bottom: 11px;}
+.box>div,.box2>div,.box3>div{
+	height: 100%;
+}
+.box .left{
+	width: 222px; float: left; background: lightblue;
+}
+.box .right{
+	margin-left: 222px; background: lightpink;
+}
+
+.box2 .left{
+	width: 222px; float: left; background: lightblue;
+}
+.box2 .right{
+	width:calc(100%-222px); background: lightpink;
+}
+.box3{
+	display: flex;
+}
+.box3 .left{
+	width: 222px;  background: lightblue;
+}
+.box3 .right{
+	flex: 1; background: lightpink;
+}
+
+	</style>
+</head>
+<body>
+<h2 title="this is a h2 ele&#13;ment!">this is a h2 element(title换行)</h2>
+<p>this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~this is a paragraph~</p>
+<textarea name="" id="" cols="30" rows="10">this is a textarea~</textarea>
+
+<div class="box">
+<div class="left"></div>
+<div class="right">如何实现左侧宽度固定，右侧宽度自适应的布局(利用float + margin实现)</div>
+</div>
+
+<div class="box2">
+<div class="left"></div>
+<div class="right">如何实现左侧宽度固定，右侧宽度自适应的布局(利用calc计算宽度)</div>
+</div>
+
+<div class="box3">
+<div class="left"></div>
+<div class="right">如何实现左侧宽度固定，右侧宽度自适应的布局(利用flex)</div>
+</div>
+
+</body>
+</html>
+<script src="store.legacy.min.js"></script>
+<script >
+	
+</script>
