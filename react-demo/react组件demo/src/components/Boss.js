@@ -2,11 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 12:09:32
- * @LastEditTime: 2019-10-18 15:19:36
+ * @LastEditTime: 2019-10-18 16:48:52
  * @LastEditors: Please set LastEditors
  */
 import React, { Component } from 'react';
-import axios from 'axios';
+import { CSSTransition } from 'react-transition-group'
 
 class Boss extends Component {
     constructor(props){
@@ -17,11 +17,6 @@ class Boss extends Component {
         }
         this.toToggole = this.toToggole.bind(this)
     }
-    componentDidMount(){
-        // axios.post('https://web-api.juejin.im/v3/web/wbbr/bgeda')
-        //     .then((res)=>{console.log('axios 获取数据成功:'+JSON.stringify(res))  })
-        //     .catch((error)=>{console.log('axios 获取数据失败'+error)})
-    }
     toToggole(){
         this.setState({
             isShow: this.state.isShow ? false :true
@@ -30,7 +25,15 @@ class Boss extends Component {
     render() { 
         return ( 
             <div className="boss">
-                <h2 className={this.state.isShow ?'show' :'hide'}>BOSS级人物-孙悟空</h2>
+                {/* <h2 className={this.state.isShow ?'show' :'hide'}>BOSS级人物-孙悟空</h2> */}
+                <CSSTransition 
+                    in={this.state.isShow}   //用于判断是否出现的状态
+                    timeout={2000}           //动画持续时间
+                    classNames="boss-text"   //className值，防止重复
+                    unmountOnExit
+                >
+                    <h2>BOSS级人物-孙悟空</h2>
+                </CSSTransition>
                 <div><button className="btn btn-info" onClick={this.toToggole}>召唤Boss</button></div>
                 <ul>
                     {
