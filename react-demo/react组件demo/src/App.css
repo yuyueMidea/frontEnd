@@ -98,3 +98,41 @@ ul,ol{
 .the_home .inputUser{
   padding: 22px; border: 1px solid #ccc; border-radius: 11px;
 }
+
+.boss{
+  padding: 4px 8px;
+}
+/* .boss .show{ opacity: 1; transition:all 1.5s ease-in;}
+.boss .hide{opacity: 0; transition:all 1.5s ease-in;} */
+.boss .show{ animation:show-item 2s ease-in forwards; }
+.boss .hide{ animation:hide-item 2s ease-in forwards; }
+
+@keyframes hide-item{
+    0% {
+        opacity:1;
+        color:yellow;
+    }
+    50%{
+        opacity: 0.5 ;
+        color:red;
+    }
+    100%{
+        opacity:0;
+        color: green;
+    }
+}
+
+@keyframes show-item{
+    0% {
+        opacity:0;
+        color:yellow;
+    }
+    50%{
+        opacity: 0.5 ;
+        color:red;
+    }
+    100%{
+        opacity:1;
+        color: green;
+    }
+}

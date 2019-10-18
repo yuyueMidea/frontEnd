@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-29 16:33:56
- * @LastEditTime: 2019-09-29 16:33:56
- * @LastEditors: your name
+ * @LastEditTime: 2019-10-18 14:17:24
+ * @LastEditors: Please set LastEditors
  */
 import React from 'react';
 
@@ -22,6 +22,7 @@ import Hook from './components/Hook';
 import NameForm from './components/NameForm';
 import NotFound from './components/NotFound';
 import Xiaojiejie from './components/Xiaojiejie';
+import Boss from './components/Boss';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -34,6 +35,7 @@ const routes = [
   {path: "/hook", component: Hook,name:'HOOk'},
   {path: "/404", component: NotFound,name:'404NotFound'},
   {path: "/xiaojie", component: Xiaojiejie,name:'Xiaojiejie'},
+  {path: "/boss", component: Boss,name:'Boss'},
 ];
 
 const isLogined = localStorage.getItem('userInfo');
