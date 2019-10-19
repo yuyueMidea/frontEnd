@@ -129,3 +129,14 @@ ul,ol{
 .boss-text-exit-done{
   opacity: 0;
 }
+
+.todo-list{
+  padding: 5px 11px;
+}
+.todo-list ul li{
+  margin: 5px; width: 444px; border-bottom:1px solid #ccc;
+  padding: 11px;
+}
+.todo-list ul li button{
+  float: right;
+}
