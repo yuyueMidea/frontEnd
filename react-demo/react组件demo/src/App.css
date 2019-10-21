@@ -19,17 +19,18 @@ ul,ol{
 }
 
 .right{
-  display: block;margin-left: 200px;
+  position: absolute; top: 0; left: 200px; bottom: 0;right: 0;
 }
 .right .navbar{
   display: flex; background: #eee; 
-  height: 60px; width: 100%;
+  height: 50px; width: 100%;
   position: fixed;
   border-bottom: 1px solid #bbb;
-  overflow: hidden;
+  overflow: hidden;z-index: 999;
 }
 .right .content{
   padding-top: 60px;
+  width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto;
 }
 .App-header .nav{
   background: rgb(48, 65, 86); color: rgb(191, 203, 217);
@@ -48,12 +49,16 @@ ul,ol{
 .App-header ul li a:hover{
   background-color: rgb(38, 52, 69);
 }
+.App-header ul li .active{
+  background-color: rgb(38, 52, 69);border-left: 6px solid #3c8dbc;
+}
+
 
 .the_bus{
-  padding: 22px; border: 1px solid #ccc; border-radius: 11px;
+  padding: 22px; border: 1px solid #ccc;
 }
 .the_NameForm{
-  padding: 22px; border: 1px solid #ccc; border-radius: 11px;
+  padding: 22px; border: 1px solid #ccc;
 }
 .the_user ul li span{
   width: 200px; padding: 3px 6px;
@@ -78,7 +83,7 @@ ul,ol{
   border: 1px solid #bbb; padding: 5px 11px;
 }
 .the_login{
-  padding: 22px; border: 1px solid #ccc; border-radius: 11px;
+  padding: 22px; border: 1px solid #ccc; 
   text-align: center;
 }
 .the_login button{
@@ -93,7 +98,7 @@ ul,ol{
 }
 
 .the_home {
-  padding: 22px; border: 1px solid #ccc; border-radius: 11px;
+  padding: 22px; border: 1px solid #ccc;
 }
 .the_home .inputUser{
   padding: 22px; border: 1px solid #ccc; border-radius: 11px;
@@ -139,4 +144,8 @@ ul,ol{
 }
 .todo-list ul li button{
   float: right;
+}
+
+.the_clock {
+  position: absolute; right: 211px;
 }
