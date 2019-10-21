@@ -2,10 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-15 19:59:09
- * @LastEditTime: 2019-10-16 10:00:55
+ * @LastEditTime: 2019-10-21 19:19:16
  * @LastEditors: Please set LastEditors
  */
-import React,{Fragment } from 'react'
+import React from 'react'
 import '../App.css';
 import XiaojiejieItem from './XiaojiejieItem.js';
 
@@ -31,9 +31,9 @@ class Xiaojiejie extends React.Component{
     addInfo(){
         if(!this.state.inputValue) return;
         this.setState({
-            list1:[...this.state.list1, this.state.inputValue]
+            list1:[...this.state.list1, this.state.inputValue],
+            inputValue:''
         })
-        this.state.inputValue=''
     }
     getInput(e){
         this.setState({
@@ -50,7 +50,7 @@ class Xiaojiejie extends React.Component{
     }
     render(){
         return(
-            <Fragment>
+            <div style={{margin: "11px"}}>
                 <div>
                     <label >加入服务：
                         <input id="jspang" className="form-control" value={this.state.inputValue} onChange={this.getInput.bind(this)} />
@@ -71,9 +71,8 @@ class Xiaojiejie extends React.Component{
                         })
                     }
                 </ul>
-                <hr/>
                 {/* <XiaojiejieItem content={item} /> */}
-            </Fragment>
+            </div>
         )
        
     }
