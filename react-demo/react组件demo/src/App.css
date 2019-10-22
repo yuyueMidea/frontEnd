@@ -5,6 +5,20 @@
 ul,ol{
   list-style: none;
 }
+.app-wrapper .hideSideBar .left{
+  width: 50px !important;
+}
+.app-wrapper .hideSideBar .right{
+  left: 50px !important;
+}
+
+.app-wrapper .openSideBar .left{
+  width: 200px !important;
+}
+.app-wrapper .openSideBar .right{
+  left: 200px !important;
+}
+
 .left{
   bottom: 0px;
     display: block;
@@ -29,15 +43,15 @@ ul,ol{
   overflow: hidden;z-index: 999;
 }
 .right .content{
-  padding-top: 60px;
-  width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto;
+  margin-top: 50px;
+  width: 100%; height: calc(100vh - 50px); overflow-x: hidden; overflow-y: auto;
 }
 .App-header .nav{
   background: rgb(48, 65, 86); color: rgb(191, 203, 217);
   width: 100%; height: 100%;
 }
 .App-header .nav li{
-  width: 100%
+  width: 100%; overflow: hidden;
 }
 .App-header ul li a{
   display: block; color: rgb(191, 203, 217);
@@ -46,13 +60,16 @@ ul,ol{
     line-height: 50px;
     padding-left: 11px;
 }
+
 .App-header ul li a:hover{
   background-color: rgb(38, 52, 69);
 }
 .App-header ul li .active{
   background-color: rgb(38, 52, 69);border-left: 6px solid #3c8dbc;
 }
-
+.App-header ul li .el-menu2 {
+  padding-left: 30px;
+}
 
 .the_bus{
   padding: 22px; border: 1px solid #ccc;
