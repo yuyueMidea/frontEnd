@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-29 16:33:57
+ * @LastEditTime: 2019-10-22 11:21:23
+ * @LastEditors: Please set LastEditors
+ */
 import { createStore } from 'redux';
 
 /**
@@ -11,7 +18,7 @@ import { createStore } from 'redux';
  * 下面例子使用 `switch` 语句和字符串来做判断，但你可以写帮助类(helper)
  * 根据不同的约定（如方法映射）来判断，只要适用你的项目即可。
  */
-function counter(state = 0, action) {
+function counter(state = 5, action) {
   switch (action.type) {
   case 'INCREMENT':
     return state + 1;
@@ -21,10 +28,41 @@ function counter(state = 0, action) {
     return state;
   }
 }
+const data=[
+  '早8点开晨会，分配今天的开发工作',
+  '早9点和项目经理作开发需求讨论会',
+  '晚5:30对今日代码进行review'
+]
+function todolist(state = data, action) {
+  switch (action.type) {
+    case 'ADD':
+      return state.concat(action.value);
+    case 'MINUS':
+      let index = state.indexOf(action.value),
+      newState = state;
+      newState.splice(index, 1);
+        return newState;
+    default:
+      return state;
+  }
+}
+
+function toggleSide(state =1, action){
+  switch(action.type) {
+    case 'open':
+      return state +1
+    case 'hide':
+      return state -1
+    default:
+      return state
+  }
+}
 
 // 创建 Redux store 来存放应用的状态。
 // API 是 { subscribe, dispatch, getState }。
 let store = createStore(counter);
+let itemTodo = createStore(todolist);
+let toggleSideBar = createStore(toggleSide);
 
 // 可以手动订阅更新，也可以事件绑定到视图层。
 
@@ -37,3 +75,4 @@ let store = createStore(counter);
 // store.dispatch({ type: 'DECREMENT' });
 // 1
 export default store;
+export  {itemTodo, toggleSideBar};

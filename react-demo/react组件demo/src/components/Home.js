@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-29 16:33:56
- * @LastEditTime: 2019-09-29 16:33:56
- * @LastEditors: your name
+ * @LastEditTime: 2019-10-22 16:15:47
+ * @LastEditors: Please set LastEditors
  */
 import React from 'react';
 import '../App.css';
@@ -12,6 +12,7 @@ import store_0 from './state-subscriber'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import axios from 'axios';
+import Example from './Example'
 
 function Blog(props) {
     const sidebar = (
@@ -63,7 +64,9 @@ class Home extends React.Component{
     }
    
     plus(){
+      console.log('tag111 ',store.getState())
         store.dispatch({ type: 'INCREMENT' });
+        console.log('tag2222 ',store.getState())
         this.setState({
             initCount: store.getState()
         })
@@ -91,7 +94,7 @@ class Home extends React.Component{
                 this.setState({
                     resData: v.data.data
                 })
-                // debugger
+                debugger
 		  	}).catch(function (error) {
 				console.log(error);
 			  })
@@ -102,8 +105,7 @@ class Home extends React.Component{
     
     render(){
         return <div className="the_home">
-            <h2>welcome---home!</h2>
-            <p>我家的地址是---{this.state.home}</p>
+          <Example/>
             <div className='inputUser'>
                 <div className='row'>
                     <div className='col-sm-4'>
@@ -162,6 +164,9 @@ Unmounting：已移出真实 DOM<br/>
 <br/>
 componentWillMount 在渲染前调用,在客户端也在服务端。<br/>
 
+componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
+componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
+componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
 componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
 <br/>
  如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异步操作阻塞UI)。

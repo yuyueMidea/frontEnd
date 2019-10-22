@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-29 16:33:56
+ * @LastEditTime: 2019-10-22 09:39:22
+ * @LastEditors: Please set LastEditors
+ */
 import React from 'react';
 import '../App.css';
 // import store from './store'
@@ -45,7 +52,7 @@ class Login extends React.Component {
         pwd: this.state.pwd,
       }
       localStorage.setItem('userInfo',JSON.stringify(userObj));
-      return (<Redirect to="/index" />);
+      this.props.history.push('/home')
     }
     render() {
       return (
