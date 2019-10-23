@@ -2,17 +2,18 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-29 16:33:56
- * @LastEditTime: 2019-10-22 16:15:47
+ * @LastEditTime: 2019-10-23 11:23:34
  * @LastEditors: Please set LastEditors
  */
 import React from 'react';
 import '../App.css';
 import store from './store'
 import store_0 from './state-subscriber'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import axios from 'axios';
 import Example from './Example'
+
+
 
 function Blog(props) {
     const sidebar = (
@@ -43,6 +44,7 @@ function Blog(props) {
     {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
     {id: 2, title: 'Installation', content: 'You can install React from npm.'}
   ];
+  
 
 class Home extends React.Component{
     constructor(props){
@@ -52,42 +54,18 @@ class Home extends React.Component{
             resData: '',
             initCount: store.getState(),
             id:'',
-            description:'',
-            itemArr: store_0.getState().items
         }
         this.getNews = this.getNews.bind(this);
         this.plus = this.plus.bind(this);
-        this.submitInfo = this.submitInfo.bind(this);
-
-        this.getID = this.getID.bind(this);
-        this.getDES = this.getDES.bind(this);
     }
    
     plus(){
-      console.log('tag111 ',store.getState())
         store.dispatch({ type: 'INCREMENT' });
-        console.log('tag2222 ',store.getState())
         this.setState({
             initCount: store.getState()
         })
     }
-    getID(event) {
-        this.setState({id: event.target.value});
-      }
-      getDES(event) {
-        this.setState({description: event.target.value});
-      }
-      submitInfo(){
-        if(!this.state.id || !this.state.description) return;
-        //新增一个条目--描述
-        store_0.dispatch({ type: 'ADD_ITEM', 
-            item:{
-                id: this.state.id,
-                description: this.state.description
-            } 
-        })
-        this.setState({itemArr: store_0.getState().items});
-    }
+      
     getNews(){
         axios.get('https://www.apiopen.top/journalismApi').then(v=>{
 		  		console.log(v.data.data);
@@ -105,28 +83,8 @@ class Home extends React.Component{
     
     render(){
         return <div className="the_home">
-          <Example/>
-            <div className='inputUser'>
-                <div className='row'>
-                    <div className='col-sm-4'>
-                        id: <input type="text" className="form-control" value={this.state.id} onChange={this.getID} />
-                    </div>
-                    <div className='col-sm-4'>
-                        描述: <input type="text" className="form-control" value={this.state.description} onChange={this.getDES} />
-                    </div>
-                    <div className='col-sm-4'>
-                        <button className="btn btn-primary" onClick={this.submitInfo}>提交</button>
-                    </div>
-                </div>
-                
-            </div>
-            <hr/><br/>
-            <BootstrapTable data={ this.state.itemArr } striped={ true } hover={ true } condensed={ true }>
-                <TableHeaderColumn dataField='id' isKey={ true }>Product ID</TableHeaderColumn>
-                <TableHeaderColumn dataField='description'>Product description</TableHeaderColumn>
-            </BootstrapTable>
-            <hr/><br/>
-            
+          
+            <Example/>
             <div>
                 <button className="btn btn-primary" onClick={this.plus}>count++</button>
                 <p>{this.state.initCount}</p>
