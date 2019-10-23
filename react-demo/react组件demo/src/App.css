@@ -166,3 +166,13 @@ ul,ol{
 .the_clock {
   position: absolute; right: 211px;
 }
+
+
+/* ------------------- */
+.ant-table-thead > tr > th, .ant-table-tbody >tr >td {
+  padding: 4px 16px !important;
+}
+
+.the_wrapper_1 .ant-table-wrapper {
+  height: 388px;
+}

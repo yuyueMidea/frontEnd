@@ -1,7 +1,15 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-29 16:33:56
+ * @LastEditTime: 2019-10-22 20:48:28
+ * @LastEditors: Please set LastEditors
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './App.css';
 import App from './App';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-29 16:33:56
- * @LastEditTime: 2019-10-22 15:31:34
+ * @LastEditTime: 2019-10-23 11:25:51
  * @LastEditors: Please set LastEditors
  */
 import React,{Component} from 'react';
@@ -75,7 +75,7 @@ class Routers extends Component {
                           v.children ? v.children.map((item,index)=>
                             <NavLink className="el-menu2" key={index} to={item.path} >{item.name}</NavLink>
                           ) 
-                          : <NavLink className="el-menu1" to={v.path} >{v.name}</NavLink>
+                          : <NavLink className="el-menu1" to={v.path} title={v.name}>{v.name}</NavLink>
                         }
                       </li>
                     )}
@@ -103,7 +103,7 @@ class Routers extends Component {
                   }
                   {/* <Redirect from="/*" to="/home" /> */}
                   {/* // 所有错误路由跳转页面 */}
-                <Route component={NotFound} />
+                {/* <Route component={NotFound} /> */}
                 </Switch>
               </div>
             </div>
