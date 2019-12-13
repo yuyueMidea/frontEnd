@@ -6,9 +6,41 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>bbo Document</title>
   <script type="text/javascript" src="bbo.min.js"></script>
+  <style type="text/css">
+
+#container{
+    padding-left: 200px;
+    padding-right: 150px;
+}
+#container .column{
+    float: left;
+}
+#center{
+    width: 100%;
+}
+#left{
+    width: 200px;
+    margin-left: -100%;
+    position: relative;
+    right: 200px; background: lightblue
+}
+#right{
+    width: 150px;
+    margin-right: -150px; background: pink
+}
+
+  </style>
 </head>
 <body>
   <p>Documentation for bbo</p>
   <p>See the latest <a href="https://github.ahthw.com/bbo/">docs/documentation</a> for a full API reference or <a href="https://github.com/halldwang/bbo-docs">bbo-docs</a></p>
+  
+  <div id="container">
+    <div id="center" class="column">center</div>
+    <div id="left" class="column">left</div>
+    <div id="right" class="column">right</div>
+</div>
+
+
 </body>
 </html>
